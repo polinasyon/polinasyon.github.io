@@ -47,7 +47,8 @@
 
     <header class="sticky top-0 z-50 glass border-b border-slate-200">
         <div class="max-w-xl mx-auto px-5 py-3 flex items-center justify-between">
-            <div class="w-9"></div>
+            <!-- Sol taraftaki denge boşluğunu sağdaki iki butona göre genişlettik -->
+            <div class="w-[72px]"></div>
 
             <div class="text-center flex flex-col items-center">
                 <div class="flex items-center justify-center gap-2">
