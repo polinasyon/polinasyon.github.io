@@ -1,5 +1,5 @@
-const CACHE_NAME = 'polinasyon-static-v7';
-const DYNAMIC_CACHE = 'polinasyon-dynamic-v7';
+const CACHE_NAME = 'polinasyon-static-v8';
+const DYNAMIC_CACHE = 'polinasyon-dynamic-v8';
 
 const STATIC_ASSETS = [
   './',
@@ -8,9 +8,7 @@ const STATIC_ASSETS = [
   './ikon.png',
   './logo.png',
   './polinasyon.png',
-  './polinasyon_logo.png',
-  'https://cdn.tailwindcss.com',
-  'https://unpkg.com/lucide@latest'
+  './polinasyon_logo.png'
 ];
 
 // Kurulum - Varlıkları önbelleğe al
@@ -18,9 +16,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
-      return cache.addAll(
-        STATIC_ASSETS.map(url => new Request(url, { mode: 'no-cors' }))
-      ).catch(err => console.log('[SW] Cache addAll uyarısı:', err));
+      return cache.addAll(STATIC_ASSETS);
     })
   );
   self.skipWaiting();
@@ -115,4 +111,3 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
