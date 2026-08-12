@@ -1,0 +1,32 @@
+{
+  "name": "POLİNASYON | Kanatların Matematiği",
+  "short_name": "Polinasyon",
+  "description": "Kovan Takip ve Nektar Akımı Gözlem Uygulaması",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f1f5f9",
+  "theme_color": "#f59e0b",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "ikon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "ikon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
