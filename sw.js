@@ -5,7 +5,7 @@ const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './ikon.png',
+  './favicon.png',
   './logo.png',
   './polinasyon.png',
   './polinasyon_logo.png'
