@@ -1229,15 +1229,49 @@
             },
 
             verileriYedekle() {
-                const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(this.data, null, 2));
-                const dl = document.createElement('a');
-                dl.setAttribute('href', dataStr);
-                dl.setAttribute('download', 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json');
-                document.body.appendChild(dl);
-                dl.click();
-                document.body.removeChild(dl);
-            },
+    try {
+        const json = JSON.stringify(this.data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
 
+        // Mobilde Web Share API varsa (iPhone / Android) en güvenilir yol
+        if (navigator.share && navigator.canShare) {
+            const file = new File([blob], dosyaAdi, { type: 'application/json' });
+            if (navigator.canShare({ files: [file] })) {
+                navigator.share({
+                    files: [file],
+                    title: 'Polinasyon Yedek',
+                    text: 'Kovan ve saha verileri yedeği'
+                }).catch(() => {
+                    // Kullanıcı paylaşımı iptal ederse veya hata olursa normal indirmeye düş
+                    this._indirmeYap(blob, dosyaAdi);
+                });
+                return;
+            }
+        }
+
+        // Masaüstü veya Share desteklenmiyorsa klasik indirme
+        this._indirmeYap(blob, dosyaAdi);
+
+    } catch (e) {
+        console.error(e);
+        alert('Yedek oluşturulurken hata oluştu.');
+    }
+},
+
+_indirmeYap(blob, dosyaAdi) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = dosyaAdi;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 200);
+},
             verileriIceAktar() {
                 const input = document.createElement('input');
                 input.type = 'file';
