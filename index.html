@@ -50,15 +50,14 @@
             <div class="w-9"></div>
 
             <div class="text-center flex flex-col items-center">
-                <!-- gap-2 değerini gap-1 veya gap-1.5 yaparak logoyu yazıya yakınlaştırdık -->
                 <div class="flex items-center justify-center gap-1.1">
                     <img src="https://raw.githubusercontent.com/polinasyon/polinasyon/refs/heads/main/Favicon.ICO" alt="Polinasyon Logo" class="h-6 w-auto object-contain">
                     <h1 class="text-xl font-bold text-slate-900 leading-tight brand-arial tracking-wide">Polinasyon</h1>
                 </div>
-                <!-- BURAYA translate-x-3 veya translate-x-4 ekleyerek istediğin kadar sağa kaydırabilirsin -->
-       <p class="text-[9px] text-slate-500 font-semibold tracking-wider uppercase leading-none mt-1 flex items-center justify-center gap-1.5 translate-x-[3px]">
-    <span>Kanatların Matematiği</span>
-</p>
+                <p class="text-[9px] text-slate-500 font-semibold tracking-wider uppercase leading-none mt-1 flex items-center justify-center gap-1.5 translate-x-[3px]">
+                    <span>Kanatların Matematiği</span>
+                    <span id="offlineBadge" class="hidden bg-rose-500 text-white px-1.5 py-[1px] rounded text-[8px] tracking-widest font-bold animate-pulse">ÇEVRİMDIŞI</span>
+                </p>
             </div>
 
             <div class="flex items-center gap-1.5">
@@ -1235,7 +1234,6 @@
         const blob = new Blob([json], { type: 'application/json' });
         const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
 
-        // Mobilde Web Share API varsa (iPhone / Android) en güvenilir yol
         if (navigator.share && navigator.canShare) {
             const file = new File([blob], dosyaAdi, { type: 'application/json' });
             if (navigator.canShare({ files: [file] })) {
@@ -1244,14 +1242,12 @@
                     title: 'Polinasyon Yedek',
                     text: 'Kovan ve saha verileri yedeği'
                 }).catch(() => {
-                    // Kullanıcı paylaşımı iptal ederse veya hata olursa normal indirmeye düş
                     this._indirmeYap(blob, dosyaAdi);
                 });
                 return;
             }
         }
 
-        // Masaüstü veya Share desteklenmiyorsa klasik indirme
         this._indirmeYap(blob, dosyaAdi);
 
     } catch (e) {
@@ -1325,3 +1321,5 @@ _indirmeYap(blob, dosyaAdi) {
     </script>
 </body>
 </html>
+
+
