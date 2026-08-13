@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Polinasyon">
     <link rel="manifest" href="manifest.json">
-    <title>POLİNASYON | Kanatların Matematiği (v4.0 - GDD Entegre)</title>
+    <title>POLİNASYON | Kanatların Matematiği (v4.1 - GDD + Literatür Eşikleri)</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -151,7 +151,7 @@
                     </div>
                     <p id="nektarAciklama" class="text-sm text-slate-600">Meteoroloji ve fenoloji analiz ediliyor...</p>
                     <div id="dinamikDuzeltmeNotu" class="mt-2 text-[11px] font-bold hidden"></div>
-                    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">Bu skor; arı uçuş sıcaklığı (~10–30°C optimal aralık), rüzgar ve nem için yayınlanmış arıcılık/entomoloji literatüründeki eşiklere dayanır ve bu yılın ısı birikimini (GDD) geçen yılla karşılaştırarak fenolojiyi düzeltir. Yine de kalibre edilmiş bir bilimsel ölçüm değil, literatür temelli deneysel bir tahmindir.</p>
+                    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">Bu skor; arı uçuş sıcaklığı (~10–30°C optimal aralık, PMC/UMaine/Kore çalışmaları), rüzgar (~24 km/s'de foraj kesilmesi, UMaine) ve nem için yayınlanmış arıcılık/entomoloji literatüründeki eşiklere dayanır ve bu yılın ısı birikimini (GDD) geçen yılla karşılaştırarak fenolojiyi düzeltir. Yine de kalibre edilmiş bir bilimsel ölçüm değil, literatür temelli deneysel bir tahmindir.</p>
                 </div>
 
                 <div class="border border-slate-200/80 bg-slate-100/60 rounded-2xl p-5 space-y-4">
@@ -732,14 +732,65 @@
                 return (ayIdx >= 4 && ayIdx <= 8) ? 50 : 15;
             },
 
+            // === LİTERATÜR TEMELLİ EŞİKLER ===
+            // Sıcaklık (ağırlık 25): Arı uçuşu genel olarak 10-40°C aralığında, optimal
+            // foraj 20-30°C ("A review of short-term weather impacts on honey production",
+            // PMC). Alt eşik ~9-13°C (Kore/Andong Üniversitesi ve UMaine çalışmaları).
+            // Tek nokta "ideal sıcaklık" yerine kademeli artış → düz plato → kademeli
+            // düşüş modeli (uçuşEgrisi fonksiyonu) kullanıldı.
+            uçuşEgrisi(sicaklik) {
+                if (sicaklik < 10) return 0;
+                if (sicaklik < 20) return (sicaklik - 10) / 10;
+                if (sicaklik <= 30) return 1;
+                if (sicaklik < 38) return 1 - (sicaklik - 30) / 8;
+                return 0;
+            },
+
+            // Rüzgar (ağırlık 15): Literatürde eşikler geniş bir aralıkta (1.6-8 m/s,
+            // yaklaşık 5.8-29 km/s arası çalışmalar var). UMaine'in "15 mph (~24 km/s)'de
+            // foraj kesiliyor" bulgusu, önceki koddaki 25 km/s eşiğine zaten yakın
+            // olduğu için referans noktası olarak korundu, kademeli düşüş netleştirildi.
+            //
+            // Nem (ağırlık 15): Literatürde tek bir "ideal nem" değeri yok; yüksek nem
+            // nektar şeker konsantrasyonunu sulandırır (Corbet 1979, Epilobium
+            // çalışması), çok düşük nem de çiçek/nektar stresine yol açabilir. Keskin
+            // tek-nokta yerine geniş bir "makul aralık" (%40-70) kullanıldı.
+            //
+            // Çiy noktası (ağırlık 5): Bağıl nem ile matematiksel olarak ilişkili
+            // olduğundan (aynı bilgiyi iki kez saymamak için) ağırlığı düşürüldü;
+            // sıcaklık-çiy noktası farkı (doygunluk açığı) sisli/çiy'li sabah riskini
+            // gösteren tamamlayıcı bir gösterge olarak kullanıldı.
+            //
+            // 3 günlük ortalama (ağırlık 10): Anlık sıcaklıkla (t) aynı uçuş eğrisini
+            // paylaşıyor ama daha düşük ağırlıkla — kısa vadeli ısınma trendi farklı bir
+            // sinyal taşıdığı için tutuldu, ancak çifte sayım etkisini azaltmak amacıyla
+            // ağırlığı (önceki sürümdeki 15'ten) 10'a indirildi.
+            //
+            // Fenoloji (ağırlık 30): GDD-düzeltmeli değer (bkz. fenolojiyiGddIleDuzelt).
             nektar_flow_score(temp, humidity, wind, dew, past, pheno) {
-                const t = Math.max(0, 1 - Math.abs(temp - 24) / 12) * 20;
-                const h = Math.max(0, 1 - Math.abs(humidity - 65) / 30) * 15;
-                const d = Math.max(0, 1 - Math.abs(dew - 14) / 10) * 10;
-                const w = Math.max(0, 1 - wind / 25) * 10;
-                const p = Math.max(0, 1 - Math.abs(past - 22) / 15) * 15;
+                const t = Math.max(0, Math.min(1, this.uçuşEgrisi(temp))) * 25;
+
+                let wOran;
+                if (wind <= 10) wOran = 1;
+                else if (wind < 24) wOran = 1 - (wind - 10) / 14;
+                else wOran = 0;
+                const w = Math.max(0, Math.min(1, wOran)) * 15;
+
+                let hOran;
+                if (humidity >= 40 && humidity <= 70) hOran = 1;
+                else if (humidity < 40) hOran = humidity / 40;
+                else hOran = 1 - (humidity - 70) / 30;
+                const h = Math.max(0, Math.min(1, hOran)) * 15;
+
+                const doygunlukAcigi = temp - dew;
+                const dOran = doygunlukAcigi >= 2 ? 1 : Math.max(0, doygunlukAcigi / 2);
+                const d = dOran * 5;
+
+                const p = Math.max(0, Math.min(1, this.uçuşEgrisi(past))) * 10;
+
                 const ph = (pheno / 100) * 30;
-                return Math.round(t + h + d + w + p + ph);
+
+                return Math.round(t + w + h + d + p + ph);
             },
 
             nektarAkimiHesaplaVeGuncelle() {
@@ -1229,46 +1280,47 @@
             },
 
             verileriYedekle() {
-    try {
-        const json = JSON.stringify(this.data, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
+                try {
+                    const json = JSON.stringify(this.data, null, 2);
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
 
-        if (navigator.share && navigator.canShare) {
-            const file = new File([blob], dosyaAdi, { type: 'application/json' });
-            if (navigator.canShare({ files: [file] })) {
-                navigator.share({
-                    files: [file],
-                    title: 'Polinasyon Yedek',
-                    text: 'Kovan ve saha verileri yedeği'
-                }).catch(() => {
+                    if (navigator.share && navigator.canShare) {
+                        const file = new File([blob], dosyaAdi, { type: 'application/json' });
+                        if (navigator.canShare({ files: [file] })) {
+                            navigator.share({
+                                files: [file],
+                                title: 'Polinasyon Yedek',
+                                text: 'Kovan ve saha verileri yedeği'
+                            }).catch(() => {
+                                this._indirmeYap(blob, dosyaAdi);
+                            });
+                            return;
+                        }
+                    }
+
                     this._indirmeYap(blob, dosyaAdi);
-                });
-                return;
-            }
-        }
 
-        this._indirmeYap(blob, dosyaAdi);
+                } catch (e) {
+                    console.error(e);
+                    alert('Yedek oluşturulurken hata oluştu.');
+                }
+            },
 
-    } catch (e) {
-        console.error(e);
-        alert('Yedek oluşturulurken hata oluştu.');
-    }
-},
+            _indirmeYap(blob, dosyaAdi) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = dosyaAdi;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 200);
+            },
 
-_indirmeYap(blob, dosyaAdi) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = dosyaAdi;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 200);
-},
             verileriIceAktar() {
                 const input = document.createElement('input');
                 input.type = 'file';
@@ -1321,5 +1373,3 @@ _indirmeYap(blob, dosyaAdi) {
     </script>
 </body>
 </html>
-
-
