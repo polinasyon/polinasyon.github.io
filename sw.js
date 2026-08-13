@@ -1,6 +1,7 @@
 const CACHE_NAME = 'polinasyon-static-v9';
 const DYNAMIC_CACHE = 'polinasyon-dynamic-v9';
 
+// BURASI ÇOK ÖNEMLİ: Dış kütüphaneler kalıcı listeye eklenmeli!
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -8,7 +9,11 @@ const STATIC_ASSETS = [
   './ikon.png',
   './logo.png',
   './polinasyon.png',
-  './polinasyon_logo.png'
+  './polinasyon_logo.png',
+  './favicon.ico',
+  'https://raw.githubusercontent.com/polinasyon/polinasyon/refs/heads/main/Favicon.ICO',
+  'https://cdn.tailwindcss.com',
+  'https://unpkg.com/lucide@latest'
 ];
 
 // Kurulum - Varlıkları önbelleğe al
