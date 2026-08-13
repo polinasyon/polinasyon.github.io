@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Polinasyon">
     <link rel="manifest" href="manifest.json">
-    <title>POLİNASYON | Kanatların Matematiği (v4.0 - GDD Entegre | TÜBİTAK/TAGEM Flora)</title>
+   <title>POLİNASYON | Kanatların Matematiği (v4.0 - GDD Entegre | TÜBİTAK/TAGEM Flora)</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -48,8 +48,9 @@
     <header class="sticky top-0 z-50 glass border-b border-slate-200">
         <div class="max-w-xl mx-auto px-5 py-3 flex items-center justify-between">
             <div class="w-9"></div>
+
             <div class="text-center flex flex-col items-center">
-                <div class="flex items-center justify-center gap-1.5">
+                <div class="flex items-center justify-center gap-1.1">
                     <img src="https://raw.githubusercontent.com/polinasyon/polinasyon/refs/heads/main/Favicon.ICO" alt="Polinasyon Logo" class="h-6 w-auto object-contain">
                     <h1 class="text-xl font-bold text-slate-900 leading-tight brand-arial tracking-wide">Polinasyon</h1>
                 </div>
@@ -58,6 +59,7 @@
                     <span id="offlineBadge" class="hidden bg-rose-500 text-white px-1.5 py-[1px] rounded text-[8px] tracking-widest font-bold animate-pulse">ÇEVRİMDIŞI</span>
                 </p>
             </div>
+
             <div class="flex items-center gap-1.5">
                 <button onclick="uygulama.verileriIceAktar()" title="Yedek Yükle (JSON)" class="w-9 h-9 flex items-center justify-center bg-slate-100 border border-slate-200 text-slate-600 hover:text-amber-600 transition rounded-xl">
                     <i data-lucide="upload" class="w-4 h-4"></i>
@@ -68,6 +70,7 @@
             </div>
         </div>
     </header>
+
 
     <main class="max-w-xl mx-auto px-5 pt-5 space-y-5">
 
@@ -191,6 +194,7 @@
                     </div>
                     <div id="kategoriListesiContainer" class="space-y-3"></div>
                 </div>
+
                 <div id="kategoriDetayGorunum" class="hidden">
                     <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
                         <div class="flex items-center gap-2">
@@ -211,7 +215,7 @@
             </div>
         </section>
 
-        <section id="sayfaSaglik" class="space-y-5 hidden">
+       <section id="sayfaSaglik" class="space-y-5 hidden">
             <div class="soft-card p-6 sm:p-8 space-y-5">
                 <div class="border-b border-slate-100 pb-4">
                     <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
@@ -223,6 +227,7 @@
                         Bilgilendirme amaçlıdır; teşhis ve tedavi için veteriner hekim / resmi rehberlere başvurun.
                     </p>
                 </div>
+
                 <div class="space-y-4">
                     <details class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden" open>
                         <summary class="flex justify-between items-center p-4 cursor-pointer font-bold text-sm text-slate-800 bg-amber-50/60 hover:bg-amber-100/50 transition">
@@ -341,7 +346,7 @@
                                         <li><strong>İzleme:</strong> Ayda 1 pudra şekeri veya alkol testi. %3 üzeri bulaşıklıkta derhal müdahale.</li>
                                         <li><strong>Biyoteknik:</strong> Drone yavru tuzak petekleri, kuluçkasız dönem oluşturma.</li>
                                         <li><strong>Organik asitler:</strong>
-                                            <ul class="list-disc pl-4">
+                                            <ul class="list-circle pl-4">
                                                 <li>Formik asit (%65): 15–25°C’de yavaş buharlaştırma. Kapalı yavruya nüfuz eder.</li>
                                                 <li>Oksalik asit: Kuluçkasız dönemde buharlaştırma veya damlatma (%95+ başarı).</li>
                                             </ul>
@@ -428,7 +433,8 @@
             </div>
         </section>
 
-        <section id="sayfaAkademi" class="space-y-5 hidden">
+
+       <section id="sayfaAkademi" class="space-y-5 hidden">
             <div class="soft-card p-6 space-y-4">
                 <div class="border border-slate-200/80 bg-slate-50 rounded-2xl p-3.5 flex items-center justify-between shadow-2xs">
                     <div class="flex items-center gap-4 text-slate-700">
@@ -585,46 +591,13 @@
             aktifKategoriId: null,
             aktifDuzenlenenKovanId: null,
 
-            /* ASCII / farklı yazım → kanonik anahtar (flora + bölge) */
-            konumAlias: {
-                "igdir": "ığdır", "ıgdir": "ığdır",
-                "agri": "ağrı", "ağri": "ağrı",
-                "afyonkarahisar": "afyon",
-                "sanliurfa": "şanlıurfa", "şanliurfa": "şanlıurfa",
-                "kahramanmaras": "kahramanmaraş", "kahramanmaraş": "kahramanmaraş",
-                "canakkale": "çanakkale",
-                "tekirdag": "tekirdağ",
-                "kirklareli": "kırklareli",
-                "balikesir": "balıkesir",
-                "mugla": "muğla",
-                "usak": "uşak",
-                "kutahya": "kütahya",
-                "isparta": "ısparta", "ısparta": "ısparta",
-                "elazig": "elazığ",
-                "bingol": "bingöl",
-                "mus": "muş",
-                "sirnak": "şırnak",
-                "diyarbakir": "diyarbakır",
-                "adiyaman": "adıyaman",
-                "eskisehir": "eskişehir",
-                "nigde": "niğde",
-                "nevsehir": "nevşehir",
-                "corum": "çorum",
-                "cankiri": "çankırı",
-                "duzce": "düzce",
-                "bartin": "bartın",
-                "karabuk": "karabük",
-                "kirikkale": "kırıkkale",
-                "kirsehir": "kırşehir"
-            },
-
             bolgeHaritasi: {
                 "iç anadolu": ["ankara", "konya", "kayseri", "eskişehir", "sivas", "kırıkkale", "aksaray", "karaman", "kırşehir", "niğde", "nevşehir", "yozgat", "çankırı"],
                 "ege": ["izmir", "manisa", "aydın", "denizli", "kütahya", "afyon", "uşak", "muğla", "simav"],
                 "akdeniz": ["antalya", "adana", "mersin", "burdur", "hatay", "osmaniye", "ısparta", "kahramanmaraş"],
-                "karadeniz": ["trabzon", "rize", "artvin", "ordu", "giresun", "samsun", "zonguldak", "sinop", "tokat", "çorum", "amasya", "kastamonu", "karabük", "bartın", "bolu", "düzce"],
+                "karadeniz": ["trabzon", "rize", "artvin", "ordu", "giresun", "samsun", "zonguldak", "sinop", "tokat", "çorum", "amasya", "kastamonu", "karabük", "bartın", "bolu", "düzce", "gümüşhane", "bayburt"],
                 "doğu anadolu": ["erzurum", "erzincan", "kars", "ardahan", "ağrı", "ığdır", "van", "bingöl", "muş", "bitlis", "tunceli", "elazığ", "malatya", "hakkari"],
-                "marmara": ["istanbul", "kocaeli", "sakarya", "yalova", "bursa", "balıkesir", "çanakkale", "tekirdağ", "edirne", "kırklareli"],
+                "marmara": ["istanbul", "kocaeli", "sakarya", "yalova", "bursa", "balıkesir", "çanakkale", "tekirdağ", "edirne", "kırklareli", "bilecik"],
                 "güneydoğu": ["gaziantep", "şanlıurfa", "diyarbakır", "mardin", "batman", "siirt", "adıyaman", "kilis", "şırnak"]
             },
 
@@ -641,65 +614,26 @@
 
             GDD_BASE_TEMP: 10,
 
-            /* Konum metnini tr-TR ile küçük harf + alias */
-            normalizeKonum(str) {
-                let s = (str || "").toLocaleLowerCase("tr-TR").trim();
-                if (this.konumAlias[s]) return this.konumAlias[s];
-                const ascii = s
-                    .replace(/ğ/g, "g").replace(/ü/g, "u").replace(/ş/g, "s")
-                    .replace(/ı/g, "i").replace(/ö/g, "o").replace(/ç/g, "c");
-                if (this.konumAlias[ascii]) return this.konumAlias[ascii];
-                return s;
-            },
-
-            eslesiyorMu(konumNorm, anahtar) {
-                const a = this.normalizeKonum(anahtar);
-                if (!a || !konumNorm) return false;
-                return konumNorm === a || konumNorm.includes(a) || a.includes(konumNorm);
-            },
-
-            /* Şehir veya bölge flora anahtarı (en uzun eşleşme öncelikli) */
-            floraAnahtariBul() {
-                const k = this.normalizeKonum(this.data.konum);
-                let best = null;
-                let bestLen = 0;
-                for (const ah in this.floraVeritabani) {
-                    if (ah === "varsayılan") continue;
-                    const na = this.normalizeKonum(ah);
-                    if (this.eslesiyorMu(k, ah) && na.length >= bestLen) {
-                        best = ah;
-                        bestLen = na.length;
-                    }
-                }
-                if (best) return best;
-                for (const b in this.bolgeHaritasi) {
-                    if (this.bolgeHaritasi[b].some(s => this.eslesiyorMu(k, s))) {
-                        return this.floraVeritabani[b] ? b : "varsayılan";
-                    }
-                }
-                return "varsayılan";
-            },
-
             aktifBolgesiBul() {
-                const k = this.normalizeKonum(this.data.konum);
+                const k = this.data.konum.toLocaleLowerCase('tr-TR');
                 for (const b in this.bolgeHaritasi) {
-                    if (this.bolgeHaritasi[b].some(s => this.eslesiyorMu(k, s))) return b;
+                    if (this.bolgeHaritasi[b].some(s => k.includes(s))) return b;
                 }
-                const floraKey = this.floraAnahtariBul();
-                if (floraKey !== "varsayılan") {
-                    for (const b in this.bolgeHaritasi) {
-                        if (this.bolgeHaritasi[b].some(s => this.normalizeKonum(s) === this.normalizeKonum(floraKey))) return b;
-                        if (b === floraKey) return b;
+                for (const a in this.floraVeritabani) {
+                    if (a !== "varsayılan" && k.includes(a)) {
+                        for (const b in this.bolgeHaritasi) {
+                            if (this.bolgeHaritasi[b].includes(a)) return b;
+                        }
                     }
                 }
                 return "varsayılan";
             },
 
             async gddOraniniGetir(lat, lon) {
-                const cacheAnahtari = "polinasyon_gdd_cache_v1";
-                const bugunStr = new Date().toISOString().split("T")[0];
+                const cacheAnahtari = 'polinasyon_gdd_cache_v1';
+                const bugunStr = new Date().toISOString().split('T')[0];
                 try {
-                    const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || "null");
+                    const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
                     if (onbellek && onbellek.tarih === bugunStr && Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
                         return onbellek;
                     }
@@ -711,13 +645,13 @@
                     let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 5;
                     if (gunSayisi < 1) gunSayisi = 1;
                     const buYilBitis = new Date(yilBaslangici.getTime() + gunSayisi * 86400000);
-                    const buYilBaslangicStr = yilBaslangici.toISOString().split("T")[0];
-                    const buYilBitisStr = buYilBitis.toISOString().split("T")[0];
+                    const buYilBaslangicStr = yilBaslangici.toISOString().split('T')[0];
+                    const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
 
                     const gecenYilBaslangici = new Date(Date.UTC(bugun.getFullYear() - 1, 0, 1));
                     const gecenYilBitis = new Date(gecenYilBaslangici.getTime() + gunSayisi * 86400000);
-                    const gecenYilBaslangicStr = gecenYilBaslangici.toISOString().split("T")[0];
-                    const gecenYilBitisStr = gecenYilBitis.toISOString().split("T")[0];
+                    const gecenYilBaslangicStr = gecenYilBaslangici.toISOString().split('T')[0];
+                    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0];
 
                     const [buYilRes, gecenYilRes] = await Promise.all([
                         fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
@@ -731,7 +665,7 @@
                         const mx = d.daily.temperature_2m_max, mn = d.daily.temperature_2m_min;
                         let toplam = 0;
                         for (let i = 0; i < mx.length; i++) {
-                            if (typeof mx[i] !== "number" || typeof mn[i] !== "number") continue;
+                            if (typeof mx[i] !== 'number' || typeof mn[i] !== 'number') continue;
                             toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
                         }
                         return toplam;
@@ -757,52 +691,47 @@
             },
 
             fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
-                if (!veriVar || typeof gddOran !== "number") return hamFenoloji;
+                if (!veriVar || typeof gddOran !== 'number') return hamFenoloji;
                 const carpan = 1 + (gddOran - 1) * 0.5;
                 return Math.max(5, Math.min(100, Math.round(hamFenoloji * carpan)));
             },
 
-            veriKaydet() { localStorage.setItem("polinasyon_data_v4", JSON.stringify(this.data)); },
+            veriKaydet() { localStorage.setItem('polinasyon_data_v4', JSON.stringify(this.data)); },
             veriYukle() {
-                const kayitli = localStorage.getItem("polinasyon_data_v4") || localStorage.getItem("polinasyon_data_v2");
+                const kayitli = localStorage.getItem('polinasyon_data_v4') || localStorage.getItem('polinasyon_data_v2');
                 if (kayitli) { try { this.data = { ...this.data, ...JSON.parse(kayitli) }; } catch (e) {} }
             },
 
             sayfaDegistir(sayfaId) {
-                if (sayfaId === "Kovanlar") this.kategoriGorunumuneDon();
-                ["AnaSayfa", "Kovanlar", "Saglik", "Akademi"].forEach(s => {
-                    const el = document.getElementById("sayfa" + s);
-                    const nav = document.getElementById("nav" + s);
+                if (sayfaId === 'Kovanlar') this.kategoriGorunumuneDon();
+                ['AnaSayfa', 'Kovanlar', 'Saglik', 'Akademi'].forEach(s => {
+                    const el = document.getElementById('sayfa' + s);
+                    const nav = document.getElementById('nav' + s);
                     if (s === sayfaId) {
-                        el?.classList.remove("hidden");
-                        nav?.classList.add("nav-btn-active");
-                        if (s === "Akademi") this.rssYukle();
+                        el?.classList.remove('hidden');
+                        nav?.classList.add('nav-btn-active');
+                        if (s === 'Akademi') this.rssYukle();
                     } else {
-                        el?.classList.add("hidden");
-                        nav?.classList.remove("nav-btn-active");
+                        el?.classList.add('hidden');
+                        nav?.classList.remove('nav-btn-active');
                     }
                 });
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             },
 
             otomatikKonumBul() {
                 if (!navigator.geolocation) return alert("Konum desteklenmiyor.");
-                document.getElementById("havaLokasyon").textContent = "GPS Aranıyor...";
+                document.getElementById('havaLokasyon').textContent = "GPS Aranıyor...";
                 navigator.geolocation.getCurrentPosition(async (pos) => {
                     try {
                         const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&localityLanguage=tr`);
                         const data = await res.json();
                         await this.havaDurumunuYukle(pos.coords.latitude, pos.coords.longitude, data.city || data.locality || "Bulunan Konum");
-                    } catch (e) {
-                        await this.havaDurumunuYukle(pos.coords.latitude, pos.coords.longitude, "GPS Konum");
-                    }
-                }, () => {
-                    alert("Konum alınamadı.");
-                    document.getElementById("havaLokasyon").textContent = this.data.konum;
-                }, { enableHighAccuracy: true });
+                    } catch (e) { await this.havaDurumunuYukle(pos.coords.latitude, pos.coords.longitude, "GPS Konum"); }
+                }, () => { alert("Konum alınamadı."); document.getElementById('havaLokasyon').textContent = this.data.konum; }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 });
             },
 
-            // === TÜBİTAK / TAGEM FLORA (özet — önceki tüm kayıtlar korunur) ===
+            // === TÜBİTAK / TARIM ORMAN BAKANLIĞI / ARAŞTIRMA ENSTİTÜLERİ FLORA VERİTABANI ===
             floraVeritabani: {
                 "muğla": { flora: "Ege Çam Balı & Püren Florası", timeline: [{ ay: "Mayıs", bitki: "Narenciye / Hayıt", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ Florası", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Pamuklu Koşnili", verim: 95, tur: "nektar" }, { ay: "Eylül", bitki: "Çam Balı Zirve", verim: 98, tur: "nektar" }] },
                 "simav": { flora: "Ege Geçiş Bölgesi Kestane & Çam", timeline: [{ ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Orman Altı", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 75, tur: "nektar" }] },
@@ -832,16 +761,7 @@
                 "uşak": { flora: "Uşak Geçiş & Kekik Florası", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Dağ Florası", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }] },
                 "denizli": { flora: "Denizli Maki, Kekik & Çam", timeline: [{ ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 75, tur: "nektar" }] },
                 "aydın": { flora: "Aydın Zeytin, Hayıt & Maki", timeline: [{ ay: "Nisan", bitki: "Narenciye / Erken", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 30, tur: "kıtlık" }] },
-                "izmir": {
-  flora: "İzmir Maki, Kekik & Çam Florası",
-  timeline: [
-    { ay: "Nisan",   bitki: "Narenciye / Bahar", verim: 75, tur: "nektar" },
-    { ay: "Mayıs",   bitki: "Hayıt / Püren",     verim: 85, tur: "nektar" },
-    { ay: "Haziran", bitki: "Kekik / Dağ",       verim: 80, tur: "nektar" },
-    { ay: "Temmuz",  bitki: "Sıcaklık Stresi",   verim: 30, tur: "kıtlık" },
-    { ay: "Ağustos", bitki: "Çam Salgısı",       verim: 70, tur: "nektar" }
-  ]
-},
+                "izmir": { flora: "İzmir Maki, Kekik & Çam Florası", timeline: [{ ay: "Nisan", bitki: "Narenciye / Bahar", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 70, tur: "nektar" }] },
                 "manisa": { flora: "Manisa Bağ, Kekik & Maki", timeline: [{ ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, { ay: "Mayıs", bitki: "Hayıt / Kekik", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Dağ Florası", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 30, tur: "kıtlık" }] },
                 "antalya": { flora: "Antalya Narenciye, Maki & Çam", timeline: [{ ay: "Mart", bitki: "Erken Narenciye", verim: 80, tur: "nektar" }, { ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki (Hayıt/Püren)", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 20, tur: "kıtlık" }] },
                 "mersin": { flora: "Mersin Narenciye & Maki Florası", timeline: [{ ay: "Mart", bitki: "Erken Narenciye", verim: 80, tur: "nektar" }, { ay: "Nisan", bitki: "Portakal Zirve", verim: 95, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki / Defne", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 20, tur: "kıtlık" }] },
@@ -878,17 +798,7 @@
                 "nevşehir": { flora: "Nevşehir Kapadokya Bozkır Florası", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" }] },
                 "aksaray": { flora: "Aksaray Bozkır & Tarım Florası", timeline: [{ ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yonca / Yayla", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" }] },
                 "karaman": { flora: "Karaman Bozkır & Kekik", timeline: [{ ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" }] },
-               "ığdır": {
-  flora: "Iğdır Ova & Erken Bahar Florası",
-  timeline: [
-    { ay: "Nisan",   bitki: "Erken Bahar / Meyve", verim: 75, tur: "nektar" },
-    { ay: "Mayıs",   bitki: "Çayır / Yonca",       verim: 85, tur: "nektar" },
-    { ay: "Haziran", bitki: "Ova Akımı",           verim: 80, tur: "nektar" },
-    { ay: "Temmuz",  bitki: "Sıcaklık Stresi",     verim: 35, tur: "kıtlık" },
-    { ay: "Ağustos", bitki: "Yaz Sonu / Kıtlık",   verim: 25, tur: "kıtlık" }
-  ]
-},
-
+                "ığdır": { flora: "Iğdır Ova & Erken Bahar Florası", timeline: [{ ay: "Nisan", bitki: "Erken Bahar / Meyve", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Çayır / Yonca", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Ova Akımı", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }] },
                 "batman": { flora: "Batman Ova & Bozkır Florası", timeline: [{ ay: "Nisan", bitki: "Erken Bahar", verim: 70, tur: "polen" }, { ay: "Mayıs", bitki: "Yonca / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
                 "siirt": { flora: "Siirt Dağ & Bozkır Florası", timeline: [{ ay: "Nisan", bitki: "Bahar / Maki", verim: 70, tur: "nektar" }, { ay: "Mayıs", bitki: "Kekik / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 15, tur: "kıtlık" }] },
                 "adıyaman": { flora: "Adıyaman Ova & Maki Florası", timeline: [{ ay: "Nisan", bitki: "Bahar / Maki", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Kekik / Yonca", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
@@ -907,15 +817,31 @@
             aktifFenolojiyiBul() {
                 const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
                 const suAnkiAy = aylar[new Date().getMonth()];
-                const anahtar = this.floraAnahtariBul();
-                const secilenVeri = this.floraVeritabani[anahtar] || this.floraVeritabani["varsayılan"];
+                const konumKucuk = this.data.konum.toLocaleLowerCase('tr-TR');
+                let secilenVeri = this.floraVeritabani["varsayılan"];
+                let bulundu = false;
+                for (let ah in this.floraVeritabani) {
+                    if (ah !== "varsayılan" && konumKucuk.includes(ah)) {
+                        secilenVeri = this.floraVeritabani[ah];
+                        bulundu = true;
+                        break;
+                    }
+                }
+                if (!bulundu) {
+                    for (let b in this.bolgeHaritasi) {
+                        if (this.bolgeHaritasi[b].some(s => konumKucuk.includes(s))) {
+                            secilenVeri = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"];
+                            break;
+                        }
+                    }
+                }
                 const ayV = secilenVeri.timeline.find(t => t.ay === suAnkiAy);
                 if (ayV) return ayV.verim;
                 const ayIdx = new Date().getMonth();
                 return (ayIdx >= 4 && ayIdx <= 8) ? 50 : 15;
             },
 
-            ucusEgrisi(sicaklik) {
+            uçuşEgrisi(sicaklik) {
                 if (sicaklik < 10) return 0;
                 if (sicaklik < 20) return (sicaklik - 10) / 10;
                 if (sicaklik <= 30) return 1;
@@ -925,26 +851,35 @@
 
             nektar_flow_score(temp, humidity, wind, dew, past, pheno, precipitation = 0, cloudCover = 40) {
                 const ag = this.bolgeAgirliklari[this.aktifBolgesiBul()] || this.bolgeAgirliklari["varsayılan"];
-                const t = Math.max(0, Math.min(1, this.ucusEgrisi(temp))) * 22 * ag.t;
+
+                const t = Math.max(0, Math.min(1, this.uçuşEgrisi(temp))) * 22 * ag.t;
+
                 let wOran;
                 if (wind <= 10) wOran = 1;
                 else if (wind < 24) wOran = 1 - (wind - 10) / 14;
                 else wOran = 0;
                 const w = Math.max(0, Math.min(1, wOran)) * 12 * ag.w;
+
                 let hOran;
                 if (humidity >= 40 && humidity <= 70) hOran = 1;
                 else if (humidity < 40) hOran = humidity / 40;
                 else hOran = Math.max(0, 1 - (humidity - 70) / 30);
                 const h = Math.max(0, Math.min(1, hOran)) * 12 * ag.h;
+
                 const doygunlukAcigi = temp - dew;
                 const dOran = doygunlukAcigi >= 2 ? 1 : Math.max(0, doygunlukAcigi / 2);
                 const d = dOran * 5 * ag.d;
-                const p = Math.max(0, Math.min(1, this.ucusEgrisi(past))) * 8 * ag.p;
+
+                const p = Math.max(0, Math.min(1, this.uçuşEgrisi(past))) * 8 * ag.p;
+
                 const rainOran = precipitation <= 0 ? 1 : Math.max(0, 1 - precipitation / 2);
                 const rain = rainOran * 8 * ag.rain;
+
                 const sunOran = Math.max(0, Math.min(1, 1 - (cloudCover / 100)));
                 const sun = sunOran * 8 * ag.sun;
+
                 const ph = (pheno / 100) * 25 * ag.ph;
+
                 return Math.round(Math.max(0, Math.min(100, t + w + h + d + p + rain + sun + ph)));
             },
 
@@ -952,154 +887,187 @@
                 const hamFenoloji = this.aktifFenolojiyiBul();
                 const pheno = (this.data.duzeltilmisFenoloji != null) ? this.data.duzeltilmisFenoloji : hamFenoloji;
                 const skor = this.nektar_flow_score(
-                    this.data.temp, this.data.humidity, this.data.windSpeed, this.data.dewPoint,
-                    this.data.pastAvgTemp || 22, pheno, this.data.precipitation || 0, this.data.cloudCover ?? 40
+                    this.data.temp,
+                    this.data.humidity,
+                    this.data.windSpeed,
+                    this.data.dewPoint,
+                    this.data.pastAvgTemp || 22,
+                    pheno,
+                    this.data.precipitation || 0,
+                    this.data.cloudCover ?? 40
                 );
-                document.getElementById("nektarSkor").textContent = `%${skor}`;
-                document.getElementById("nektarBar").style.width = `${skor}%`;
-                document.getElementById("uiGecmis").textContent = `${this.data.pastAvgTemp || 22}°C Ortalama`;
+
+                document.getElementById('nektarSkor').textContent = `%${skor}`;
+                document.getElementById('nektarBar').style.width = `${skor}%`;
+                document.getElementById('uiGecmis').textContent = `${this.data.pastAvgTemp || 22}°C Ortalama`;
+
                 let fenolojiMetin = `%${pheno} Kapasite`;
                 if (this.data.gddVeriVar && this.data.gddOran !== 1) {
                     const farkYuzde = Math.round((this.data.gddOran - 1) * 100);
-                    const isaret = farkYuzde > 0 ? "+" : "";
+                    const isaret = farkYuzde > 0 ? '+' : '';
                     fenolojiMetin += ` (GDD ${isaret}${farkYuzde}%)`;
                 }
-                document.getElementById("uiFenoloji").textContent = fenolojiMetin;
-                const etiket = document.getElementById("nektarDurumEtiketi");
-                const aciklama = document.getElementById("nektarAciklama");
-                const dinamikNot = document.getElementById("dinamikDuzeltmeNotu");
-                dinamikNot.classList.remove("hidden");
-                dinamikNot.style.display = "flex";
+                document.getElementById('uiFenoloji').textContent = fenolojiMetin;
+
+                const etiket = document.getElementById('nektarDurumEtiketi');
+                const aciklama = document.getElementById('nektarAciklama');
+                const dinamikNot = document.getElementById('dinamikDuzeltmeNotu');
+                dinamikNot.classList.remove('hidden');
+                dinamikNot.style.display = 'flex';
+
                 if (skor >= 70) {
                     etiket.textContent = "GÜÇLÜ";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800";
-                    aciklama.textContent = "Aktif bitki fenolojisi ile birleşen kusursuz anlık hava değerleri nektar salgısını maksimuma çıkarıyor.";
+                    aciklama.textContent = `Aktif bitki fenolojisi ile birleşen kusursuz anlık hava değerleri nektar salgısını maksimuma çıkarıyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-emerald-700 bg-emerald-50 p-2 rounded-xl border border-emerald-200/60 flex flex-wrap items-center gap-1.5";
                     dinamikNot.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 shrink-0"></i> <span>Optimum Turgor Bonusu: Akım Potansiyeli +${Math.round(skor / 3)}%</span>`;
                 } else if (skor >= 40) {
                     etiket.textContent = "ORTA";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800";
-                    aciklama.textContent = "Nektar akımı için makul şartlar mevcut. Fenolojik kapasite ve iklim trendi dengeli seyrediyor.";
+                    aciklama.textContent = `Nektar akımı için makul şartlar mevcut. Fenolojik kapasite ve iklim trendi dengeli seyrediyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-amber-700 bg-amber-50 p-2 rounded-xl border border-amber-200/60 flex flex-wrap items-center gap-1.5";
                     dinamikNot.innerHTML = `<i data-lucide="info" class="w-3.5 h-3.5 shrink-0"></i> <span>Hava Etkisi: Akım Dengeli (Nötr)</span>`;
                 } else {
                     etiket.textContent = "ZAYIF";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-rose-100 text-rose-800";
-                    aciklama.textContent = "Bitkilerin fenolojik uyumsuzluğu veya aşırı sıcak/soğuk rüzgarlar bitkide strese yol açarak nektarı kısıtlıyor.";
+                    aciklama.textContent = `Bitkilerin fenolojik uyumsuzluğu veya aşırı sıcak/soğuk rüzgarlar bitkide strese yol açarak nektarı kısıtlıyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-rose-700 bg-rose-50 p-2 rounded-xl border border-rose-200/60 flex flex-wrap items-center gap-1.5";
                     dinamikNot.innerHTML = `<i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0"></i> <span>İklim Kısıtlaması: Akım -${Math.round((100 - skor) / 2)}%</span>`;
                 }
                 if (window.lucide) window.lucide.createIcons();
             },
 
-            timelineCiz() {
-                const container = document.getElementById("floraTimelineContainer");
-                const anahtar = this.floraAnahtariBul();
-                const sec = this.floraVeritabani[anahtar] || this.floraVeritabani["varsayılan"];
-                const sehirOzel = anahtar !== "varsayılan" && !this.bolgeHaritasi[anahtar];
-                document.getElementById("bolgeFloraHaritasi").textContent =
-                    `Flora: ${!sehirOzel && sec.flora === "Çeşitli Yayla & Tarım Çiçekleri" ? this.data.konum + " ve Çevresi" : sec.flora}`;
+           timelineCiz() {
+    const container = document.getElementById('floraTimelineContainer');
+    const k = this.data.konum.toLocaleLowerCase('tr-TR');
+    let sec = this.floraVeritabani["varsayılan"];
+    let bul = false;
+    for (let a in this.floraVeritabani) {
+        if (a !== "varsayılan" && k.includes(a)) {
+            sec = this.floraVeritabani[a];
+            bul = true;
+            break;
+        }
+    }
+    if (!bul) {
+        for (let b in this.bolgeHaritasi) {
+            if (this.bolgeHaritasi[b].some(s => k.includes(s))) {
+                sec = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"];
+                break;
+            }
+        }
+    }
+    document.getElementById('bolgeFloraHaritasi').textContent =
+        `Flora: ${!bul && sec.flora === "Çeşitli Yayla & Tarım Çiçekleri" ? this.data.konum + " ve Çevresi" : sec.flora}`;
 
-                const aylarIsim = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-                const mevcutAy = aylarIsim[new Date().getMonth()];
+    // Mevcut ayı cihaz saatinden dinamik çeker
+    const aylarIsim = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+    const mevcutAy = aylarIsim[new Date().getMonth()];
 
-                let html = "";
-                sec.timeline.forEach(t => {
-                    const rS = t.tur === "polen" ? "bg-amber-50 border-amber-300 text-amber-900" : (t.tur === "kıtlık" ? "bg-slate-100 border-slate-300 text-slate-700" : "bg-emerald-50 border-emerald-300 text-emerald-900");
-                    const bS = t.tur === "polen" ? "bg-amber-500" : (t.tur === "kıtlık" ? "bg-slate-400" : "bg-emerald-500");
-                    const vurgu = (t.ay && t.ay.toLocaleLowerCase("tr-TR") === mevcutAy.toLocaleLowerCase("tr-TR")) ? "ring-2 ring-amber-500 shadow-md" : "";
-                    html += `<div class="p-3 rounded-xl border ${rS} ${vurgu} flex flex-col gap-1.5 shadow-sm"><div class="flex justify-between items-center text-xs font-bold"><span>${t.ay} — ${t.bitki}</span><span>%${t.verim}</span></div><div class="w-full bg-white/70 h-2 rounded-full overflow-hidden"><div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div></div></div>`;
-                });
-                if (this.data.sahaGozlemleri && this.data.sahaGozlemleri.length > 0) {
-                    html += `<div class="mt-3 border-t border-slate-200 pt-2"><p class="text-[11px] font-bold text-slate-700 mb-1">Son Saha Gözlemleri:</p>`;
-                    this.data.sahaGozlemleri.forEach(g => {
-                        html += `<div class="p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-600 mb-1"><span class="font-bold">${g.tarih}</span> - <span class="text-amber-700">${g.tur}</span> (${g.bitki}): ${g.not}</div>`;
-                    });
-                    html += `</div>`;
-                }
-                container.innerHTML = html;
-            },
+    let html = '';
+    sec.timeline.forEach(t => {
+        let rS = t.tur === "polen" ? "bg-amber-50 border-amber-300 text-amber-900" : (t.tur === "kıtlık" ? "bg-slate-100 border-slate-300 text-slate-700" : "bg-emerald-50 border-emerald-300 text-emerald-900");
+        let bS = t.tur === "polen" ? "bg-amber-500" : (t.tur === "kıtlık" ? "bg-slate-400" : "bg-emerald-500");
+        
+        // İçinde bulunulan ayı görsel olarak belirginleştirir
+        let vurgu = (t.ay && t.ay.toLowerCase().includes(mevcutAy.toLowerCase())) ? "ring-2 ring-amber-500 shadow-md" : "";
 
-            async havaDurumunuYukle(lat, lon, sehirAd) {
-                document.getElementById("havaLokasyon").textContent = sehirAd;
-                this.data.konum = sehirAd;
-                this.data.lat = lat;
-                this.data.lon = lon;
+        html += `<div class="p-3 rounded-xl border ${rS} ${vurgu} flex flex-col gap-1.5 shadow-2xs"><div class="flex justify-between items-center text-xs font-bold"><span>${t.ay} — ${t.bitki}</span><span>%${t.verim}</span></div><div class="w-full bg-white/70 h-2 rounded-full overflow-hidden"><div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div></div></div>`;
+    });
+    if (this.data.sahaGozlemleri && this.data.sahaGozlemleri.length > 0) {
+        html += `<div class="mt-3 border-t border-slate-200 pt-2"><p class="text-[11px] font-bold text-slate-700 mb-1">Son Saha Gözlemleri:</p>`;
+        this.data.sahaGozlemleri.forEach(g => {
+            html += `<div class="p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-600 mb-1"><span class="font-bold">${g.tarih}</span> - <span class="text-amber-700">${g.tur}</span> (${g.bitki}): ${g.not}</div>`;
+        });
+        html += `</div>`;
+    }
+    container.innerHTML = html;
+},
 
-                try {
-                    const res = await fetch(
-                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,dew_point_2m,precipitation,cloud_cover&daily=temperature_2m_mean&past_days=3&forecast_days=1&timezone=auto`,
-                        { cache: "no-cache" }
-                    );
-                    const data = await res.json();
-                    if (!data || !data.current || typeof data.current.temperature_2m !== "number") {
-                        throw new Error("Beklenmeyen API yanıtı");
-                    }
-                    this.data.temp = Math.round(data.current.temperature_2m);
-                    this.data.humidity = Math.round(data.current.relative_humidity_2m);
-                    this.data.dewPoint = Math.round(data.current.dew_point_2m);
-                    this.data.windSpeed = Math.round(data.current.wind_speed_10m);
-                    this.data.precipitation = typeof data.current.precipitation === "number" ? data.current.precipitation : 0;
-                    this.data.cloudCover = typeof data.current.cloud_cover === "number" ? Math.round(data.current.cloud_cover) : 40;
-                    if (data.daily && data.daily.temperature_2m_mean) {
-                        const g = data.daily.temperature_2m_mean;
-                        this.data.pastAvgTemp = Math.round((g[0] + g[1] + g[2]) / 3);
-                    }
-                    document.getElementById("havaSicaklik").textContent = `${this.data.temp}°C`;
-                    document.getElementById("havaNem").textContent = `%${this.data.humidity}`;
-                    document.getElementById("havaCiy").textContent = `${this.data.dewPoint}°C`;
-                    document.getElementById("havaRuzgar").textContent = `${this.data.windSpeed} km/s`;
-                    document.getElementById("havaYagis").textContent = `${this.data.precipitation} mm`;
-                    document.getElementById("havaBulut").textContent = `%${this.data.cloudCover}`;
-                    localStorage.setItem("polinasyon_last_weather", JSON.stringify({
-                        temp: this.data.temp, humidity: this.data.humidity, dewPoint: this.data.dewPoint,
-                        windSpeed: this.data.windSpeed, pastAvgTemp: this.data.pastAvgTemp,
-                        precipitation: this.data.precipitation, cloudCover: this.data.cloudCover
-                    }));
-                } catch (e) {
-                    const sH = localStorage.getItem("polinasyon_last_weather");
-                    if (sH) {
-                        try {
-                            const p = JSON.parse(sH);
-                            this.data.temp = p.temp;
-                            this.data.humidity = p.humidity;
-                            this.data.dewPoint = p.dewPoint || 12;
-                            this.data.windSpeed = p.windSpeed;
-                            this.data.pastAvgTemp = p.pastAvgTemp || 22;
-                            this.data.precipitation = p.precipitation ?? 0;
-                            this.data.cloudCover = p.cloudCover ?? 40;
-                            document.getElementById("havaSicaklik").textContent = `${this.data.temp}°C`;
-                            document.getElementById("havaNem").textContent = `%${this.data.humidity}`;
-                            document.getElementById("havaCiy").textContent = `${this.data.dewPoint}°C`;
-                            document.getElementById("havaRuzgar").textContent = `${this.data.windSpeed} km/s`;
-                            document.getElementById("havaYagis").textContent = `${this.data.precipitation} mm`;
-                            document.getElementById("havaBulut").textContent = `%${this.data.cloudCover}`;
-                        } catch (err) {}
-                    }
-                }
+async havaDurumunuYukle(lat, lon, sehirAd) {
+    document.getElementById('havaLokasyon').textContent = sehirAd;
+    this.data.konum = sehirAd;
+    this.data.lat = lat;
+    this.data.lon = lon;
 
-                try {
-                    const gdd = await this.gddOraniniGetir(lat, lon);
-                    this.data.gddOran = gdd.oran;
-                    this.data.gddVeriVar = gdd.veriVar;
-                    const ham = this.aktifFenolojiyiBul();
-                    this.data.duzeltilmisFenoloji = this.fenolojiyiGddIleDuzelt(ham, gdd.oran, gdd.veriVar);
-                } catch (err) {
-                    this.data.gddOran = 1;
-                    this.data.gddVeriVar = false;
-                    this.data.duzeltilmisFenoloji = this.aktifFenolojiyiBul();
-                }
+    try {
+        const res = await fetch(
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,dew_point_2m,precipitation,cloud_cover&daily=temperature_2m_mean&past_days=3&forecast_days=1&timezone=auto`,
+            { cache: 'no-cache' }
+        );
+        const data = await res.json();
+        if (!data || !data.current || typeof data.current.temperature_2m !== 'number') {
+            throw new Error('Beklenmeyen API yanıtı');
+        }
+        this.data.temp = Math.round(data.current.temperature_2m);
+        this.data.humidity = Math.round(data.current.relative_humidity_2m);
+        this.data.dewPoint = Math.round(data.current.dew_point_2m);
+        this.data.windSpeed = Math.round(data.current.wind_speed_10m);
+        this.data.precipitation = typeof data.current.precipitation === 'number' ? data.current.precipitation : 0;
+        this.data.cloudCover = typeof data.current.cloud_cover === 'number' ? Math.round(data.current.cloud_cover) : 40;
+        if (data.daily && data.daily.temperature_2m_mean) {
+            const g = data.daily.temperature_2m_mean;
+            this.data.pastAvgTemp = Math.round((g[0] + g[1] + g[2]) / 3);
+        }
+        document.getElementById('havaSicaklik').textContent = `${this.data.temp}°C`;
+        document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
+        document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
+        document.getElementById('havaRuzgar').textContent = `${this.data.windSpeed} km/s`;
+        document.getElementById('havaYagis').textContent = `${this.data.precipitation} mm`;
+        document.getElementById('havaBulut').textContent = `%${this.data.cloudCover}`;
+        localStorage.setItem('polinasyon_last_weather', JSON.stringify({
+            temp: this.data.temp,
+            humidity: this.data.humidity,
+            dewPoint: this.data.dewPoint,
+            windSpeed: this.data.windSpeed,
+            pastAvgTemp: this.data.pastAvgTemp,
+            precipitation: this.data.precipitation,
+            cloudCover: this.data.cloudCover
+        }));
+    } catch (e) {
+        const sH = localStorage.getItem('polinasyon_last_weather');
+        if (sH) {
+            try {
+                const p = JSON.parse(sH);
+                this.data.temp = p.temp;
+                this.data.humidity = p.humidity;
+                this.data.dewPoint = p.dewPoint || 12;
+                this.data.windSpeed = p.windSpeed;
+                this.data.pastAvgTemp = p.pastAvgTemp || 22;
+                this.data.precipitation = p.precipitation ?? 0;
+                this.data.cloudCover = p.cloudCover ?? 40;
+                document.getElementById('havaSicaklik').textContent = `${this.data.temp}°C`;
+                document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
+                document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
+                document.getElementById('havaRuzgar').textContent = `${this.data.windSpeed} km/s`;
+                document.getElementById('havaYagis').textContent = `${this.data.precipitation} mm`;
+                document.getElementById('havaBulut').textContent = `%${this.data.cloudCover}`;
+            } catch (err) {}
+        }
+    }
 
-                this.veriKaydet();
-                this.nektarAkimiHesaplaVeGuncelle();
-                this.timelineCiz();
-            },
+    try {
+        const gdd = await this.gddOraniniGetir(lat, lon);
+        this.data.gddOran = gdd.oran;
+        this.data.gddVeriVar = gdd.veriVar;
+        const ham = this.aktifFenolojiyiBul();
+        this.data.duzeltilmisFenoloji = this.fenolojiyiGddIleDuzelt(ham, gdd.oran, gdd.veriVar);
+    } catch (err) {
+        this.data.gddOran = 1;
+        this.data.gddVeriVar = false;
+        this.data.duzeltilmisFenoloji = this.aktifFenolojiyiBul();
+    }
 
-            arayuzuGuncelle() {
-                const c = document.getElementById("kategoriListesiContainer");
-                let html = "";
-                this.data.kategoriler.forEach(kat => {
-                    html += `
+    this.veriKaydet();
+    this.nektarAkimiHesaplaVeGuncelle();
+    this.timelineCiz();
+},
+
+arayuzuGuncelle() {
+    const c = document.getElementById('kategoriListesiContainer');
+    let html = '';
+    this.data.kategoriler.forEach(kat => {
+        html += `
             <div onclick="uygulama.kategoriSec(${kat.id})" class="soft-card p-4 cursor-pointer hover:border-amber-400 flex items-center justify-between group transition">
                 <div class="flex items-center gap-3.5">
                     <div class="w-11 h-11 rounded-2xl bg-amber-50 group-hover:bg-amber-500 group-hover:text-white text-amber-600 flex items-center justify-center transition shrink-0"><i data-lucide="folder-kanban" class="w-5 h-5"></i></div>
@@ -1110,31 +1078,30 @@
                     <div class="w-8 h-8 rounded-full bg-slate-100 border flex items-center justify-center text-slate-400 group-hover:text-amber-600"><i data-lucide="chevron-right" class="w-4 h-4"></i></div>
                 </div>
             </div>`;
-                });
-                c.innerHTML = html || `<p class="text-center py-8 text-slate-400 text-xs">Henüz kategori bulunmuyor.</p>`;
-                if (window.lucide) window.lucide.createIcons();
-            },
-
+    });
+    c.innerHTML = html || `<p class="text-center py-8 text-slate-400 text-xs">Henüz kategori bulunmuyor.</p>`;
+    if (window.lucide) window.lucide.createIcons();
+},
             kategoriSec(id) {
                 this.aktifKategoriId = id;
                 const kat = this.data.kategoriler.find(k => k.id === id);
                 if (!kat) return;
-                document.getElementById("aktifKategoriBaslik").textContent = kat.isim;
-                document.getElementById("kategoriAnaGorunum").classList.add("hidden");
-                document.getElementById("kategoriDetayGorunum").classList.remove("hidden");
+                document.getElementById('aktifKategoriBaslik').textContent = kat.isim;
+                document.getElementById('kategoriAnaGorunum').classList.add('hidden');
+                document.getElementById('kategoriDetayGorunum').classList.remove('hidden');
                 this.aktifKovanlariCiz(kat.kovanlar);
             },
 
             kategoriGorunumuneDon() {
                 this.aktifKategoriId = null;
-                document.getElementById("kategoriDetayGorunum").classList.add("hidden");
-                document.getElementById("kategoriAnaGorunum").classList.remove("hidden");
+                document.getElementById('kategoriDetayGorunum').classList.add('hidden');
+                document.getElementById('kategoriAnaGorunum').classList.remove('hidden');
                 this.arayuzuGuncelle();
             },
 
             kategoriSil(id, event) {
                 if (event) event.stopPropagation();
-                if (!confirm("Bu kategori ve içindeki tüm kovanlar silinsin mi?")) return;
+                if (!confirm('Bu kategori ve içindeki tüm kovanlar silinsin mi?')) return;
                 this.data.kategoriler = this.data.kategoriler.filter(k => k.id !== id);
                 if (this.aktifKategoriId === id) this.kategoriGorunumuneDon();
                 this.veriKaydet();
@@ -1142,15 +1109,15 @@
             },
 
             aktifKovanlariCiz(kovanlar) {
-                const c = document.getElementById("aktifKovanlarContainer");
-                let html = "";
+                const c = document.getElementById('aktifKovanlarContainer');
+                let html = '';
                 kovanlar.forEach(k => {
                     const sk = k.gecmisKontroller?.length ? k.gecmisKontroller[k.gecmisKontroller.length - 1] : null;
                     html += `
-                        <div class="p-4 rounded-2xl border border-slate-200 bg-white flex items-center justify-between hover:border-amber-400 transition cursor-pointer shadow-sm" onclick="uygulama.kovanDetayModaliniAc(${k.id})">
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-white flex items-center justify-between hover:border-amber-400 transition cursor-pointer shadow-2xs" onclick="uygulama.kovanDetayModaliniAc(${k.id})">
                             <div class="flex-1 pr-3">
                                 <div class="flex items-center gap-2"><h4 class="font-bold text-sm text-slate-800">${k.isim}</h4><span class="text-[10px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-lg">Bal: ${sk ? sk.bal : 0} kg</span></div>
-                                <p class="text-xs text-slate-600 mt-1 line-clamp-1">${sk ? sk.not : "Kayıt yok"}</p>
+                                <p class="text-xs text-slate-600 mt-1 line-clamp-1">${sk ? sk.not : 'Kayıt yok'}</p>
                             </div>
                             <button type="button" onclick="event.stopPropagation(); uygulama.kovanSil(${k.id})" class="text-slate-400 hover:text-rose-500 p-2 transition rounded-lg hover:bg-rose-50"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>`;
@@ -1165,15 +1132,15 @@
                 const kovan = kat.kovanlar.find(k => k.id === kovanId);
                 if (!kovan) return;
                 this.aktifDuzenlenenKovanId = kovanId;
-                document.getElementById("editKovanId").value = kovan.id;
-                document.getElementById("detayIsim").value = kovan.isim || "";
-                document.getElementById("detayAnaAri").value = kovan.anaAri || "";
-                document.getElementById("yeniBal").value = "";
-                document.getElementById("yeniHastalik").value = "";
-                document.getElementById("yeniNot").value = "";
+                document.getElementById('editKovanId').value = kovan.id;
+                document.getElementById('detayIsim').value = kovan.isim || "";
+                document.getElementById('detayAnaAri').value = kovan.anaAri || "";
+                document.getElementById('yeniBal').value = "";
+                document.getElementById('yeniHastalik').value = "";
+                document.getElementById('yeniNot').value = "";
                 this.gecmisKontrolleriCiz(kovan.gecmisKontroller);
                 this.gelisimGrafigiCiz(kovan.gecmisKontroller);
-                document.getElementById("kovanDetayModal").classList.remove("hidden");
+                document.getElementById('kovanDetayModal').classList.remove('hidden');
                 if (window.lucide) window.lucide.createIcons();
             },
 
@@ -1182,24 +1149,24 @@
                 if (kat && this.aktifDuzenlenenKovanId) {
                     const kovan = kat.kovanlar.find(k => k.id === this.aktifDuzenlenenKovanId);
                     if (kovan) {
-                        kovan.isim = document.getElementById("detayIsim").value.trim() || kovan.isim;
-                        kovan.anaAri = document.getElementById("detayAnaAri").value.trim() || kovan.anaAri;
+                        kovan.isim = document.getElementById('detayIsim').value.trim() || kovan.isim;
+                        kovan.anaAri = document.getElementById('detayAnaAri').value.trim() || kovan.anaAri;
                         this.veriKaydet();
                     }
                 }
-                document.getElementById("kovanDetayModal").classList.add("hidden");
+                document.getElementById('kovanDetayModal').classList.add('hidden');
                 if (kat) this.aktifKovanlariCiz(kat.kovanlar);
                 this.arayuzuGuncelle();
             },
 
             yeniKontrolEkle() {
-                const isim = document.getElementById("detayIsim").value.trim();
-                const anaAri = document.getElementById("detayAnaAri").value.trim();
-                const balInput = document.getElementById("yeniBal").value;
+                const isim = document.getElementById('detayIsim').value.trim();
+                const anaAri = document.getElementById('detayAnaAri').value.trim();
+                const balInput = document.getElementById('yeniBal').value;
                 const bal = balInput !== "" ? parseFloat(balInput) : null;
-                const hastalik = document.getElementById("yeniHastalik").value.trim() || "Yok";
-                const not = document.getElementById("yeniNot").value.trim() || "Kontrol gerçekleştirildi.";
-                const tarih = new Date().toISOString().split("T")[0];
+                const hastalik = document.getElementById('yeniHastalik').value.trim() || "Yok";
+                const not = document.getElementById('yeniNot').value.trim() || "Kontrol gerçekleştirildi.";
+                const tarih = new Date().toISOString().split('T')[0];
                 const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
                 if (!kat) return;
                 const kovan = kat.kovanlar.find(k => k.id === this.aktifDuzenlenenKovanId);
@@ -1210,21 +1177,21 @@
                     if (!kovan.gecmisKontroller) kovan.gecmisKontroller = [];
                     kovan.gecmisKontroller.push({ tarih, bal, hastalik, not });
                 }
-                document.getElementById("yeniBal").value = "";
-                document.getElementById("yeniHastalik").value = "";
-                document.getElementById("yeniNot").value = "";
+                document.getElementById('yeniBal').value = "";
+                document.getElementById('yeniHastalik').value = "";
+                document.getElementById('yeniNot').value = "";
                 this.veriKaydet();
                 this.gecmisKontrolleriCiz(kovan.gecmisKontroller);
                 this.gelisimGrafigiCiz(kovan.gecmisKontroller);
             },
 
             gecmisKontrolleriCiz(kontroller) {
-                const container = document.getElementById("gecmisKontrollerListesi");
+                const container = document.getElementById('gecmisKontrollerListesi');
                 if (!kontroller || kontroller.length === 0) {
                     container.innerHTML = `<p class="text-center py-4 text-slate-400 text-xs">Henüz kontrol kaydı yok.</p>`;
                     return;
                 }
-                let html = "";
+                let html = '';
                 [...kontroller].reverse().forEach((k, idx) => {
                     const gercekIdx = kontroller.length - 1 - idx;
                     let trendIkon = '<i data-lucide="minus" class="w-3.5 h-3.5 text-slate-400"></i>';
@@ -1233,7 +1200,7 @@
                         if (k.bal > onceki) trendIkon = '<i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i>';
                         else if (k.bal < onceki) trendIkon = '<i data-lucide="trending-down" class="w-3.5 h-3.5 text-rose-500"></i>';
                     }
-                    html += `<div class="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between text-xs shadow-sm"><div><div class="flex items-center gap-2 font-bold text-slate-800"><span>${k.tarih}</span><span class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded">${k.bal} kg</span><span class="text-slate-500 font-normal">(${k.hastalik})</span></div><p class="text-slate-600 mt-1">${k.not}</p></div><div class="flex items-center gap-2 shrink-0">${trendIkon}<button type="button" onclick="uygulama.kontrolSil(${gercekIdx})" class="text-slate-300 hover:text-rose-500 p-1"><i data-lucide="x" class="w-3.5 h-3.5"></i></button></div></div>`;
+                    html += `<div class="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between text-xs shadow-2xs"><div><div class="flex items-center gap-2 font-bold text-slate-800"><span>${k.tarih}</span><span class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded">${k.bal} kg</span><span class="text-slate-500 font-normal">(${k.hastalik})</span></div><p class="text-slate-600 mt-1">${k.not}</p></div><div class="flex items-center gap-2 shrink-0">${trendIkon}<button type="button" onclick="uygulama.kontrolSil(${gercekIdx})" class="text-slate-300 hover:text-rose-500 p-1"><i data-lucide="x" class="w-3.5 h-3.5"></i></button></div></div>`;
                 });
                 container.innerHTML = html;
                 if (window.lucide) window.lucide.createIcons();
@@ -1251,7 +1218,7 @@
             },
 
             gelisimGrafigiCiz(kontroller) {
-                const container = document.getElementById("gelisimGrafigi");
+                const container = document.getElementById('gelisimGrafigi');
                 if (!kontroller || kontroller.length === 0) {
                     container.innerHTML = `<p class="text-center text-xs text-slate-400 w-full m-auto">Grafik için kayıtlı bal verisi yok.</p>`;
                     return;
@@ -1276,7 +1243,7 @@
                     const p0 = points[i], p1 = points[i + 1], midX = (p0.x + p1.x) / 2;
                     pathData += ` Q ${midX} ${p0.y}, ${midX} ${(p0.y + p1.y) / 2} T ${p1.x} ${p1.y}`;
                 }
-                const areaData = `${pathData} L ${width - padding} ${height - 10} L ${padding} ${height - 10} Z`;
+                let areaData = `${pathData} L ${width - padding} ${height - 10} L ${padding} ${height - 10} Z`;
                 let svgHtml = `<svg viewBox="0 0 ${width} ${height}" class="w-full h-24 overflow-visible"><defs><linearGradient id="glowGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.0"/></linearGradient></defs><line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" stroke="#334155" stroke-width="1" stroke-dasharray="3 3"/><path d="${areaData}" fill="url(#glowGradient)" /><path d="${pathData}" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>`;
                 points.forEach((p, idx) => {
                     let renkSinifi = "#fbbf24";
@@ -1314,14 +1281,14 @@
             },
 
             konumModaliniAc() {
-                document.getElementById("sehirInput").value = "";
-                document.getElementById("konumModal").classList.remove("hidden");
-                document.getElementById("sehirInput").focus();
+                document.getElementById('sehirInput').value = "";
+                document.getElementById('konumModal').classList.remove('hidden');
+                document.getElementById('sehirInput').focus();
             },
-            konumModaliniKapat() { document.getElementById("konumModal").classList.add("hidden"); },
+            konumModaliniKapat() { document.getElementById('konumModal').classList.add('hidden'); },
 
             async sehirAraVeGuncelle() {
-                const aranan = document.getElementById("sehirInput").value.trim();
+                const aranan = document.getElementById('sehirInput').value.trim();
                 if (!aranan) return;
                 this.konumModaliniKapat();
                 try {
@@ -1335,14 +1302,14 @@
             },
 
             yeniKategoriModaliniAc() {
-                document.getElementById("kategoriIsimInput").value = "";
-                document.getElementById("kategoriModal").classList.remove("hidden");
-                document.getElementById("kategoriIsimInput").focus();
+                document.getElementById('kategoriIsimInput').value = "";
+                document.getElementById('kategoriModal').classList.remove('hidden');
+                document.getElementById('kategoriIsimInput').focus();
             },
-            yeniKategoriModaliniKapat() { document.getElementById("kategoriModal").classList.add("hidden"); },
+            yeniKategoriModaliniKapat() { document.getElementById('kategoriModal').classList.add('hidden'); },
 
             kategoriKaydet() {
-                const isim = document.getElementById("kategoriIsimInput").value.trim();
+                const isim = document.getElementById('kategoriIsimInput').value.trim();
                 if (!isim) return;
                 this.data.kategoriler.push({ id: Date.now(), isim, kovanlar: [] });
                 this.veriKaydet();
@@ -1358,7 +1325,7 @@
                     id: yeniId,
                     isim: "Kovan #" + (kat.kovanlar.length + 1),
                     anaAri: new Date().getFullYear().toString(),
-                    gecmisKontroller: [{ tarih: new Date().toISOString().split("T")[0], bal: 0, hastalik: "Yok", not: "İlk kurulum kaydı." }]
+                    gecmisKontroller: [{ tarih: new Date().toISOString().split('T')[0], bal: 0, hastalik: "Yok", not: "İlk kurulum kaydı." }]
                 };
                 kat.kovanlar.push(yeniKovan);
                 this.veriKaydet();
@@ -1367,17 +1334,17 @@
             },
 
             sahaRaporuModaliniAc() {
-                document.getElementById("raporTurInput").value = "Nektar Akımı";
-                document.getElementById("raporBitkiInput").value = "";
-                document.getElementById("raporNotInput").value = "";
-                document.getElementById("sahaRaporuModal").classList.remove("hidden");
+                document.getElementById('raporTurInput').value = 'Nektar Akımı';
+                document.getElementById('raporBitkiInput').value = '';
+                document.getElementById('raporNotInput').value = '';
+                document.getElementById('sahaRaporuModal').classList.remove('hidden');
             },
-            sahaRaporuModaliniKapat() { document.getElementById("sahaRaporuModal").classList.add("hidden"); },
+            sahaRaporuModaliniKapat() { document.getElementById('sahaRaporuModal').classList.add('hidden'); },
             sahaRaporuKaydet() {
-                const tur = document.getElementById("raporTurInput").value;
-                const bitki = document.getElementById("raporBitkiInput").value.trim() || "Belirtilmedi";
-                const not = document.getElementById("raporNotInput").value.trim() || "-";
-                const tarih = new Date().toISOString().split("T")[0];
+                const tur = document.getElementById('raporTurInput').value;
+                const bitki = document.getElementById('raporBitkiInput').value.trim() || 'Belirtilmedi';
+                const not = document.getElementById('raporNotInput').value.trim() || '-';
+                const tarih = new Date().toISOString().split('T')[0];
                 if (!this.data.sahaGozlemleri) this.data.sahaGozlemleri = [];
                 this.data.sahaGozlemleri.unshift({ tarih, tur, bitki, not });
                 if (this.data.sahaGozlemleri.length > 30) this.data.sahaGozlemleri.length = 30;
@@ -1387,17 +1354,17 @@
             },
 
             async rssYukle() {
-                const container = document.getElementById("makaleListesiContainer");
+                const container = document.getElementById('makaleListesiContainer');
                 container.innerHTML = `<p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>`;
                 try {
                     const targetUrl = encodeURIComponent("https://www.polinasyon.org/atom.xml?redirect=false&start-index=1&max-results=50");
                     const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${targetUrl}`);
                     const data = await res.json();
                     if (data && data.items && data.items.length > 0) {
-                        let html = "";
+                        let html = '';
                         data.items.forEach(item => {
-                            const descClean = item.description ? item.description.replace(/<[^>]*>?/gm, "").substring(0, 200) : "Detay bulunmuyor.";
-                            const safeTitle = (item.title || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                            const descClean = item.description ? item.description.replace(/<[^>]*>?/gm, '').substring(0, 200) : "Detay bulunmuyor.";
+                            const safeTitle = (item.title || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
                             html += `<div class="rounded-2xl border border-slate-200 bg-white overflow-hidden mb-3"><div onclick="this.nextElementSibling.classList.toggle('active')" class="p-4 cursor-pointer flex justify-between items-center hover:bg-slate-50 transition"><h4 class="font-semibold text-sm text-slate-800">${safeTitle}</h4><span class="text-xs text-slate-400">▼</span></div><div class="accordion-panel px-4 pb-4 pt-2 border-t border-slate-100 text-xs text-slate-600"><p class="mb-3">${descClean}...</p><a href="${item.link}" target="_blank" rel="noopener noreferrer" class="text-amber-600 font-bold underline inline-block">Devamını Oku →</a></div></div>`;
                         });
                         container.innerHTML = html;
@@ -1412,28 +1379,37 @@
             verileriYedekle() {
                 try {
                     const json = JSON.stringify(this.data, null, 2);
-                    const blob = new Blob([json], { type: "application/json" });
-                    const dosyaAdi = "polinasyon_yedek_" + new Date().toISOString().slice(0, 10) + ".json";
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
+
                     if (navigator.share && navigator.canShare) {
-                        const file = new File([blob], dosyaAdi, { type: "application/json" });
+                        const file = new File([blob], dosyaAdi, { type: 'application/json' });
                         if (navigator.canShare({ files: [file] })) {
-                            navigator.share({ files: [file], title: "Polinasyon Yedek", text: "Kovan ve saha verileri yedeği" }).catch(() => this._indirmeYap(blob, dosyaAdi));
+                            navigator.share({
+                                files: [file],
+                                title: 'Polinasyon Yedek',
+                                text: 'Kovan ve saha verileri yedeği'
+                            }).catch(() => {
+                                this._indirmeYap(blob, dosyaAdi);
+                            });
                             return;
                         }
                     }
+
                     this._indirmeYap(blob, dosyaAdi);
+
                 } catch (e) {
                     console.error(e);
-                    alert("Yedek oluşturulurken hata oluştu.");
+                    alert('Yedek oluşturulurken hata oluştu.');
                 }
             },
 
             _indirmeYap(blob, dosyaAdi) {
                 const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
+                const a = document.createElement('a');
                 a.href = url;
                 a.download = dosyaAdi;
-                a.style.display = "none";
+                a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
                 setTimeout(() => {
@@ -1443,9 +1419,9 @@
             },
 
             verileriIceAktar() {
-                const input = document.createElement("input");
-                input.type = "file";
-                input.accept = "application/json,.json";
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'application/json,.json';
                 input.onchange = (e) => {
                     const file = e.target.files?.[0];
                     if (!file) return;
@@ -1453,8 +1429,8 @@
                     reader.onload = (ev) => {
                         try {
                             const parsed = JSON.parse(ev.target.result);
-                            if (!parsed || typeof parsed !== "object") throw new Error("Geçersiz");
-                            if (!confirm("Mevcut verilerin üzerine yazılacak. Devam edilsin mi?")) return;
+                            if (!parsed || typeof parsed !== 'object') throw new Error('Geçersiz');
+                            if (!confirm('Mevcut verilerin üzerine yazılacak. Devam edilsin mi?')) return;
                             this.data = {
                                 konum: parsed.konum || this.data.konum,
                                 lat: parsed.lat ?? this.data.lat,
@@ -1476,9 +1452,9 @@
                             this.arayuzuGuncelle();
                             this.kategoriGorunumuneDon();
                             this.havaDurumunuYukle(this.data.lat, this.data.lon, this.data.konum);
-                            alert("Yedek başarıyla yüklendi.");
+                            alert('Yedek başarıyla yüklendi.');
                         } catch (err) {
-                            alert("Dosya okunamadı. Geçerli bir Polinasyon JSON yedeği seçin.");
+                            alert('Dosya okunamadı. Geçerli bir Polinasyon JSON yedeği seçin.');
                         }
                     };
                     reader.readAsText(file);
