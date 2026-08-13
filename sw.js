@@ -1,8 +1,7 @@
-const CACHE_NAME = 'polinasyon-static-v10';
-const DYNAMIC_CACHE = 'polinasyon-dynamic-v10';
+const CACHE_NAME = 'polinasyon-static-v11';
+const DYNAMIC_CACHE = 'polinasyon-dynamic-v11';
 
-// UYARI: Uygulamanın tasarımı bozulmasın diye dış kütüphaneler (Tailwind, Lucide vb.)
-// ve GitHub Raw üzerindeki logo buraya kalıcı (static) olarak eklendi.
+// Uygulamanın offline modda çökmemesi için Tailwind, Lucide ve Logolar eklenmiştir.
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -17,13 +16,16 @@ const STATIC_ASSETS = [
   'https://unpkg.com/lucide@latest'
 ];
 
-// Kurulum - Varlıkları önbelleğe al
+// Kurulum - Varlıkları güvenli şekilde önbelleğe al
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
-      return cache.addAll(STATIC_ASSETS);
-    }).catch(err => console.log('[SW] Cache addAll hatası:', err))
+      // Her bir dosyayı tek tek ekleyerek tek bir hata yüzünden kurulumun patlamasını engelleriz
+      return Promise.allSettled(
+        STATIC_ASSETS.map(url => cache.add(new Request(url, { mode: 'no-cors' })))
+      );
+    })
   );
   self.skipWaiting();
 });
@@ -118,5 +120,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
-
 
