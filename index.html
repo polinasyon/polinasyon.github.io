@@ -97,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
                     <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
                         <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">SICAKLIK</p>
                         <p id="havaSicaklik" class="text-2xl font-bold text-slate-800 mt-1">--°C</p>
@@ -113,6 +113,14 @@
                     <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
                         <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">RÜZGAR</p>
                         <p id="havaRuzgar" class="text-2xl font-bold text-slate-800 mt-1">--</p>
+                    </div>
+                    <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
+                        <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">YAĞIŞ</p>
+                        <p id="havaYagis" class="text-2xl font-bold text-slate-800 mt-1">--</p>
+                    </div>
+                    <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
+                        <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">BULUT</p>
+                        <p id="havaBulut" class="text-2xl font-bold text-slate-800 mt-1">--%</p>
                     </div>
                 </div>
 
@@ -151,7 +159,7 @@
                     </div>
                     <p id="nektarAciklama" class="text-sm text-slate-600">Meteoroloji ve fenoloji analiz ediliyor...</p>
                     <div id="dinamikDuzeltmeNotu" class="mt-2 text-[11px] font-bold hidden"></div>
-                    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">Bu skor; arı uçuş sıcaklığı (~10–30°C optimal aralık, PMC/UMaine/Kore çalışmaları), rüzgar (~24 km/s'de foraj kesilmesi, UMaine) ve nem için yayınlanmış arıcılık/entomoloji literatüründeki eşiklere dayanır ve bu yılın ısı birikimini (GDD) geçen yılla karşılaştırarak fenolojiyi düzeltir. Yine de kalibre edilmiş bir bilimsel ölçüm değil, literatür temelli deneysel bir tahmindir.</p>
+                    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">Bu skor; arı uçuş sıcaklığı (~10–30°C), rüzgar, nem, çiy açığı, 3 günlük trend, anlık yağış, bulut örtüsü (güneş potansiyeli) ve GDD ile düzeltilmiş fenolojiyi bölgeye göre ağırlıklandırarak hesaplar. Literatür temelli deneysel bir tahmindir; kalibre bilimsel ölçüm değildir.</p>
                 </div>
 
                 <div class="border border-slate-200/80 bg-slate-100/60 rounded-2xl p-5 space-y-4">
@@ -429,9 +437,23 @@
         <section id="sayfaAkademi" class="space-y-5 hidden">
             <div class="soft-card p-6 space-y-4">
                 <div class="border border-slate-200/80 bg-slate-50 rounded-2xl p-3.5 flex items-center justify-between shadow-2xs">
+                    <div class="flex items-center gap-4 text-slate-700">
+                        <a href="https://facebook.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="Facebook">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://twitter.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="X (Twitter)">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="https://instagram.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="Instagram">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://youtube.com/@polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="YouTube">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                    </div>
                     <span class="text-xs font-bold text-slate-800 tracking-wide">@polinasyon</span>
-                    <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 text-xs font-semibold underline">Web Sitesi →</a>
                 </div>
+
                 <div class="space-y-3" id="makaleListesiContainer">
                     <p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>
                 </div>
@@ -560,6 +582,7 @@
         const uygulama = {
             data: {
                 konum: "Ankara", lat: 39.9208, lon: 32.8541, temp: 22, humidity: 65, dewPoint: 12, windSpeed: 8, pastAvgTemp: 22,
+                precipitation: 0, cloudCover: 40,
                 gddOran: 1, gddVeriVar: false, duzeltilmisFenoloji: null,
                 kategoriler: [{ id: 1, isim: "Merkez", kovanlar: [{ id: 101, isim: "Kovan #1", anaAri: "2024", gecmisKontroller: [{ tarih: "2026-06-01", bal: 4, hastalik: "Yok", not: "İlk kontrol" }] }] }],
                 sahaGozlemleri: []
@@ -572,10 +595,38 @@
                 "ege": ["izmir", "manisa", "aydın", "denizli", "kütahya", "afyon", "uşak", "muğla", "simav"],
                 "akdeniz": ["antalya", "adana", "mersin", "burdur", "hatay", "osmaniye", "ısparta", "kahramanmaraş"],
                 "karadeniz": ["trabzon", "rize", "artvin", "ordu", "giresun", "samsun", "zonguldak", "sinop", "tokat", "çorum", "amasya", "kastamonu", "karabük", "bartın", "bolu", "düzce"],
-                "doğu anadolu": ["erzurum", "erzincan", "kars", "ardahan", "ağrı", "ığdır", "van", "bingöl", "muş", "bitlis", "tunceli", "elazığ", "malatya", "hakkari", "şırnak", "kars", "ağrı"]
+                "doğu anadolu": ["erzurum", "erzincan", "kars", "ardahan", "ağrı", "ığdır", "van", "bingöl", "muş", "bitlis", "tunceli", "elazığ", "malatya", "hakkari"],
+                "marmara": ["istanbul", "kocaeli", "sakarya", "yalova", "bursa", "balıkesir", "çanakkale", "tekirdağ", "edirne", "kırklareli"],
+                "güneydoğu": ["gaziantep", "şanlıurfa", "diyarbakır", "mardin", "batman", "siirt", "adıyaman", "kilis", "şırnak"]
+            },
+
+            bolgeAgirliklari: {
+                "iç anadolu":   { t: 1.05, w: 1.05, h: 0.95, d: 1.0,  p: 1.0,  rain: 1.1,  sun: 1.05, ph: 1.0  },
+                "ege":          { t: 1.0,  w: 1.0,  h: 1.0,  d: 1.0,  p: 1.0,  rain: 1.15, sun: 1.1,  ph: 1.0  },
+                "akdeniz":      { t: 0.95, w: 1.0,  h: 1.05, d: 1.0,  p: 0.95, rain: 1.2,  sun: 1.15, ph: 1.0  },
+                "karadeniz":    { t: 1.0,  w: 1.05, h: 1.1,  d: 0.95, p: 1.0,  rain: 1.25, sun: 0.95, ph: 1.05 },
+                "doğu anadolu": { t: 1.15, w: 1.1,  h: 0.9,  d: 1.0,  p: 1.05, rain: 0.95, sun: 1.0,  ph: 1.1  },
+                "marmara":      { t: 1.0,  w: 1.05, h: 1.0,  d: 1.0,  p: 1.0,  rain: 1.1,  sun: 1.0,  ph: 1.0  },
+                "güneydoğu":    { t: 0.9,  w: 1.0,  h: 1.1,  d: 1.05, p: 0.95, rain: 1.15, sun: 1.2,  ph: 0.95 },
+                "varsayılan":   { t: 1.0,  w: 1.0,  h: 1.0,  d: 1.0,  p: 1.0,  rain: 1.0,  sun: 1.0,  ph: 1.0  }
             },
 
             GDD_BASE_TEMP: 10,
+
+            aktifBolgesiBul() {
+                const k = this.data.konum.toLocaleLowerCase('tr-TR');
+                for (const b in this.bolgeHaritasi) {
+                    if (this.bolgeHaritasi[b].some(s => k.includes(s))) return b;
+                }
+                for (const a in this.floraVeritabani) {
+                    if (a !== "varsayılan" && k.includes(a)) {
+                        for (const b in this.bolgeHaritasi) {
+                            if (this.bolgeHaritasi[b].includes(a)) return b;
+                        }
+                    }
+                }
+                return "varsayılan";
+            },
 
             async gddOraniniGetir(lat, lon) {
                 const cacheAnahtari = 'polinasyon_gdd_cache_v1';
@@ -681,18 +732,84 @@
 
             // === TÜBİTAK / TARIM ORMAN BAKANLIĞI / ARAŞTIRMA ENSTİTÜLERİ FLORA VERİTABANI ===
             floraVeritabani: {
-                "ağrı": { flora: "Doğu Anadolu Yüksek Yayla ve Çayır Florası (TAGEM)", timeline: [{ ay: "Mayıs", bitki: "Erken Çayır Meraları", verim: 65, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yayla Çiçekleri", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla Zirve Akımı", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 75, tur: "nektar" }] },
-                "kars": { flora: "Kars-Ardahan Yüksek Rakım Kafkas Çiçek Florası", timeline: [{ ay: "Mayıs", bitki: "Uyanma & İlk Polen", verim: 60, tur: "polen" }, { ay: "Haziran", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Kars Çiçek Balı Zirvesi", verim: 96, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Yayla Florası", verim: 70, tur: "nektar" }] },
                 "muğla": { flora: "Ege Çam Balı & Püren Florası", timeline: [{ ay: "Mayıs", bitki: "Narenciye / Hayıt", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ Florası", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Pamuklu Koşnili", verim: 95, tur: "nektar" }, { ay: "Eylül", bitki: "Çam Balı Zirve", verim: 98, tur: "nektar" }] },
                 "simav": { flora: "Ege Geçiş Bölgesi Kestane & Çam", timeline: [{ ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Orman Altı", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 75, tur: "nektar" }] },
                 "rize": { flora: "Karadeniz Kestane & Ormangülü (Anzer)", timeline: [{ ay: "Mayıs", bitki: "Komar / Ormangülü", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Çiçeği", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 90, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı Flora", verim: 40, tur: "polen" }] },
                 "hatay": { flora: "Akdeniz Maki & Defne / Keçiboynuzu", timeline: [{ ay: "Nisan", bitki: "Narenciye / Erken Maki", verim: 85, tur: "nektar" }, { ay: "Mayıs", bitki: "Defne & Maki Zirve", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık Stresi", verim: 25, tur: "kıtlık" }, { ay: "Eylül", bitki: "Keçiboynuzu / Sonbahar", verim: 70, tur: "nektar" }] },
                 "erzurum": { flora: "Doğu Anadolu Yüksek Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Uyanma & İlk Polen", verim: 60, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yonca", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 80, tur: "nektar" }] },
+                "ağrı": { flora: "Doğu Anadolu Yüksek Yayla ve Çayır Florası (TAGEM)", timeline: [{ ay: "Mayıs", bitki: "Erken Çayır Meraları", verim: 65, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yayla Çiçekleri", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla Zirve Akımı", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 75, tur: "nektar" }] },
+                "kars": { flora: "Kars-Ardahan Yüksek Rakım Kafkas Çiçek Florası", timeline: [{ ay: "Mayıs", bitki: "Uyanma & İlk Polen", verim: 60, tur: "polen" }, { ay: "Haziran", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Kars Çiçek Balı Zirvesi", verim: 96, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Yayla Florası", verim: 70, tur: "nektar" }] },
+                "ardahan": { flora: "Ardahan Yüksek Yayla & Kafkas Çiçek Florası", timeline: [{ ay: "Mayıs", bitki: "İlk Çayır Polenleri", verim: 55, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Alpin Çayırlar", verim: 70, tur: "nektar" }] },
+                "artvin": { flora: "Doğu Karadeniz Kestane & Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 90, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" }] },
+                "van": { flora: "Van Gölü Havzası Yüksek Yayla", timeline: [{ ay: "Mayıs", bitki: "Erken Çayır", verim: 55, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yonca", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Zirve Akımı", verim: 92, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 70, tur: "nektar" }] },
+                "hakkari": { flora: "Hakkari Yüksek Dağ & Alpin Flora", timeline: [{ ay: "Haziran", bitki: "Dağ Çayırları", verim: 75, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çiçekler", verim: 80, tur: "nektar" }, { ay: "Eylül", bitki: "Geç Dönem", verim: 40, tur: "polen" }] },
+                "bingöl": { flora: "Bingöl Yayla & Korunga Florası", timeline: [{ ay: "Mayıs", bitki: "İlk Polen & Çayır", verim: 60, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yonca", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Zirve", verim: 93, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Yayla", verim: 65, tur: "nektar" }] },
+                "muş": { flora: "Muş Ovası & Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Çayır Polenleri", verim: 60, tur: "polen" }, { ay: "Haziran", bitki: "Korunga / Yonca", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Akımı", verim: 90, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 55, tur: "polen" }] },
+                "bitlis": { flora: "Bitlis Yüksek Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Uyanma Polen", verim: 55, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Çayır", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Zirve", verim: 92, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 70, tur: "nektar" }] },
+                "malatya": { flora: "Malatya Kayısı & Yayla Geçiş Florası", timeline: [{ ay: "Nisan", bitki: "Kayısı / Meyve", verim: 80, tur: "nektar" }, { ay: "Mayıs", bitki: "Bahar Çiçekleri", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Korunga", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }] },
+                "elazığ": { flora: "Elazığ Fırat Havzası & Yayla", timeline: [{ ay: "Nisan", bitki: "Meyve / Erken Bahar", verim: 70, tur: "polen" }, { ay: "Mayıs", bitki: "Çayır & Akasya", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Korunga / Yonca", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }] },
+                "tunceli": { flora: "Tunceli Dağ & Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Dağ Çayırları", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 92, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Yayla", verim: 60, tur: "nektar" }] },
+                "erzincan": { flora: "Erzincan Yayla & Ova Florası", timeline: [{ ay: "Mayıs", bitki: "Bahar Polen", verim: 65, tur: "polen" }, { ay: "Haziran", bitki: "Korunga / Yonca", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Akımı", verim: 90, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 50, tur: "polen" }] },
+                "sivas": { flora: "Sivas Bozkır & Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Meyve / Akasya", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Yonca", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }] },
+                "kayseri": { flora: "Kayseri Erciyes & Bozkır Florası", timeline: [{ ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" }] },
+                "konya": { flora: "Konya Ovası Bozkır & Ayçiçeği", timeline: [{ ay: "Mayıs", bitki: "Meyve / Akasya", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 90, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" }] },
+                "ankara": { flora: "Ankara Bozkır & Yayla Geçiş", timeline: [{ ay: "Mayıs", bitki: "Meyve / Akasya", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }] },
+                "eskişehir": { flora: "Eskişehir Geçiş Bölgesi Florası", timeline: [{ ay: "Mayıs", bitki: "Meyve / Çayır", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" }] },
+                "afyon": { flora: "Afyonkarahisar Yayla & Haşhaş Bölgesi", timeline: [{ ay: "Mayıs", bitki: "Meyve / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Haşhaş / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }] },
+                "kütahya": { flora: "Kütahya Orman & Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Orman", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 50, tur: "polen" }] },
+                "uşak": { flora: "Uşak Geçiş & Kekik Florası", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Dağ Florası", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }] },
+                "denizli": { flora: "Denizli Maki, Kekik & Çam", timeline: [{ ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 75, tur: "nektar" }] },
+                "aydın": { flora: "Aydın Zeytin, Hayıt & Maki", timeline: [{ ay: "Nisan", bitki: "Narenciye / Erken", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 30, tur: "kıtlık" }] },
+                "izmir": { flora: "İzmir Maki, Kekik & Çam Florası", timeline: [{ ay: "Nisan", bitki: "Narenciye / Bahar", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 70, tur: "nektar" }] },
+                "manisa": { flora: "Manisa Bağ, Kekik & Maki", timeline: [{ ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, { ay: "Mayıs", bitki: "Hayıt / Kekik", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Dağ Florası", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 30, tur: "kıtlık" }] },
+                "antalya": { flora: "Antalya Narenciye, Maki & Çam", timeline: [{ ay: "Mart", bitki: "Erken Narenciye", verim: 80, tur: "nektar" }, { ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki (Hayıt/Püren)", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 20, tur: "kıtlık" }] },
+                "mersin": { flora: "Mersin Narenciye & Maki Florası", timeline: [{ ay: "Mart", bitki: "Erken Narenciye", verim: 80, tur: "nektar" }, { ay: "Nisan", bitki: "Portakal Zirve", verim: 95, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki / Defne", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 20, tur: "kıtlık" }] },
+                "adana": { flora: "Adana Çukurova Narenciye & Tarım", timeline: [{ ay: "Mart", bitki: "Erken Narenciye", verim: 75, tur: "nektar" }, { ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki / Bahar", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
+                "ısparta": { flora: "Isparta Gül, Kekik & Yayla", timeline: [{ ay: "Mayıs", bitki: "Gül / Bahar", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Yayla", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Dağ Florası", verim: 75, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }] },
+                "burdur": { flora: "Burdur Göl Havzası & Kekik", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Dağ Florası", verim: 75, tur: "nektar" }, { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" }] },
+                "trabzon": { flora: "Trabzon Kestane & Ormangülü", timeline: [{ ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 40, tur: "polen" }] },
+                "ordu": { flora: "Ordu Kestane & Fındık Altı Florası", timeline: [{ ay: "Mayıs", bitki: "Ormangülü / Bahar", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 40, tur: "polen" }] },
+                "giresun": { flora: "Giresun Kestane & Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" }] },
+                "samsun": { flora: "Samsun Karadeniz Kıyı & İç Florası", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Kestane / Ihlamur", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" }] },
+                "kastamonu": { flora: "Kastamonu Orman, Kestane & Yayla", timeline: [{ ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 92, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 50, tur: "polen" }] },
+                "sinop": { flora: "Sinop Kıyı Orman & Kestane", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 92, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla / Orman", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" }] },
+                "bolu": { flora: "Bolu Orman, Ihlamur & Yayla", timeline: [{ ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Ihlamur & Kestane", verim: 92, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 50, tur: "polen" }] },
+                "bursa": { flora: "Bursa İznik, Kestane & Ihlamur", timeline: [{ ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla / Otsu", verim: 70, tur: "nektar" }] },
+                "balıkesir": { flora: "Balıkesir Kazdağı, Kekik & Çam", timeline: [{ ay: "Mayıs", bitki: "Bahar / Hayıt", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Orman / Yayla", verim: 75, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 70, tur: "nektar" }] },
+                "çanakkale": { flora: "Çanakkale Kazdağı & Maki Florası", timeline: [{ ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Orman Altı", verim: 70, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam / Geç", verim: 65, tur: "nektar" }] },
+                "tekirdağ": { flora: "Tekirdağ Trakya Ayçiçeği & Tarım", timeline: [{ ay: "Mayıs", bitki: "Meyve / Akasya", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Çayır / Yonca", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }] },
+                "edirne": { flora: "Edirne Trakya Ayçiçeği & Ova", timeline: [{ ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yonca / Çayır", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" }] },
+                "kırklareli": { flora: "Kırklareli Istranca Orman & Ayçiçeği", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Ihlamur / Orman", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 92, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" }] },
+                "gaziantep": { flora: "Gaziantep Antepfıstığı & Maki", timeline: [{ ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, { ay: "Mayıs", bitki: "Maki / Kekik", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Dağ Florası", verim: 70, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 25, tur: "kıtlık" }] },
+                "şanlıurfa": { flora: "Şanlıurfa Bozkır & Tarım Florası", timeline: [{ ay: "Nisan", bitki: "Erken Bahar", verim: 70, tur: "polen" }, { ay: "Mayıs", bitki: "Çayır / Yonca", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 40, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
+                "diyarbakır": { flora: "Diyarbakır Ova & Bozkır Florası", timeline: [{ ay: "Nisan", bitki: "Bahar Polen", verim: 70, tur: "polen" }, { ay: "Mayıs", bitki: "Yonca / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 15, tur: "kıtlık" }] },
+                "mardin": { flora: "Mardin Maki & Bozkır Florası", timeline: [{ ay: "Nisan", bitki: "Bahar / Maki", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Kekik / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
+                "kahramanmaraş": { flora: "Kahramanmaraş Maki, Defne & Yayla", timeline: [{ ay: "Nisan", bitki: "Narenciye / Maki", verim: 80, tur: "nektar" }, { ay: "Mayıs", bitki: "Defne & Maki", verim: 88, tur: "nektar" }, { ay: "Haziran", bitki: "Yayla / Kekik", verim: 75, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 25, tur: "kıtlık" }] },
+                "osmaniye": { flora: "Osmaniye Maki & Narenciye", timeline: [{ ay: "Nisan", bitki: "Narenciye", verim: 85, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki / Defne", verim: 88, tur: "nektar" }, { ay: "Haziran", bitki: "Dağ Florası", verim: 70, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 20, tur: "kıtlık" }] },
+                "istanbul": { flora: "İstanbul Kıyı, Akasya & Kent Florası", timeline: [{ ay: "Nisan", bitki: "Erken Bahar / Meyve", verim: 70, tur: "polen" }, { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Ihlamur / Kent Yeşili", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 70, tur: "nektar" }] },
+                "kocaeli": { flora: "Kocaeli Orman, Ihlamur & Sanayi Çevresi", timeline: [{ ay: "Mayıs", bitki: "Akasya / Bahar", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Ihlamur & Kestane", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Orman / Otsu", verim: 75, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" }] },
+                "sakarya": { flora: "Sakarya Ova, Fındık & Ihlamur", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Ihlamur / Kestane", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Otsu / Tarım", verim: 75, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" }] },
+                "yalova": { flora: "Yalova Kıyı & Bahçe Florası", timeline: [{ ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Ihlamur", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Otsu / Bahçe", verim: 65, tur: "nektar" }] },
+                "zonguldak": { flora: "Zonguldak Kıyı Orman & Kestane", timeline: [{ ay: "Mayıs", bitki: "Bahar / Orman", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 92, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla / Orman", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" }] },
+                "tokat": { flora: "Tokat Geçiş, Yonca & Yayla", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yonca / Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Otsu / Kekik", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }] },
+                "amasya": { flora: "Amasya Elma, Yonca & Ova", timeline: [{ ay: "Nisan", bitki: "Meyve / Bahar", verim: 80, tur: "nektar" }, { ay: "Mayıs", bitki: "Çayır / Akasya", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Yonca / Otsu", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Kurak Başlangıç", verim: 40, tur: "kıtlık" }] },
+                "niğde": { flora: "Niğde Bozkır & Yayla Florası", timeline: [{ ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" }] },
+                "nevşehir": { flora: "Nevşehir Kapadokya Bozkır Florası", timeline: [{ ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" }] },
+                "aksaray": { flora: "Aksaray Bozkır & Tarım Florası", timeline: [{ ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Yonca / Yayla", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" }] },
+                "karaman": { flora: "Karaman Bozkır & Kekik", timeline: [{ ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" }] },
+                "ığdır": { flora: "Iğdır Ova & Erken Bahar Florası", timeline: [{ ay: "Nisan", bitki: "Erken Bahar / Meyve", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Çayır / Yonca", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Ova Akımı", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }] },
+                "batman": { flora: "Batman Ova & Bozkır Florası", timeline: [{ ay: "Nisan", bitki: "Erken Bahar", verim: 70, tur: "polen" }, { ay: "Mayıs", bitki: "Yonca / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
+                "siirt": { flora: "Siirt Dağ & Bozkır Florası", timeline: [{ ay: "Nisan", bitki: "Bahar / Maki", verim: 70, tur: "nektar" }, { ay: "Mayıs", bitki: "Kekik / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 15, tur: "kıtlık" }] },
+                "adıyaman": { flora: "Adıyaman Ova & Maki Florası", timeline: [{ ay: "Nisan", bitki: "Bahar / Maki", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Kekik / Yonca", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
+                "kilis": { flora: "Kilis Maki & Zeytin Florası", timeline: [{ ay: "Nisan", bitki: "Bahar / Maki", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Kekik / Zeytin Altı", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 15, tur: "kıtlık" }] },
+                "şırnak": { flora: "Şırnak Dağ & Yüksek Yayla", timeline: [{ ay: "Mayıs", bitki: "Dağ Çayırları", verim: 65, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" }] },
                 "iç anadolu": { flora: "İç Anadolu Bozkır & Kekik/Ayçiçeği", timeline: [{ ay: "Mayıs", bitki: "Meyve / Akasya", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }] },
                 "ege": { flora: "Ege Maki, Kekik & Çam Florası", timeline: [{ ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ Florası", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 80, tur: "nektar" }] },
                 "karadeniz": { flora: "Karadeniz Kestane & Orman Florası", timeline: [{ ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" }] },
                 "akdeniz": { flora: "Akdeniz Narenciye & Maki", timeline: [{ ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki (Hayıt/Püren)", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 20, tur: "kıtlık" }, { ay: "Eylül", bitki: "Keçiboynuzu / Çam", verim: 75, tur: "nektar" }] },
                 "doğu anadolu": { flora: "Doğu Anadolu Yüksek Yayla", timeline: [{ ay: "Haziran", bitki: "Korunga / Yonca", verim: 80, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Zirve Akımı", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 75, tur: "nektar" }, { ay: "Eylül", bitki: "Geç Dönem", verim: 40, tur: "polen" }] },
+                "marmara": { flora: "Marmara Ihlamur, Kestane & Ayçiçeği", timeline: [{ ay: "Mayıs", bitki: "Akasya / Bahar", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Ihlamur & Kestane", verim: 92, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" }] },
+                "güneydoğu": { flora: "Güneydoğu Bozkır & Maki Florası", timeline: [{ ay: "Nisan", bitki: "Erken Bahar / Maki", verim: 75, tur: "nektar" }, { ay: "Mayıs", bitki: "Kekik / Çayır", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }] },
                 "varsayılan": { flora: "Çeşitli Yayla & Tarım Çiçekleri", timeline: [{ ay: "Mayıs", bitki: "Bahar Çiçekleri", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Ana Akım Florası", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği / Otsu Bitkiler", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Yaz Sonu Kuraklığı", verim: 35, tur: "kıtlık" }] }
             },
 
@@ -712,7 +829,7 @@
                 if (!bulundu) {
                     for (let b in this.bolgeHaritasi) {
                         if (this.bolgeHaritasi[b].some(s => konumKucuk.includes(s))) {
-                            secilenVeri = this.floraVeritabani[b];
+                            secilenVeri = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"];
                             break;
                         }
                     }
@@ -731,30 +848,53 @@
                 return 0;
             },
 
-            nektar_flow_score(temp, humidity, wind, dew, past, pheno) {
-                const t = Math.max(0, Math.min(1, this.uçuşEgrisi(temp))) * 25;
+            nektar_flow_score(temp, humidity, wind, dew, past, pheno, precipitation = 0, cloudCover = 40) {
+                const ag = this.bolgeAgirliklari[this.aktifBolgesiBul()] || this.bolgeAgirliklari["varsayılan"];
+
+                const t = Math.max(0, Math.min(1, this.uçuşEgrisi(temp))) * 22 * ag.t;
+
                 let wOran;
                 if (wind <= 10) wOran = 1;
                 else if (wind < 24) wOran = 1 - (wind - 10) / 14;
                 else wOran = 0;
-                const w = Math.max(0, Math.min(1, wOran)) * 15;
+                const w = Math.max(0, Math.min(1, wOran)) * 12 * ag.w;
+
                 let hOran;
                 if (humidity >= 40 && humidity <= 70) hOran = 1;
                 else if (humidity < 40) hOran = humidity / 40;
-                else hOran = 1 - (humidity - 70) / 30;
-                const h = Math.max(0, Math.min(1, hOran)) * 15;
+                else hOran = Math.max(0, 1 - (humidity - 70) / 30);
+                const h = Math.max(0, Math.min(1, hOran)) * 12 * ag.h;
+
                 const doygunlukAcigi = temp - dew;
                 const dOran = doygunlukAcigi >= 2 ? 1 : Math.max(0, doygunlukAcigi / 2);
-                const d = dOran * 5;
-                const p = Math.max(0, Math.min(1, this.uçuşEgrisi(past))) * 10;
-                const ph = (pheno / 100) * 30;
-                return Math.round(t + w + h + d + p + ph);
+                const d = dOran * 5 * ag.d;
+
+                const p = Math.max(0, Math.min(1, this.uçuşEgrisi(past))) * 8 * ag.p;
+
+                const rainOran = precipitation <= 0 ? 1 : Math.max(0, 1 - precipitation / 2);
+                const rain = rainOran * 8 * ag.rain;
+
+                const sunOran = Math.max(0, Math.min(1, 1 - (cloudCover / 100)));
+                const sun = sunOran * 8 * ag.sun;
+
+                const ph = (pheno / 100) * 25 * ag.ph;
+
+                return Math.round(Math.max(0, Math.min(100, t + w + h + d + p + rain + sun + ph)));
             },
 
             nektarAkimiHesaplaVeGuncelle() {
                 const hamFenoloji = this.aktifFenolojiyiBul();
                 const pheno = (this.data.duzeltilmisFenoloji != null) ? this.data.duzeltilmisFenoloji : hamFenoloji;
-                const skor = this.nektar_flow_score(this.data.temp, this.data.humidity, this.data.windSpeed, this.data.dewPoint, this.data.pastAvgTemp || 22, pheno);
+                const skor = this.nektar_flow_score(
+                    this.data.temp,
+                    this.data.humidity,
+                    this.data.windSpeed,
+                    this.data.dewPoint,
+                    this.data.pastAvgTemp || 22,
+                    pheno,
+                    this.data.precipitation || 0,
+                    this.data.cloudCover ?? 40
+                );
 
                 document.getElementById('nektarSkor').textContent = `%${skor}`;
                 document.getElementById('nektarBar').style.width = `${skor}%`;
@@ -811,7 +951,7 @@
                 if (!bul) {
                     for (let b in this.bolgeHaritasi) {
                         if (this.bolgeHaritasi[b].some(s => k.includes(s))) {
-                            sec = this.floraVeritabani[b];
+                            sec = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"];
                             break;
                         }
                     }
@@ -842,7 +982,7 @@
 
                 try {
                     const res = await fetch(
-                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,dew_point_2m&daily=temperature_2m_mean&past_days=3&forecast_days=1&timezone=auto`,
+                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,dew_point_2m,precipitation,cloud_cover&daily=temperature_2m_mean&past_days=3&forecast_days=1&timezone=auto`,
                         { cache: 'no-cache' }
                     );
                     const data = await res.json();
@@ -853,6 +993,8 @@
                     this.data.humidity = Math.round(data.current.relative_humidity_2m);
                     this.data.dewPoint = Math.round(data.current.dew_point_2m);
                     this.data.windSpeed = Math.round(data.current.wind_speed_10m);
+                    this.data.precipitation = typeof data.current.precipitation === 'number' ? data.current.precipitation : 0;
+                    this.data.cloudCover = typeof data.current.cloud_cover === 'number' ? Math.round(data.current.cloud_cover) : 40;
                     if (data.daily && data.daily.temperature_2m_mean) {
                         const g = data.daily.temperature_2m_mean;
                         this.data.pastAvgTemp = Math.round((g[0] + g[1] + g[2]) / 3);
@@ -861,12 +1003,16 @@
                     document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
                     document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
                     document.getElementById('havaRuzgar').textContent = `${this.data.windSpeed} km/s`;
+                    document.getElementById('havaYagis').textContent = `${this.data.precipitation} mm`;
+                    document.getElementById('havaBulut').textContent = `%${this.data.cloudCover}`;
                     localStorage.setItem('polinasyon_last_weather', JSON.stringify({
                         temp: this.data.temp,
                         humidity: this.data.humidity,
                         dewPoint: this.data.dewPoint,
                         windSpeed: this.data.windSpeed,
-                        pastAvgTemp: this.data.pastAvgTemp
+                        pastAvgTemp: this.data.pastAvgTemp,
+                        precipitation: this.data.precipitation,
+                        cloudCover: this.data.cloudCover
                     }));
                 } catch (e) {
                     const sH = localStorage.getItem('polinasyon_last_weather');
@@ -878,10 +1024,14 @@
                             this.data.dewPoint = p.dewPoint || 12;
                             this.data.windSpeed = p.windSpeed;
                             this.data.pastAvgTemp = p.pastAvgTemp || 22;
+                            this.data.precipitation = p.precipitation ?? 0;
+                            this.data.cloudCover = p.cloudCover ?? 40;
                             document.getElementById('havaSicaklik').textContent = `${this.data.temp}°C`;
                             document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
                             document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
                             document.getElementById('havaRuzgar').textContent = `${this.data.windSpeed} km/s`;
+                            document.getElementById('havaYagis').textContent = `${this.data.precipitation} mm`;
+                            document.getElementById('havaBulut').textContent = `%${this.data.cloudCover}`;
                         } catch (err) {}
                     }
                 }
@@ -1281,6 +1431,8 @@
                                 dewPoint: parsed.dewPoint ?? this.data.dewPoint,
                                 windSpeed: parsed.windSpeed ?? this.data.windSpeed,
                                 pastAvgTemp: parsed.pastAvgTemp ?? this.data.pastAvgTemp,
+                                precipitation: parsed.precipitation ?? 0,
+                                cloudCover: parsed.cloudCover ?? 40,
                                 gddOran: parsed.gddOran ?? 1,
                                 gddVeriVar: parsed.gddVeriVar ?? false,
                                 duzeltilmisFenoloji: parsed.duzeltilmisFenoloji ?? null,
@@ -1311,4 +1463,3 @@
     </script>
 </body>
 </html>
-
