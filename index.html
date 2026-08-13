@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Polinasyon">
     <link rel="manifest" href="manifest.json">
-    <title>POLİNASYON | Kanatların Matematiği (v4.3 - TÜBİTAK/TAGEM Flora)</title>
+   <title>POLİNASYON | Kanatların Matematiği (v4.0 - GDD Entegre | TÜBİTAK/TAGEM Flora)</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -207,7 +207,7 @@
             </div>
         </section>
 
-        <section id="sayfaSaglik" class="space-y-5 hidden">
+       <section id="sayfaSaglik" class="space-y-5 hidden">
             <div class="soft-card p-6 sm:p-8 space-y-5">
                 <div class="border-b border-slate-100 pb-4">
                     <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
@@ -215,9 +215,216 @@
                         Arı Sağlığı ve Zararlılar
                     </h2>
                     <p class="text-xs text-slate-500 mt-0.5">Pratik tanı, izleme ve entegre mücadele özeti</p>
+                    <p class="text-[11px] text-amber-800 bg-amber-50 border border-amber-200/60 rounded-xl px-3 py-2 mt-3">
+                        Bilgilendirme amaçlıdır; teşhis ve tedavi için veteriner hekim / resmi rehberlere başvurun.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <details class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden" open>
+                        <summary class="flex justify-between items-center p-4 cursor-pointer font-bold text-sm text-slate-800 bg-amber-50/60 hover:bg-amber-100/50 transition">
+                            <span class="flex items-center gap-2"><i data-lucide="bug" class="w-4 h-4 text-amber-600"></i> Ergin Arı Hastalıkları</span>
+                            <span class="text-xs text-slate-400 group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="p-4 space-y-4 border-t border-slate-200 bg-white text-xs text-slate-700">
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Nosema (Nosema apis / ceranae)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Sindirim sistemi parazitidir. Erken ilkbaharda koloni sönmesi, sarımsı ishal lekeleri, karın şişkinliği ve uçuş gücü kaybı görülür. N. ceranae daha sinsi seyreder.</p>
+                                    <p><strong>Mücadele:</strong> İlkbaharda şuruba Fumagillin (varsa) veya probiyotik + vitamin takviyesi. Hijyen, petek yenileme, kışlatma öncesi güçlü koloniler bırakma. Stres azaltma en etkili yoldur.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Amip (Malpighamoeba mellificae)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Malpigi tüplerini tıkayan tek hücreli parazittir. Genellikle Nosema ile birlikte seyreder; ishal ve zayıflama görülür.</p>
+                                    <p><strong>Mücadele:</strong> Nosema ile aynı önlemler. Petek yenileme ve kovan hijyeni kritiktir. Spesifik ilaç yoktur.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Trake Akarı (Acarapis woodi)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Trake kanallarında yaşar. Uçuş güçlüğü, kanat titremesi, kovan önünde sürünen arılar ve yüksek kış kaybı tipiktir.</p>
+                                    <p><strong>Mücadele:</strong> Mentol kristali veya formik asit uygulaması. Dirençli ırklar tercih edilir. Erken teşhis için trake muayenesi yapılır.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Septisemi</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Bakteriyel kan zehirlenmesidir. Arıların bacakları ve gövdesi kolayca kopar, ölümler hızlanır.</p>
+                                    <p><strong>Mücadele:</strong> Hijyen, nem kontrolü ve zayıf kolonileri birleştirme. Antibiyotik kullanımı önerilmez; altta yatan stresi giderin.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Kronik Arı Felci (CBPV)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Titreme, uçamama, kanatların karın üzerinde ayrılması, siyah ve tüysüz görünüm.</p>
+                                    <p><strong>Mücadele:</strong> Spesifik tedavi yoktur. Varroa kontrolü (virüs vektörü), güçlü koloniler ve hijyen. Ağır vakalarda kovanı yeniden kurmak gerekebilir.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Akut Arı Felci (ABPV)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Kolonileri hızla çökerten, ani işçi arı ölümlerine neden olan agresif virüstür.</p>
+                                    <p><strong>Mücadele:</strong> Varroa’yı düşük seviyede tutmak en kritik önlemdir. Stres azaltma ve besleme takviyesi yapılır.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </details>
+
+                    <details class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden transition">
+                        <summary class="flex justify-between items-center p-4 cursor-pointer font-bold text-sm text-slate-800 bg-amber-50/60 hover:bg-amber-100/50 transition">
+                            <span class="flex items-center gap-2"><i data-lucide="layers" class="w-4 h-4 text-amber-600"></i> Yavru Arı Hastalıkları</span>
+                            <span class="text-xs text-slate-400 group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="p-4 space-y-4 border-t border-slate-200 bg-white text-xs text-slate-700">
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Amerikan Yavru Çürüklüğü (AYÇ)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Karantina gerektiren en tehlikeli bakteriyel hastalıktır. Kapalı gözler çökük ve deliklidir; çöp çekildiğinde tutkal gibi iplik uzar. Keskin, ekşi koku vardır.</p>
+                                    <p><strong>Mücadele:</strong> Bildirim zorunludur. En etkili yöntem yakma veya yakma + sterilizasyondur. Antibiyotik sadece resmi izinle ve sınırlı kullanılır. Ekipman dezenfeksiyonu şarttır.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Avrupa Yavru Çürüklüğü (AVYÇ)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Açık larvaları etkiler. Larvalar kıvrık yapısını kaybeder, sarımsı-kahverengiye döner ve ekşi koku yayar.</p>
+                                    <p><strong>Mücadele:</strong> Güçlü koloniler, petek yenileme ve iyi havalandırma. Ağır vakalarda oksitetrasiklin (resmi onayla). Genellikle koloninin kendi hijyen davranışı ile düzelir.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Kireç Hastalığı (Ascosphaera apis)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Mantari hastalıktır. Larvalar kireç veya mermer parçası gibi sertleşerek mum artıkları arasına düşer.</p>
+                                    <p><strong>Mücadele:</strong> Nem kontrolü ve havalandırma en önemli önlemdir. Zayıf kolonileri güçlendirin, petekleri yenileyin. Fungisit kullanımı nadiren gerekir.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Taş Hastalığı (Aspergillus)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Larvalar taş gibi sertleşir. Arıcıda solunum yolu alerjisi ve aspergilloz riski taşır.</p>
+                                    <p><strong>Mücadele:</strong> Kovan hijyeni, nem azaltma ve maske kullanımı. Enfekte petekleri imha edin. İnsan sağlığı için dikkatli olun.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Tulumsu Yavru Çürüklüğü (Sacbrood Virus)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Pupa dönemine geçemeyen larva, içi sıvı dolu bir tulum gibi kalır. Baş kısmı koyulaşır.</p>
+                                    <p><strong>Mücadele:</strong> Spesifik tedavi yoktur. Varroa kontrolü, petek yenileme ve güçlü koloniler. Genellikle mevsimsel olarak kendiliğinden azalır.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Deforme Kanat Virüsü (DWV) & Diğer Viral</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Kanatsız veya deforme kanatlı arılar, zayıf yavru ve koloni gerilemesi. Varroa ile sıkı ilişkilidir.</p>
+                                    <p><strong>Mücadele:</strong> En etkili yol Varroa’yı düşük seviyede tutmaktır. Hijyen ve stres azaltma destekler.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </details>
+
+                    <details class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden transition">
+                        <summary class="flex justify-between items-center p-4 cursor-pointer font-bold text-sm text-slate-800 bg-amber-50/60 hover:bg-amber-100/50 transition">
+                            <span class="flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4 text-amber-600"></i> Arı Parazitleri</span>
+                            <span class="text-xs text-slate-400 group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="p-4 space-y-4 border-t border-slate-200 bg-white text-xs text-slate-700">
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Varroa Destructor</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-2 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Arılığın 1 numaralı düşmanıdır. Hemolenf emer, virüs vektörüdür (özellikle DWV). Kanatsız/deforme arılar, yavru ölümü ve ani koloni çöküşüne yol açar.</p>
+                                    <p><strong>Mücadele (Entegre):</strong></p>
+                                    <ul class="list-disc pl-4 space-y-1">
+                                        <li><strong>İzleme:</strong> Ayda 1 pudra şekeri veya alkol testi. %3 üzeri bulaşıklıkta derhal müdahale.</li>
+                                        <li><strong>Biyoteknik:</strong> Drone yavru tuzak petekleri, kuluçkasız dönem oluşturma.</li>
+                                        <li><strong>Organik asitler:</strong>
+                                            <ul class="list-circle pl-4">
+                                                <li>Formik asit (%65): 15–25°C’de yavaş buharlaştırma. Kapalı yavruya nüfuz eder.</li>
+                                                <li>Oksalik asit: Kuluçkasız dönemde buharlaştırma veya damlatma (%95+ başarı).</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Diğer:</strong> Timol bazlı preparatlar (Apiguard vb.), fileli taban, petek yenileme.</li>
+                                        <li>Sezon boyunca tek ürüne bağımlı kalmayın; direnç riskini azaltın.</li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Tropilaelaps spp.</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Varroa’ya benzer ancak üreme hızı çok daha yüksek, özellikle Asya kökenli agresif akar. Yavru hasarı şiddetlidir.</p>
+                                    <p><strong>Mücadele:</strong> Varroa yöntemlerinin çoğu etkilidir (formik, oksalik, kuluçkasız dönem). Erken tespit ve karantina kritiktir. Türkiye’de henüz yaygın değildir; giriş riski takip edilmelidir.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Trake Akarı (Acarapis woodi)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Trake kanallarında yaşar. Uçuş güçlüğü, kanat titremesi, kovan önünde sürünen arılar ve yüksek kış kaybı tipiktir.</p>
+                                    <p><strong>Mücadele:</strong> Mentol kristali veya formik asit uygulaması. Dirençli ırklar tercih edilir. Erken teşhis için trake muayenesi yapılır.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </details>
+
+                    <details class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden transition">
+                        <summary class="flex justify-between items-center p-4 cursor-pointer font-bold text-sm text-slate-800 bg-amber-50/60 hover:bg-amber-100/50 transition">
+                            <span class="flex items-center gap-2"><i data-lucide="shield-alert" class="w-4 h-4 text-amber-600"></i> Arı Zararlıları</span>
+                            <span class="text-xs text-slate-400 group-open:rotate-180 transition">▼</span>
+                        </summary>
+                        <div class="p-4 space-y-4 border-t border-slate-200 bg-white text-xs text-slate-700">
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Büyük Mum Güvesi (Galleria mellonella)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Zayıf veya depodaki petekleri örümcek ağı gibi sararak un ufak eder.</p>
+                                    <p><strong>Mücadele:</strong> Güçlü koloniler, petekleri soğukta muhafaza (-7°C veya altı), Bacillus thuringiensis (BT) preparatları, kükürt fumigasyonu (dikkatli). Depolama hijyeni şarttır.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Küçük Kovan Böceği (Aethina tumida)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Petekleri, balı ve poleni çiğneyerek ekşiten istilacı böcektir. Larvaları fermente koku yapar.</p>
+                                    <p><strong>Mücadele:</strong> Güçlü koloniler, dar kovan girişi, tuzaklar (yağ tuzakları), hijyen. Ağır istilada petek imhası gerekebilir. Türkiye’de takip edilmesi gereken türdür.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Eşek Arısı & Sarıca Arı</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Kovan girişini tutarak veya zayıf kovanları yağmalayarak tarlacıları katleder.</p>
+                                    <p><strong>Mücadele:</strong> Giriş daraltma, yemlik tuzaklar, yuva imhası (güvenli şekilde). Zayıf kovanları birleştirin.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Arı Kuşu (Merops apiaster)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Göçmen kuştur. Tarlacı arıları havada avlayarak koloni stresine neden olur.</p>
+                                    <p><strong>Mücadele:</strong> Kovanları geçici olarak kapalı tutma veya yer değiştirme. Kalıcı çözüm zordur; yoğun geçiş döneminde dikkat edilir.</p>
+                                </div>
+                            </details>
+                            <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
+                                <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Ayı</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
+                                <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
+                                    <p><strong>Belirti:</strong> Gece kovanları devirerek bal ve yavruları tüketir; dağ apiarilerinde yaygındır.</p>
+                                    <p><strong>Mücadele:</strong> Elektrikli çit, sağlam platform ve ağır kapaklar. Kovanları birbirine bağlama ve fiziksel bariyer şarttır.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </details>
+
+                    <div class="p-4 bg-amber-50/50 border border-amber-200/60 rounded-2xl space-y-2">
+                        <h4 class="font-bold text-xs text-amber-900 flex items-center gap-1.5">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-600"></i> Genel Önlemler & İyi Uygulamalar
+                        </h4>
+                        <ul class="list-disc pl-4 space-y-1 text-xs text-slate-700">
+                            <li>Her sezon kuluçkalıktaki peteklerin en az 1/3’ünü yenileyin.</li>
+                            <li>Fileli (varroa çekmeceli) taban kullanarak havalandırmayı artırın.</li>
+                            <li>Ayda bir kez düzenli Varroa popülasyon testi yapın.</li>
+                            <li>Zayıf kolonileri birleştirin, boş petekleri depoda soğukta saklayın.</li>
+                            <li>Antibiyotik ve kimyasal kullanımı minimumda tutun; direnç ve kalıntı riski yüksektir.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
+
 
         <section id="sayfaAkademi" class="space-y-5 hidden">
             <div class="soft-card p-6 space-y-4">
