@@ -1,7 +1,8 @@
-const CACHE_NAME = 'polinasyon-static-v9';
-const DYNAMIC_CACHE = 'polinasyon-dynamic-v9';
+const CACHE_NAME = 'polinasyon-static-v10';
+const DYNAMIC_CACHE = 'polinasyon-dynamic-v10';
 
-// BURASI ÇOK ÖNEMLİ: Dış kütüphaneler kalıcı listeye eklenmeli!
+// UYARI: Uygulamanın tasarımı bozulmasın diye dış kütüphaneler (Tailwind, Lucide vb.)
+// ve GitHub Raw üzerindeki logo buraya kalıcı (static) olarak eklendi.
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -22,7 +23,7 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
       return cache.addAll(STATIC_ASSETS);
-    })
+    }).catch(err => console.log('[SW] Cache addAll hatası:', err))
   );
   self.skipWaiting();
 });
@@ -51,6 +52,7 @@ self.addEventListener('fetch', (event) => {
   // 1. API İstekleri: Önce Ağ, çevrimdışıysa son önbellekteki veriyi dön
   if (
     url.hostname.includes('api.open-meteo.com') ||
+    url.hostname.includes('archive-api.open-meteo.com') ||
     url.hostname.includes('rss2json') ||
     url.hostname.includes('bigdatacloud') ||
     url.hostname.includes('geocoding-api.open-meteo.com')
@@ -116,3 +118,5 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+
+
