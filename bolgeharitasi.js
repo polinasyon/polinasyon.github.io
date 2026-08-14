@@ -1,5 +1,5 @@
 // === 7 BÖLGE FLORA VERİTABANI (TÜBİTAK / TAGEM temelli referans) ===
-window.BOLGE_HARITASI = { ... }
+window.BOLGE_HARITASI || {},
   // 1) MARMARA
   "marmara": {
     flora: "Marmara: Ihlamur, Kestane, Akasya & Ayçiçeği",
@@ -123,7 +123,7 @@ window.BOLGE_HARITASI = { ... }
 
 
 // === 7 BÖLGE HARİTASI (il + geçiş ilçeleri) ===
-window.BOLGE_AGIRLIKLARI = { ... }
+window.BOLGE_AGIRLIKLARI || {
   "iç anadolu": [
     "ankara", "konya", "kayseri", "eskişehir", "sivas", "kırıkkale", "aksaray",
     "karaman", "kırşehir", "niğde", "nevşehir", "yozgat", "çankırı",
