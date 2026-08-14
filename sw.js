@@ -1,8 +1,7 @@
-const CACHE_VERSION = 10; // Güncelleme tetiklemek için versiyonu artırdık
+const CACHE_VERSION = 11; // Versiyonu güncelledik
 const CACHE_NAME = `polinasyon-static-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `polinasyon-dynamic-v${CACHE_VERSION}`;
 
-// Tailwind CDN yerine yeni derlediğimiz ./style.css eklendi
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -14,29 +13,31 @@ const STATIC_ASSETS = [
   'https://unpkg.com/lucide@latest'
 ];
 
-// 1. Kurulum (Install) - Dosyaları güvenli bir şekilde önbelleğe al
+// 1. Kurulum (Install) - Dosyaları ve CDN'leri güvenle önbelleğe al
 self.addEventListener('install', (event) => {
-  self.skipWaiting(); // Yeni SW'nin beklemeden hemen devreye girmesini sağlar
+  self.skipWaiting();
   
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
-      // addAll yerine güvenli map() ile hatalı linklerin tüm kurulumu bozmasını engelliyoruz
-      return Promise.all(
+      return Promise.allSettled(
         STATIC_ASSETS.map(url => {
           return fetch(new Request(url, { cache: 'reload' }))
             .then(response => {
-              if (!response.ok) throw new Error(`Hatalı yanıt: ${url}`);
+              // DİKKAT: CDN'ler (opaque yanıtlar) için status 0 döner, ok false olur. Bunu unutturmadık!
+              if (!response.ok && response.type !== 'opaque') {
+                throw new Error(`Hatalı yanıt: ${url}`);
+              }
               return cache.put(url, response);
             })
-            .catch(err => console.warn('[SW] Önbellek uyarısı:', url, err));
+            .catch(err => console.warn('[SW] Önbellek uyarısı (Çevrimdışı olabilir):', url, err));
         })
       );
     })
   );
 });
 
-// 2. Aktivasyon (Activate) - Eski versiyon önbellekleri temizle
+// 2. Aktivasyon (Activate) - Eski önbellekleri temizle ve kontrolü al
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -50,18 +51,17 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
-  self.clients.claim(); // Kontrolü anında ele al
+  self.clients.claim();
 });
 
-// 3. İstek Yakalama (Fetch) - Offline öncelikli ve ağ fallback stratejisi
+// 3. İstek Yakalama (Fetch) - Akıllı Çevrimdışı Strateji
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Sadece HTTP/HTTPS isteklerini işle (chrome-extension vb. dışla)
   if (!url.protocol.startsWith('http')) return;
 
-  // API İstekleri: Önce Ağ (Network First), Çökerse Önbellek
+  // API İstekleri: Önce Ağ (Network First), İnternet yoksa Önbellek
   const apiDomains = [
     'api.open-meteo.com',
     'archive-api.open-meteo.com',
@@ -83,16 +83,15 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Statik Dosyalar ve Diğerleri: Önce Önbellek (Cache First), Yoksa Ağ
+  // Statik Dosyalar: Önce Önbellek (Cache First), Yoksa Ağ
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
-        return cachedResponse; // Önbellekte varsa anında hızlıca yükle
+        return cachedResponse;
       }
 
       return fetch(request)
         .then((networkResponse) => {
-          // Gelen yanıt geçerliyse dinamik önbelleğe kaydet
           if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
             const resClone = networkResponse.clone();
             caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, resClone));
@@ -100,11 +99,10 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         })
         .catch(() => {
-          // İNTERNET YOKKEN: Eğer kullanıcı sayfa yeniliyorsa veya gezinmeye çalışıyorsa beyaz ekran verme
-          if (request.mode === 'navigate' || request.headers.get('accept').includes('text/html')) {
-            return caches.match('./index.html');
+          // İNTERNET YOKKEN: Sayfa gezintilerinde beyaz ekran yerine index.html sun
+          if (request.mode === 'navigate') {
+            return caches.match('./index.html') || caches.match('./');
           }
-          // Sayfa değilse (örneğin kayıp bir resim) uygun bir yanıt dönülebilir
           return new Response('Çevrimdışı', { status: 503, statusText: 'Offline' });
         });
     })
