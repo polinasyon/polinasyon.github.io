@@ -1,5 +1,5 @@
 // === TÜBİTAK / TARIM ORMAN BAKANLIĞI / ARAŞTIRMA ENSTİTÜLERİ FLORA VERİTABANI ===
-window.floraVeritabani = {
+window.FLORA_VERITABANI = { ... };
     "muğla": { 
         flora: "Ege Çam Balı & Püren Florası", 
         timeline: [
