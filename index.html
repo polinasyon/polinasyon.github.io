@@ -590,55 +590,60 @@
 
             GDD_BASE_TEMP: 10,
 
-           async gddOraniniGetir(lat, lon) {
+        async gddOraniniGetir(lat, lon) {
     const cacheAnahtari = 'polinasyon_gdd_cache_v1';
-    
-    // Yerel saati baz alan tarih oluşturma
     const simdi = new Date();
     const bugunStr = `${simdi.getFullYear()}-${String(simdi.getMonth() + 1).padStart(2, '0')}-${String(simdi.getDate()).padStart(2, '0')}`;
     
     try {
         const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
-        if (onbellek && onbellek.tarih === bugunStr && Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
+        if (onbellek && onbellek.tarih === bugunStr) {
             return onbellek;
         }
     } catch (e) {}
 
     try {
-        const bugun = new Date();
-        const yilBaslangici = new Date(Date.UTC(bugun.getFullYear(), 0, 1));
-        
-        // 7 gün gecikme payı ile daha kararlı veri çekimi
-        let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 7;
-        if (gunSayisi < 1) return { tarih: bugunStr, lat, lon, oran: 1, veriVar: false };
+        const yilBaslangici = new Date(Date.UTC(simdi.getFullYear(), 0, 1));
+        let gunSayisi = Math.floor((simdi - yilBaslangici) / 86400000) - 7;
+        if (gunSayisi < 1) throw new Error("Gün sayısı geçersiz");
 
         const buYilBitis = new Date(yilBaslangici.getTime() + gunSayisi * 86400000);
-        const buYilBaslangicStr = yilBaslangici.toISOString().split('T')[0];
-        const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
-
-        const gecenYilBaslangici = new Date(Date.UTC(bugun.getFullYear() - 1, 0, 1));
+        const gecenYilBaslangici = new Date(Date.UTC(simdi.getFullYear() - 1, 0, 1));
         const gecenYilBitis = new Date(gecenYilBaslangici.getTime() + gunSayisi * 86400000);
-        const gecenYilBaslangicStr = gecenYilBaslangici.toISOString().split('T')[0];
-        const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0];
 
-        const [buYilRes, gecenYilRes] = await Promise.all([
-            fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
-            fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${gecenYilBaslangicStr}&end_date=${gecenYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`)
+        const bBasla = yilBaslangici.toISOString().split('T')[0];
+        const bBit = buYilBitis.toISOString().split('T')[0];
+        const gBasla = gecenYilBaslangici.toISOString().split('T')[0];
+        const gBit = gecenYilBitis.toISOString().split('T')[0];
+
+        // Fetch isteklerine 5 saniye zaman aşımı (timeout) ekledik ki sonsuza kadar beklemesin
+        const fetchWithTimeout = async (url) => {
+            const controller = new AbortController();
+            const id = setTimeout(() => controller.abort(), 5000);
+            try {
+                const res = await fetch(url, { signal: controller.signal });
+                clearTimeout(id);
+                return await res.json();
+            } catch (err) {
+                clearTimeout(id);
+                throw err;
+            }
+        };
+
+        const [buYilData, gecenYilData] = await Promise.all([
+            fetchWithTimeout(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${bBasla}&end_date=${bBit}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
+            fetchWithTimeout(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${gBasla}&end_date=${gBit}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`)
         ]);
 
-        const buYilData = await buYilRes.json();
-        const gecenYilData = await gecenYilRes.json();
-
-        // API'den hata dönerse (veri henüz hazır değilse) catch'e gitmeden dön
-        if (buYilData.error || gecenYilData.error) throw new Error("API Veri Hatası");
-
         const gddTopla = (d) => {
-            if (!d || !d.daily) return null;
-            const mx = d.daily.temperature_2m_max, mn = d.daily.temperature_2m_min;
+            if (!d || !d.daily || !d.daily.temperature_2m_max) return 0;
             let toplam = 0;
-            for (let i = 0; i < mx.length; i++) {
-                if (typeof mx[i] !== 'number') continue;
-                toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
+            for (let i = 0; i < d.daily.temperature_2m_max.length; i++) {
+                const mx = d.daily.temperature_2m_max[i];
+                const mn = d.daily.temperature_2m_min[i];
+                if (typeof mx === 'number' && typeof mn === 'number') {
+                    toplam += Math.max(0, (mx + mn) / 2 - (this.GDD_BASE_TEMP || 10));
+                }
             }
             return toplam;
         };
@@ -646,16 +651,18 @@
         const buYilGDD = gddTopla(buYilData);
         const gecenYilGDD = gddTopla(gecenYilData);
 
-        let veriVar = buYilGDD !== null && gecenYilGDD !== null && gecenYilGDD > 5;
+        let veriVar = gecenYilGDD > 5;
         let oran = veriVar ? Math.max(0.5, Math.min(1.5, buYilGDD / gecenYilGDD)) : 1;
 
         const sonuc = { tarih: bugunStr, lat, lon, oran, buYilGDD, gecenYilGDD, veriVar };
         localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc));
         return sonuc;
     } catch (e) {
+        // Hata olsa bile uygulama asla kilitlenmez, varsayılan değer döner
         return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: null, gecenYilGDD: null, veriVar: false };
     }
 }
+
             fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
                 if (!veriVar || typeof gddOran !== 'number') return hamFenoloji;
                 const carpan = 1 + (gddOran - 1) * 0.5;
