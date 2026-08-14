@@ -1,5 +1,5 @@
-const CACHE_NAME = 'polinasyon-static-v11'; // Sürümü güncelledik (v10 -> v11)
-const DYNAMIC_CACHE = 'polinasyon-dynamic-v11';
+const CACHE_NAME = 'polinasyon-static-v8';
+const DYNAMIC_CACHE = 'polinasyon-dynamic-v8';
 
 const STATIC_ASSETS = [
   './',
