@@ -630,22 +630,105 @@
             },
 
             // ===================== SAYFA DEĞİŞTİRME =====================
-            sayfaDegistir(sayfaId) {
-                ['AnaSayfa', 'Kovanlar', 'Saglik', 'Akademi'].forEach(s => {
-                    const el = document.getElementById('sayfa' + s);
-                    const nav = document.getElementById('nav' + s);
-                    if (s === sayfaId) {
-                        el?.classList.remove('hidden');
-                        nav?.classList.add('nav-btn-active');
-                    } else {
-                        el?.classList.add('hidden');
-                        nav?.classList.remove('nav-btn-active');
-                    }
-                });
-                if (sayfaId === 'Kovanlar') this.kategoriGorunumuneDon();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                if (window.lucide) lucide.createIcons();
-            },
+           sayfaDegistir(sayfaId) {
+    ['AnaSayfa', 'Kovanlar', 'Saglik', 'Akademi'].forEach(s => {
+        const el = document.getElementById('sayfa' + s);
+        const nav = document.getElementById('nav' + s);
+        if (s === sayfaId) {
+            el?.classList.remove('hidden');
+            nav?.classList.add('nav-btn-active');
+            if (s === 'Akademi') this.rssYukle();
+        } else {
+            el?.classList.add('hidden');
+            nav?.classList.remove('nav-btn-active');
+        }
+    });
+    if (sayfaId === 'Kovanlar') this.kategoriGorunumuneDon();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.lucide) lucide.createIcons();
+},
+            async rssYukle() {
+    const container = document.getElementById('makaleListesiContainer');
+    if (!container) return;
+    container.innerHTML = `<p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>`;
+
+    try {
+        // Blogger Atom / RSS (max 50)
+        const feedUrl = encodeURIComponent(
+            'https://www.polinasyon.org/feeds/posts/default?alt=rss&max-results=50'
+        );
+        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`);
+        const data = await res.json();
+
+        if (!data || data.status !== 'ok' || !data.items || data.items.length === 0) {
+            throw new Error('Boş veya geçersiz feed');
+        }
+
+        // Numaraya göre sırala (başlıktaki ilk sayı); yoksa tarihe göre (yeniden eskiye)
+        const items = [...data.items].sort((a, b) => {
+            const numA = (a.title || '').match(/(\d+)/);
+            const numB = (b.title || '').match(/(\d+)/);
+            if (numA && numB) return parseInt(numA[1], 10) - parseInt(numB[1], 10);
+            if (numA) return -1;
+            if (numB) return 1;
+            const tA = new Date(a.pubDate || 0).getTime();
+            const tB = new Date(b.pubDate || 0).getTime();
+            return tB - tA;
+        });
+
+        let html = '';
+        items.forEach((item, index) => {
+            const title = (item.title || 'Başlıksız').replace(/</g, '&lt;');
+            const link = item.link || 'https://www.polinasyon.org';
+            let desc = item.description
+                ? item.description.replace(/<[^>]*>?/gm, '').replace(/\s+/g, ' ').trim()
+                : '';
+            if (desc.length > 180) desc = desc.substring(0, 180) + '…';
+            if (!desc) desc = 'Detay için yazıyı açın.';
+
+            const tarih = item.pubDate
+                ? new Date(item.pubDate).toLocaleDateString('tr-TR', {
+                      year: 'numeric', month: 'short', day: 'numeric'
+                  })
+                : '';
+
+            const numMatch = (item.title || '').match(/(\d+)/);
+            const siraEtiket = numMatch ? `#${numMatch[1]}` : `#${index + 1}`;
+
+            html += `
+                <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+                    <div onclick="this.nextElementSibling.classList.toggle('active')"
+                         class="p-4 cursor-pointer flex justify-between items-start gap-3 hover:bg-slate-50 transition">
+                        <div class="min-w-0 flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-amber-50 text-amber-700 shrink-0">${siraEtiket}</span>
+                                ${tarih ? `<span class="text-[10px] text-slate-400">${tarih}</span>` : ''}
+                            </div>
+                            <h4 class="font-semibold text-sm text-slate-800 leading-snug">${title}</h4>
+                        </div>
+                        <span class="text-xs text-slate-400 shrink-0 mt-1">▼</span>
+                    </div>
+                    <div class="accordion-panel px-4 pb-4 pt-2 border-t border-slate-100 text-xs text-slate-600">
+                        <p class="mb-3 leading-relaxed">${desc}</p>
+                        <a href="${link}" target="_blank" rel="noopener noreferrer"
+                           class="text-amber-600 font-bold underline inline-flex items-center gap-1">
+                            Devamını Oku →
+                        </a>
+                    </div>
+                </div>`;
+        });
+
+        container.innerHTML = html || `<p class="text-center py-8 text-slate-400 text-xs">Henüz yayın yok.</p>`;
+    } catch (e) {
+        console.warn('RSS hatası:', e);
+        container.innerHTML = `
+            <p class="text-center py-6 text-slate-400 text-xs">
+                Yayınlar yüklenemedi.
+                <a href="https://www.polinasyon.org" target="_blank" rel="noopener noreferrer"
+                   class="text-amber-600 underline font-semibold">polinasyon.org</a>
+            </p>`;
+    }
+},
 
             // ===================== KOVAN TAKİP =====================
             arayuzuGuncelle() {
