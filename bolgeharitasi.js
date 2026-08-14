@@ -27,8 +27,4 @@ window.BOLGE_HARITASI = {
     "tekirdağ", "edirne", "kırklareli", "bilecik",
     "edremit", "ayvacık"
   ],
-  "güneydoğu": [
-    "gaziantep", "şanlıurfa", "diyarbakır", "mardin", "batman", "siirt",
-    "adıyaman", "kilis", "şırnak"
-  ]
-};
+  "g​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
