@@ -1,5 +1,5 @@
 // === 7 BÖLGE FLORA VERİTABANI (TÜBİTAK / TAGEM temelli referans) ===
-window.bolgeHaritasi = { ... };
+window.bolgeHaritasi = {
 
   // 1) MARMARA
   "marmara": {
