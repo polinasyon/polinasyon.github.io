@@ -1,67 +1,65 @@
-const CACHE_VERSION = 2; //
+const CACHE_VERSION = 3; // her önemli güncellemede +1
 const CACHE_NAME = `polinasyon-static-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `polinasyon-dynamic-v${CACHE_VERSION}`;
 
 const STATIC_ASSETS = [
   './',
   './index.html',
-  './style.css', 
   './manifest.json',
   './ikon.png',
   './bolgeharitasi.js',
   './floraveritabani.js',
-  'https://unpkg.com/lucide@latest'
+  'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
+  'https://unpkg.com/lucide@0.469.0'
 ];
 
-// 1. Kurulum (Install) - Dosyaları ve CDN'leri güvenle önbelleğe al
+// 1. Kurulum
 self.addEventListener('install', (event) => {
   self.skipWaiting();
-  
+
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
       return Promise.allSettled(
-        STATIC_ASSETS.map(url => {
-          return fetch(new Request(url, { cache: 'reload' }))
-            .then(response => {
-              // DİKKAT: CDN'ler (opaque yanıtlar) için status 0 döner, ok false olur. Bunu unutturmadık!
+        STATIC_ASSETS.map((url) =>
+          fetch(new Request(url, { cache: 'reload' }))
+            .then((response) => {
               if (!response.ok && response.type !== 'opaque') {
                 throw new Error(`Hatalı yanıt: ${url}`);
               }
               return cache.put(url, response);
             })
-            .catch(err => console.warn('[SW] Önbellek uyarısı (Çevrimdışı olabilir):', url, err));
-        })
+            .catch((err) => console.warn('[SW] Önbellek uyarısı:', url, err))
+        )
       );
     })
   );
 });
 
-// 2. Aktivasyon (Activate) - Eski önbellekleri temizle ve kontrolü al
+// 2. Aktivasyon — eski cache'leri sil
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME && cacheName !== DYNAMIC_CACHE) {
-            console.log('[SW] Eski önbellek siliniyor:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames
+          .filter((name) => name !== CACHE_NAME && name !== DYNAMIC_CACHE)
+          .map((name) => {
+            console.log('[SW] Eski önbellek siliniyor:', name);
+            return caches.delete(name);
+          })
+      )
+    ).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// 3. İstek Yakalama (Fetch) - Akıllı Çevrimdışı Strateji
+// 3. Fetch
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
   if (!url.protocol.startsWith('http')) return;
 
-  // API İstekleri: Önce Ağ (Network First), İnternet yoksa Önbellek
+  // API: Network First
   const apiDomains = [
     'api.open-meteo.com',
     'archive-api.open-meteo.com',
@@ -70,12 +68,12 @@ self.addEventListener('fetch', (event) => {
     'geocoding-api.open-meteo.com'
   ];
 
-  if (apiDomains.some(domain => url.hostname.includes(domain))) {
+  if (apiDomains.some((domain) => url.hostname.includes(domain))) {
     event.respondWith(
       fetch(request)
         .then((networkResponse) => {
-          const resClone = networkResponse.clone();
-          caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, resClone));
+          const clone = networkResponse.clone();
+          caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, clone));
           return networkResponse;
         })
         .catch(() => caches.match(request))
@@ -83,27 +81,63 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Statik Dosyalar: Önce Önbellek (Cache First), Yoksa Ağ
+  // App shell (HTML + kritik JS): Stale-While-Revalidate
+  const isAppShell =
+    request.mode === 'navigate' ||
+    url.pathname.endsWith('/') ||
+    url.pathname.endsWith('index.html') ||
+    url.pathname.endsWith('floraveritabani.js') ||
+    url.pathname.endsWith('bolgeharitasi.js');
+
+  if (isAppShell) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then(async (cache) => {
+        const cached = await cache.match(request);
+        const networkPromise = fetch(request)
+          .then((response) => {
+            if (response && response.ok) {
+              cache.put(request, response.clone());
+            }
+            return response;
+          })
+          .catch(() => null);
+
+        return (
+          cached ||
+          (await networkPromise) ||
+          caches.match('./index.html') ||
+          caches.match('./')
+        );
+      })
+    );
+    return;
+  }
+
+  // Diğer statik: Cache First
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+      if (cachedResponse) return cachedResponse;
 
       return fetch(request)
         .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
-            const resClone = networkResponse.clone();
-            caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, resClone));
+          if (
+            networkResponse &&
+            networkResponse.status === 200 &&
+            networkResponse.type === 'basic'
+          ) {
+            const clone = networkResponse.clone();
+            caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, clone));
           }
           return networkResponse;
         })
         .catch(() => {
-          // İNTERNET YOKKEN: Sayfa gezintilerinde beyaz ekran yerine index.html sun
           if (request.mode === 'navigate') {
             return caches.match('./index.html') || caches.match('./');
           }
-          return new Response('Çevrimdışı', { status: 503, statusText: 'Offline' });
+          return new Response('Çevrimdışı', {
+            status: 503,
+            statusText: 'Offline'
+          });
         });
     })
   );
