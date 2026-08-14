@@ -1,92 +1,112 @@
-const CACHE_NAME = 'polinasyon-static-v9';
-const DYNAMIC_CACHE = 'polinasyon-dynamic-v9';
+const CACHE_VERSION = 10; // Güncelleme tetiklemek için versiyonu artırdık
+const CACHE_NAME = `polinasyon-static-v${CACHE_VERSION}`;
+const DYNAMIC_CACHE = `polinasyon-dynamic-v${CACHE_VERSION}`;
 
+// Tailwind CDN yerine yeni derlediğimiz ./style.css eklendi
 const STATIC_ASSETS = [
   './',
   './index.html',
+  './style.css', 
   './manifest.json',
   './ikon.png',
   './bolgeharitasi.js',
   './floraveritabani.js',
-  'https://cdn.tailwindcss.com',
   'https://unpkg.com/lucide@latest'
 ];
 
-// Kurulum
+// 1. Kurulum (Install) - Dosyaları güvenli bir şekilde önbelleğe al
 self.addEventListener('install', (event) => {
+  self.skipWaiting(); // Yeni SW'nin beklemeden hemen devreye girmesini sağlar
+  
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
-      return Promise.allSettled(
-        STATIC_ASSETS.map(url => cache.add(new Request(url, { mode: 'no-cors' })))
+      // addAll yerine güvenli map() ile hatalı linklerin tüm kurulumu bozmasını engelliyoruz
+      return Promise.all(
+        STATIC_ASSETS.map(url => {
+          return fetch(new Request(url, { cache: 'reload' }))
+            .then(response => {
+              if (!response.ok) throw new Error(`Hatalı yanıt: ${url}`);
+              return cache.put(url, response);
+            })
+            .catch(err => console.warn('[SW] Önbellek uyarısı:', url, err));
+        })
       );
     })
   );
-  self.skipWaiting();
 });
 
-// Aktivasyon - Eski cache'leri temizle
+// 2. Aktivasyon (Activate) - Eski versiyon önbellekleri temizle
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => {
+    caches.keys().then((cacheNames) => {
       return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME && key !== DYNAMIC_CACHE) {
-            console.log('[SW] Eski cache siliniyor:', key);
-            return caches.delete(key);
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME && cacheName !== DYNAMIC_CACHE) {
+            console.log('[SW] Eski önbellek siliniyor:', cacheName);
+            return caches.delete(cacheName);
           }
         })
       );
     })
   );
-  self.clients.claim();
+  self.clients.claim(); // Kontrolü anında ele al
 });
 
-// Fetch stratejisi
+// 3. İstek Yakalama (Fetch) - Offline öncelikli ve ağ fallback stratejisi
 self.addEventListener('fetch', (event) => {
-  const url = new URL(event.request.url);
+  const { request } = event;
+  const url = new URL(request.url);
 
+  // Sadece HTTP/HTTPS isteklerini işle (chrome-extension vb. dışla)
   if (!url.protocol.startsWith('http')) return;
 
-  // API istekleri - Network first
-  if (
-    url.hostname.includes('api.open-meteo.com') ||
-    url.hostname.includes('archive-api.open-meteo.com') ||
-    url.hostname.includes('rss2json') ||
-    url.hostname.includes('bigdatacloud') ||
-    url.hostname.includes('geocoding-api.open-meteo.com')
-  ) {
+  // API İstekleri: Önce Ağ (Network First), Çökerse Önbellek
+  const apiDomains = [
+    'api.open-meteo.com',
+    'archive-api.open-meteo.com',
+    'rss2json',
+    'bigdatacloud',
+    'geocoding-api.open-meteo.com'
+  ];
+
+  if (apiDomains.some(domain => url.hostname.includes(domain))) {
     event.respondWith(
-      fetch(event.request)
+      fetch(request)
         .then((networkResponse) => {
           const resClone = networkResponse.clone();
-          caches.open(DYNAMIC_CACHE).then((cache) => {
-            cache.put(event.request, resClone);
-          });
+          caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, resClone));
           return networkResponse;
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => caches.match(request))
     );
     return;
   }
 
-  // Statik dosyalar - Cache first
+  // Statik Dosyalar ve Diğerleri: Önce Önbellek (Cache First), Yoksa Ağ
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
+    caches.match(request).then((cachedResponse) => {
       if (cachedResponse) {
-        return cachedResponse;
+        return cachedResponse; // Önbellekte varsa anında hızlıca yükle
       }
-      return fetch(event.request).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const resClone = networkResponse.clone();
-          caches.open(DYNAMIC_CACHE).then((cache) => {
-            cache.put(event.request, resClone);
-          });
-        }
-        return networkResponse;
-      }).catch(() => {
-        return new Response('Çevrimdışı', { status: 503 });
-      });
+
+      return fetch(request)
+        .then((networkResponse) => {
+          // Gelen yanıt geçerliyse dinamik önbelleğe kaydet
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            const resClone = networkResponse.clone();
+            caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, resClone));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          // İNTERNET YOKKEN: Eğer kullanıcı sayfa yeniliyorsa veya gezinmeye çalışıyorsa beyaz ekran verme
+          if (request.mode === 'navigate' || request.headers.get('accept').includes('text/html')) {
+            return caches.match('./index.html');
+          }
+          // Sayfa değilse (örneğin kayıp bir resim) uygun bir yanıt dönülebilir
+          return new Response('Çevrimdışı', { status: 503, statusText: 'Offline' });
+        });
     })
   );
 });
