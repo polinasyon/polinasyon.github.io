@@ -50,10 +50,38 @@ self.addEventListener('activate', (event) => {
   self.clientsClaim();
 });
 
-// Fetch İstek Stratejisi
+/ Fetch İstek Stratejisi
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
+  // === BURAYA EKLEYECEKSİNİZ ===
+  // Chrome eklentileri veya harici protokolleri işleme alma
+  if (!url.protocol.startsWith('http')) {
+    return;
+  }
+  // ============================
+
+  // 1. API İstekleri: Önce Ağ, çevrimdışıysa son önbellekteki veriyi dön
+  if (
+    url.hostname.includes('api.open-meteo.com') ||
+    url.hostname.includes('archive-api.open-meteo.com') ||
+    url.hostname.includes('rss2json') ||
+    url.hostname.includes('bigdatacloud') ||
+    url.hostname.includes('geocoding-api.open-meteo.com')
+  ) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          const resClone = networkResponse.clone();
+          caches.open(DYNAMIC_CACHE).then((cache) => {
+            cache.put(event.request, resClone);
+          });
+          return networkResponse;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
   // 1. API İstekleri (Önce Ağ)
   if (
     url.hostname.includes('api.open-meteo.com') ||
