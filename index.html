@@ -7,7 +7,7 @@
 
     <title>Polinasyon | Kanatların Matematiği</title>
     <meta name="description" content="Arıcılık için nektar akım tahmini, flora takvimi, kovan takibi ve arı sağlığı rehberi. Konuma göre hava, fenoloji ve GDD analizi.">
-    <meta name="keywords" content="arıcılık, nektar akımı, flora takvimi, kovan takip, polinasyon, arı sağlığı, bal, GDD">
+    <meta name="keywords" content="arıcılık, nektar akımı, flora takvimi, kovan takip, polinasyon, arı sağlığı, bal">
     <meta name="author" content="Polinasyon">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#f59e0b">
@@ -26,25 +26,33 @@
     <link rel="apple-touch-icon" href="./ikon.png">
     <link rel="manifest" href="./manifest.json">
 
-    <!-- Open Graph -->
+    <!-- Open Graph (paylaşım) -->
     <meta property="og:type" content="website">
     <meta property="og:locale" content="tr_TR">
     <meta property="og:site_name" content="Polinasyon">
     <meta property="og:title" content="Polinasyon | Kanatların Matematiği">
-    <meta property="og:description" content="Nektar akım tahmini, flora takvimi ve kovan takibi — arıcılık için pratik karar destek aracı (GDD entegre).">
+    <meta property="og:description" content="Nektar akım tahmini, flora takvimi ve kovan takibi — arıcılık için pratik karar destek aracı.">
     <meta property="og:image" content="https://polinasyon.github.io/ikon.png">
     <meta property="og:url" content="https://polinasyon.github.io/">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Polinasyon | Kanatların Matematiği">
-    <meta name="twitter:description" content="Nektar akım tahmini, flora takvimi ve kovan takibi (GDD destekli).">
+    <meta name="twitter:description" content="Nektar akım tahmini, flora takvimi ve kovan takibi.">
     <meta name="twitter:image" content="https://polinasyon.github.io/ikon.png">
 
-    <!-- Tailwind CSS v4 Browser CDN -->
+    <!-- Tailwind & Lucide -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+    
+    <!-- Tailwind CSS v4 Browser CDN (Derleme gerektirmez, anında çalışır) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- İkon Kütüphanesi -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
 
     <style>
         body {
@@ -62,51 +70,51 @@
             transition: all 0.3s ease;
         }
         .soft-card:hover { box-shadow: 0 10px 25px -5px rgb(15 23 42 / 0.08); }
+        .accent-gradient { background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); }
         .nav-btn { color: #64748b; transition: all 0.2s; cursor: pointer; }
         .nav-btn-active { background-color: #fef3c7; color: #d97706; }
         .glass { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); }
         .modal-enter { animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-        details.accordion-group > summary::-webkit-details-marker,
+        details.accordion-group > summary::-webkit-details-marker { display: none; }
         details.item-detail > summary::-webkit-details-marker { display: none; }
         .accordion-panel { display: none; }
         .accordion-panel.active { display: block; }
-        .hidden { display: none !important; }
     </style>
 </head>
-<body class="min-h-screen pb-28 bg-slate-50 text-slate-800">
+<body class="min-h-screen pb-28">
 
-    <!-- HEADER -->
     <header class="sticky top-0 z-50 glass border-b border-slate-200">
         <div class="max-w-xl mx-auto px-5 py-3 flex items-center justify-between">
             <div class="w-9"></div>
+
             <div class="text-center flex flex-col items-center">
-                <div class="flex items-center justify-center gap-1.5">
-                    <img src="https://polinasyon.github.io/ikon.png" alt="Polinasyon" class="h-6 w-auto object-contain" onerror="this.style.display='none'">
+                <div class="flex items-center justify-center gap-1.1">
+                    <img src="https://polinasyon.github.io/ikon.png" alt="Polinasyon Logo" class="h-6 w-auto object-contain">
                     <h1 class="text-xl font-bold text-slate-900 leading-tight brand-arial tracking-wide">Polinasyon</h1>
                 </div>
-                <p class="text-[9px] text-slate-500 font-semibold tracking-wider uppercase leading-none mt-1 flex items-center justify-center gap-1.5">
+                <p class="text-[9px] text-slate-500 font-semibold tracking-wider uppercase leading-none mt-1 flex items-center justify-center gap-1.5 translate-x-[3px]">
                     <span>Kanatların Matematiği</span>
                     <span id="offlineBadge" class="hidden bg-rose-500 text-white px-1.5 py-[1px] rounded text-[8px] tracking-widest font-bold animate-pulse">ÇEVRİMDIŞI</span>
                 </p>
             </div>
+
             <div class="flex items-center gap-1.5">
-                <button onclick="uygulama.verileriIceAktar()" title="Yedek Yükle" class="w-9 h-9 flex items-center justify-center bg-slate-100 border border-slate-200 text-slate-600 hover:text-amber-600 transition rounded-xl">
+                <button onclick="uygulama.verileriIceAktar()" title="Yedek Yükle (JSON)" class="w-9 h-9 flex items-center justify-center bg-slate-100 border border-slate-200 text-slate-600 hover:text-amber-600 transition rounded-xl">
                     <i data-lucide="upload" class="w-4 h-4"></i>
                 </button>
-                <button onclick="uygulama.verileriYedekle()" title="Verileri İndir" class="w-9 h-9 flex items-center justify-center bg-slate-100 border border-slate-200 text-slate-600 hover:text-amber-600 transition rounded-xl">
+                <button onclick="uygulama.verileriYedekle()" title="Verileri İndir (JSON)" class="w-9 h-9 flex items-center justify-center bg-slate-100 border border-slate-200 text-slate-600 hover:text-amber-600 transition rounded-xl">
                     <i data-lucide="download" class="w-4 h-4"></i>
                 </button>
             </div>
         </div>
     </header>
 
+
     <main class="max-w-xl mx-auto px-5 pt-5 space-y-5">
 
-        <!-- ==================== ANA SAYFA ==================== -->
         <section id="sayfaAnaSayfa" class="space-y-5 block">
             <div class="soft-card p-6 sm:p-8">
-                <!-- Konum -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5 border-b border-slate-100 pb-4">
                     <div class="flex items-center gap-2.5 overflow-hidden">
                         <div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
@@ -118,7 +126,7 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="uygulama.otomatikKonumBul()" class="flex items-center justify-center w-9 h-9 bg-slate-100 border border-slate-200 rounded-xl hover:bg-slate-200 transition text-amber-600" title="GPS ile bul">
+                        <button onclick="uygulama.otomatikKonumBul()" class="flex items-center justify-center w-9 h-9 bg-slate-100 border border-slate-200 rounded-xl hover:bg-slate-200 transition text-amber-600">
                             <i data-lucide="crosshair" class="w-4 h-4"></i>
                         </button>
                         <button onclick="uygulama.konumModaliniAc()" class="flex items-center justify-center gap-1.5 text-xs font-semibold px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl hover:bg-slate-200 transition text-slate-700">
@@ -128,7 +136,6 @@
                     </div>
                 </div>
 
-                <!-- Hava kartları -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
                     <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
                         <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">SICAKLIK</p>
@@ -156,7 +163,6 @@
                     </div>
                 </div>
 
-                <!-- Nektar Akım Potansiyeli + GDD -->
                 <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 mb-6">
                     <div class="flex justify-between items-end mb-3">
                         <div>
@@ -167,7 +173,6 @@
                         </div>
                         <div id="nektarSkor" class="text-3xl font-black text-amber-500">%--</div>
                     </div>
-
                     <div class="grid grid-cols-2 gap-3 mb-4">
                         <div class="bg-white/80 border border-slate-200/80 rounded-xl p-2.5 flex items-center gap-2.5 shadow-sm">
                             <div class="w-7 h-7 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center shrink-0">
@@ -188,68 +193,67 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="w-full bg-slate-200 rounded-full h-3 mb-4 overflow-hidden">
                         <div id="nektarBar" class="bg-amber-400 h-3 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
                     </div>
-
-                    <p id="nektarAciklama" class="text-sm text-slate-600">Meteoroloji, fenoloji ve GDD analiz ediliyor...</p>
+                    <p id="nektarAciklama" class="text-sm text-slate-600">Meteoroloji ve fenoloji analiz ediliyor...</p>
                     <div id="dinamikDuzeltmeNotu" class="mt-2 text-[11px] font-bold hidden"></div>
-
-                    <p class="mt-3 text-[10px] text-slate-400 leading-relaxed">
-                        Bu skor; arı uçuş sıcaklığı (~10–30°C), rüzgar, nem, çiy açığı, 3 günlük trend, yağış, bulut örtüsü ve <strong>GDD ile düzeltilmiş fenolojiyi</strong> bölgeye göre ağırlıklandırarak hesaplar. Literatür temelli deneysel bir tahmindir; kalibre bilimsel ölçüm değildir.
-                    </p>
+                    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">Bu skor; arı uçuş sıcaklığı (~10–30°C), rüzgar, nem, çiy açığı, 3 günlük trend, anlık yağış, bulut örtüsü (güneş potansiyeli) ve GDD ile düzeltilmiş fenolojiyi bölgeye göre ağırlıklandırarak hesaplar. Literatür temelli deneysel bir tahmindir; kalibre bilimsel ölçüm değildir.</p>
                 </div>
 
-                <!-- Flora Takvimi -->
                 <div class="border border-slate-200/80 bg-slate-100/60 rounded-2xl p-5 space-y-4">
                     <div class="flex items-center justify-between">
                         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
                             <i data-lucide="calendar-range" class="w-4 h-4 text-amber-600"></i> Flora Takvimi
                         </h3>
-                    </div>
+                       </div>
+
+
                     <p class="text-xs text-slate-600 leading-relaxed">
-                        Renk Kodları: <span class="font-bold text-emerald-700">Yeşil:</span> Güçlü Nektar |
-                        <span class="font-bold text-amber-600">Sarı:</span> Polen/Orta Akım |
-                        <span class="font-bold text-slate-500">Gri:</span> Kıtlık (Dearth)
+                        Renk Kodları: <span class="font-bold text-emerald-700">Yeşil:</span> Güçlü Nektar | <span class="font-bold text-amber-600">Sarı:</span> Polen/Orta Akım | <span class="font-bold text-slate-500">Gri:</span> Kıtlık (Dearth)
                     </p>
-                    <p class="text-[10px] text-slate-400 leading-relaxed">
-                        Bu takvim tipik/ortalama bir yılın akışını gösterir (referans). Ana sayfadaki canlı skor, bu yılın gerçek ısı birikimine (<strong>GDD</strong>) göre otomatik düzeltilir.
-                    </p>
+                    <p class="text-[10px] text-slate-400 leading-relaxed">Bu takvim tipik/ortalama bir yılın akışını gösterir (referans). Ana sayfadaki canlı skor, bu yılın gerçek ısı birikimine (GDD) göre otomatik düzeltilir.</p>
                     <div id="floraTimelineContainer" class="space-y-2.5"></div>
                 </div>
             </div>
         </section>
 
-        <!-- ==================== KOVAN TAKİP ==================== -->
         <section id="sayfaKovanlar" class="space-y-5 hidden">
-            <div class="soft-card p-5">
-                <div class="flex items-center justify-between mb-4">
-                    <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                        <i data-lucide="box" class="w-5 h-5 text-amber-600"></i> Kovan Takip
-                    </h2>
-                    <button onclick="uygulama.yeniKategoriEkle()" class="text-xs font-semibold px-3 py-2 bg-amber-500 text-white rounded-xl hover:bg-amber-600 transition">
-                        + Kategori
-                    </button>
+            <div class="soft-card p-6">
+                <div id="kategoriAnaGorunum">
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Kovan Kategorileri</h2>
+                            <p class="text-xs text-slate-500">Arılık sahalarınız</p>
+                        </div>
+                        <button onclick="uygulama.yeniKategoriModaliniAc()" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold px-3.5 py-2 rounded-xl transition flex items-center gap-1 shadow-sm">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Yeni Kategori
+                        </button>
+                    </div>
+                    <div id="kategoriListesiContainer" class="space-y-3"></div>
                 </div>
-                <div id="kategoriListesiContainer" class="space-y-3"></div>
-            </div>
 
-            <!-- Kovan listesi (kategori seçilince) -->
-            <div id="kovanListesiAlani" class="hidden soft-card p-5">
-                <div class="flex items-center justify-between mb-4">
-                    <button onclick="uygulama.kategoriGorunumuneDon()" class="flex items-center gap-1 text-sm text-slate-600 hover:text-amber-600">
-                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Geri
-                    </button>
-                    <h3 id="aktifKategoriBaslik" class="font-bold text-slate-800"></h3>
-                    <button onclick="uygulama.yeniKovanEkle()" class="text-xs font-semibold px-3 py-1.5 bg-emerald-500 text-white rounded-lg">+ Kovan</button>
+                <div id="kategoriDetayGorunum" class="hidden">
+                    <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                        <div class="flex items-center gap-2">
+                            <button onclick="uygulama.kategoriGorunumuneDon()" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </button>
+                            <div>
+                                <h2 id="aktifKategoriBaslik" class="text-base font-bold text-slate-800">Kategori</h2>
+                                <p class="text-[11px] text-slate-500">Kayıtlı kovanlar</p>
+                            </div>
+                        </div>
+                        <button onclick="uygulama.aktifKategoriyeKovanEkleModaliniAc()" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-semibold px-3.5 py-2 rounded-xl transition flex items-center gap-1 shadow-sm">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Kovan Ekle
+                        </button>
+                    </div>
+                    <div id="aktifKovanlarContainer" class="space-y-3"></div>
                 </div>
-                <div id="kovanListesiContainer" class="space-y-3"></div>
             </div>
         </section>
 
-        <!-- ==================== SAĞLIK ==================== -->
-        <section id="sayfaSaglik" class="space-y-5 hidden">
+       <section id="sayfaSaglik" class="space-y-5 hidden">
             <div class="soft-card p-6 sm:p-8 space-y-5">
                 <div class="border-b border-slate-100 pb-4">
                     <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
@@ -468,27 +472,12 @@
         </section>
 
 
-        <!-- ==================== AKADEMİ ==================== -->
-       <section id="sayfaAkademi" class="space-y-5 hidden">
+        <section id="sayfaAkademi" class="space-y-5 hidden">
             <div class="soft-card p-6 space-y-4">
                 <div class="border border-slate-200/80 bg-slate-50 rounded-2xl p-3.5 flex items-center justify-between shadow-2xs">
-                    <div class="flex items-center gap-4 text-slate-700">
-                        <a href="https://facebook.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="Facebook">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                        </a>
-                        <a href="https://twitter.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="X (Twitter)">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <a href="https://instagram.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="Instagram">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        </a>
-                        <a href="https://youtube.com/@polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="YouTube">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        </a>
-                    </div>
                     <span class="text-xs font-bold text-slate-800 tracking-wide">@polinasyon</span>
+                    <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 text-xs font-semibold underline">Web Sitesi →</a>
                 </div>
-
                 <div class="space-y-3" id="makaleListesiContainer">
                     <p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>
                 </div>
@@ -497,26 +486,72 @@
 
     </main>
 
-    <!-- ==================== KONUM MODALI ==================== -->
-    <div id="konumModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
-        <div class="bg-white rounded-3xl w-full max-w-sm p-6 modal-enter shadow-2xl">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="font-bold text-lg text-slate-800">Konum Değiştir</h3>
-                <button onclick="uygulama.konumModaliniKapat()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
-                    <i data-lucide="x" class="w-4 h-4"></i>
-                </button>
+    <!-- MODALLAR -->
+    <div id="konumModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="soft-card bg-white p-6 w-full max-w-md space-y-4 modal-enter shadow-xl">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-base">Konum Değiştir</h3>
+                <button onclick="uygulama.konumModaliniKapat()" class="text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
-            <input id="sehirInput" type="text" placeholder="Şehir veya ilçe yazın (örn: Muğla, Simav)" 
-                   class="w-full px-4 py-3 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-400 mb-3"
-                   onkeydown="if(event.key==='Enter') uygulama.sehirAra()">
-            <button onclick="uygulama.sehirAra()" class="w-full py-3 bg-amber-500 text-white font-semibold rounded-2xl hover:bg-amber-600 transition mb-3">
-                Ara ve Uygula
-            </button>
-            <p class="text-[11px] text-slate-400 text-center">Türkiye illeri ve ilçeleri desteklenir. GPS için sağ üstteki hedef ikonunu kullanın.</p>
+            <input type="text" id="sehirInput" placeholder="İl veya İlçe yazın (Örn: Ağrı, Kars, Muğla)..." class="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-amber-500">
+            <div class="flex gap-2">
+                <button onclick="uygulama.konumModaliniKapat()" class="flex-1 py-3 bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl">İptal</button>
+                <button onclick="uygulama.sehirAraVeGuncelle()" class="flex-1 py-3 bg-amber-500 text-white text-xs font-semibold rounded-xl">Güncelle</button>
+            </div>
         </div>
     </div>
 
-    <!-- NAV -->
+    
+
+    <div id="kategoriModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="soft-card bg-white p-6 w-full max-w-md space-y-4 modal-enter shadow-xl">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-base">Yeni Kategori Ekle</h3>
+                <button onclick="uygulama.yeniKategoriModaliniKapat()" class="text-slate-400 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <input type="text" id="kategoriIsimInput" placeholder="Örn: Merkez, Saha 1..." class="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-amber-500">
+            <div class="flex gap-2">
+                <button onclick="uygulama.yeniKategoriModaliniKapat()" class="flex-1 py-3 bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl">İptal</button>
+                <button onclick="uygulama.kategoriKaydet()" class="flex-1 py-3 bg-amber-500 text-white text-xs font-semibold rounded-xl">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="kovanDetayModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="soft-card bg-white p-6 w-full max-w-lg space-y-4 modal-enter shadow-xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <div>
+                    <h3 class="font-bold text-slate-800 text-base">Kovan İstatistikleri</h3>
+                    <p class="text-[11px] text-slate-500">Bal verimi ve kontrol geçmişi</p>
+                </div>
+                <button onclick="uygulama.kovanDetayModaliniKapat()" class="text-slate-400 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+            <input type="hidden" id="editKovanId">
+            <div class="grid grid-cols-2 gap-3 bg-slate-100/70 p-4 rounded-2xl">
+                <div><label class="block text-[10px] font-medium text-slate-500">Kovan Adı</label><input type="text" id="detayIsim" class="w-full px-2 py-1 bg-white border rounded-lg text-xs font-semibold"></div>
+                <div><label class="block text-[10px] font-medium text-slate-500">Ana Arı Yaşı</label><input type="text" id="detayAnaAri" class="w-full px-2 py-1 bg-white border rounded-lg text-xs"></div>
+            </div>
+            <div class="p-4 bg-amber-50/50 border border-amber-200/60 rounded-2xl space-y-2">
+                <h4 class="font-bold text-xs text-amber-900 flex items-center gap-1.5"><i data-lucide="calendar-check" class="w-3.5 h-3.5 text-amber-600"></i> Kontrol Ekle</h4>
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="number" step="0.5" id="yeniBal" placeholder="Güncel Bal (kg)" class="px-2 py-1.5 bg-white border border-amber-200 rounded-xl text-xs">
+                    <input type="text" id="yeniHastalik" placeholder="Durum (Örn: Sağlıklı)" class="px-2 py-1.5 bg-white border border-amber-200 rounded-xl text-xs">
+                </div>
+                <textarea id="yeniNot" rows="1" placeholder="Not / Gözlem..." class="w-full px-2 py-1.5 bg-white border border-amber-200 rounded-xl text-xs"></textarea>
+                <button onclick="uygulama.yeniKontrolEkle()" class="w-full py-2 bg-amber-500 text-white text-xs font-semibold rounded-xl">Kaydet</button>
+            </div>
+            <div class="space-y-1">
+                <h4 class="font-bold text-xs text-slate-700 flex items-center gap-1.5"><i data-lucide="activity" class="w-4 h-4 text-amber-600"></i> SVG Telemetri Grafiği</h4>
+                <div id="gelisimGrafigi" class="p-3 bg-slate-900 border border-slate-800 rounded-2xl min-h-[140px] flex flex-col justify-center items-center"></div>
+            </div>
+            <div class="space-y-1">
+                <div class="flex justify-between items-center"><h4 class="font-bold text-xs text-slate-700">Geçmiş Kayıtlar</h4><button onclick="uygulama.kontrolGecmisiniSifirla()" class="text-[10px] text-rose-500 font-semibold">Tümünü Sıfırla</button></div>
+                <div id="gecmisKontrollerListesi" class="space-y-2 max-h-36 overflow-y-auto"></div>
+            </div>
+            <button onclick="uygulama.kovanDetayModaliniKapat()" class="w-full py-3 bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl">Kapat</button>
+        </div>
+    </div>
+
     <nav class="fixed bottom-0 left-0 right-0 glass border-t border-slate-200 z-40">
         <div class="max-w-xl mx-auto px-2 py-2.5 flex justify-around items-center">
             <button onclick="uygulama.sayfaDegistir('AnaSayfa')" id="navAnaSayfa" class="nav-btn nav-btn-active flex flex-col items-center gap-1 px-3 py-1.5 rounded-2xl text-[11px] font-medium">
@@ -534,17 +569,17 @@
         </div>
     </nav>
 
-    <script src="./bolgeharitasi.js"></script>
+
+    <script src="./bolgeharitasi.js"></script> 
     <script src="./floraveritabani.js"></script>
 
     <script>
-        // Offline badge
-        window.addEventListener('offline', () => document.getElementById('offlineBadge')?.classList.remove('hidden'));
+        window.addEventListener('offline', () => document.getElementById('offlineBadge').classList.remove('hidden'));
         window.addEventListener('online', () => {
-            document.getElementById('offlineBadge')?.classList.add('hidden');
-            if (uygulama?.data) uygulama.havaDurumunuYukle(uygulama.data.lat, uygulama.data.lon, uygulama.data.konum);
+            document.getElementById('offlineBadge').classList.add('hidden');
+            uygulama.havaDurumunuYukle(uygulama.data.lat, uygulama.data.lon, uygulama.data.konum);
         });
-        if (!navigator.onLine) document.getElementById('offlineBadge')?.classList.remove('hidden');
+        if (!navigator.onLine) document.getElementById('offlineBadge').classList.remove('hidden');
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -554,405 +589,24 @@
 
         const uygulama = {
             data: {
-                konum: "Ankara", lat: 39.9208, lon: 32.8541,
-                temp: 22, humidity: 65, dewPoint: 12, windSpeed: 8, pastAvgTemp: 22,
+                konum: "Ankara", lat: 39.9208, lon: 32.8541, temp: 22, humidity: 65, dewPoint: 12, windSpeed: 8, pastAvgTemp: 22,
                 precipitation: 0, cloudCover: 40,
-                gddOran: 1, gddVeriVar: false, birikmisGDD: 0,
-                duzeltilmisFenoloji: null,
-                kategoriler: [
-                    { id: 1, isim: "Merkez", kovanlar: [
-                        { id: 101, isim: "Kovan #1", anaAri: "2024", gecmisKontroller: [{ tarih: "2026-06-01", bal: 4, hastalik: "Yok", not: "İlk kontrol" }] }
-                    ]}
-                ]
+                gddOran: 1, gddVeriVar: false, duzeltilmisFenoloji: null,
+                kategoriler: [{ id: 1, isim: "Merkez", kovanlar: [{ id: 101, isim: "Kovan #1", anaAri: "2024", gecmisKontroller: [{ tarih: "2026-06-01", bal: 4, hastalik: "Yok", not: "İlk kontrol" }] }] }]
             },
             aktifKategoriId: null,
+            aktifDuzenlenenKovanId: null,
 
+            // Dış JS dosyalarından
             bolgeHaritasi: window.BOLGE_HARITASI || {},
             bolgeAgirliklari: window.BOLGE_AGIRLIKLARI || {
                 "varsayılan": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 }
             },
             floraVeritabani: window.FLORA_VERITABANI || {
-                "varsayılan": { flora: "Yükleniyor...", timeline: [], gdd: {}, baseTemp: 10 }
+                "varsayılan": { flora: "Yükleniyor...", timeline: [] }
             },
 
             GDD_BASE_TEMP: 10,
-
-            // ===================== KONUM =====================
-            konumModaliniAc() {
-                const modal = document.getElementById('konumModal');
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                document.getElementById('sehirInput').value = '';
-                document.getElementById('sehirInput').focus();
-                if (window.lucide) lucide.createIcons();
-            },
-            konumModaliniKapat() {
-                const modal = document.getElementById('konumModal');
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            },
-            async sehirAra() {
-                const q = document.getElementById('sehirInput').value.trim();
-                if (!q || q.length < 2) return alert('Lütfen en az 2 harf girin.');
-
-                try {
-                    // Open-Meteo Geocoding (ücretsiz, anahtar gerekmez)
-                    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=5&language=tr&format=json`);
-                    const data = await res.json();
-                    if (!data.results || data.results.length === 0) {
-                        return alert('Konum bulunamadı. Daha spesifik yazmayı deneyin (örn: "Muğla" veya "Simav").');
-                    }
-                    const r = data.results[0];
-                    const isim = r.admin1 ? `${r.name}, ${r.admin1}` : r.name;
-                    await this.havaDurumunuYukle(r.latitude, r.longitude, isim);
-                    this.konumModaliniKapat();
-                } catch (e) {
-                    console.error(e);
-                    alert('Arama sırasında hata oluştu. İnternet bağlantınızı kontrol edin.');
-                }
-            },
-
-            otomatikKonumBul() {
-                if (!navigator.geolocation) return alert("Konum desteklenmiyor.");
-                document.getElementById('havaLokasyon').textContent = "GPS Aranıyor...";
-                navigator.geolocation.getCurrentPosition(async (pos) => {
-                    try {
-                        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&localityLanguage=tr`);
-                        const data = await res.json();
-                        await this.havaDurumunuYukle(pos.coords.latitude, pos.coords.longitude, data.city || data.locality || "Bulunan Konum");
-                    } catch (e) {
-                        await this.havaDurumunuYukle(pos.coords.latitude, pos.coords.longitude, "GPS Konum");
-                    }
-                }, () => {
-                    alert("Konum alınamadı. Tarayıcı izinlerini kontrol edin.");
-                    document.getElementById('havaLokasyon').textContent = this.data.konum;
-                }, { enableHighAccuracy: true, timeout: 10000 });
-            },
-
-            // ===================== SAYFA DEĞİŞTİRME =====================
-           sayfaDegistir(sayfaId) {
-    ['AnaSayfa', 'Kovanlar', 'Saglik', 'Akademi'].forEach(s => {
-        const el = document.getElementById('sayfa' + s);
-        const nav = document.getElementById('nav' + s);
-        if (s === sayfaId) {
-            el?.classList.remove('hidden');
-            nav?.classList.add('nav-btn-active');
-            if (s === 'Akademi') this.rssYukle();
-        } else {
-            el?.classList.add('hidden');
-            nav?.classList.remove('nav-btn-active');
-        }
-    });
-    if (sayfaId === 'Kovanlar') this.kategoriGorunumuneDon();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (window.lucide) lucide.createIcons();
-},
-            async rssYukle() {
-    const container = document.getElementById('makaleListesiContainer');
-    if (!container) return;
-    container.innerHTML = `<p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>`;
-
-    try {
-        // Blogger Atom / RSS (max 50)
-        const feedUrl = encodeURIComponent(
-            'https://www.polinasyon.org/feeds/posts/default?alt=rss&max-results=50'
-        );
-        const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${feedUrl}`);
-        const data = await res.json();
-
-        if (!data || data.status !== 'ok' || !data.items || data.items.length === 0) {
-            throw new Error('Boş veya geçersiz feed');
-        }
-
-        // Numaraya göre sırala (başlıktaki ilk sayı); yoksa tarihe göre (yeniden eskiye)
-        const items = [...data.items].sort((a, b) => {
-            const numA = (a.title || '').match(/(\d+)/);
-            const numB = (b.title || '').match(/(\d+)/);
-            if (numA && numB) return parseInt(numA[1], 10) - parseInt(numB[1], 10);
-            if (numA) return -1;
-            if (numB) return 1;
-            const tA = new Date(a.pubDate || 0).getTime();
-            const tB = new Date(b.pubDate || 0).getTime();
-            return tB - tA;
-        });
-
-        let html = '';
-        items.forEach((item, index) => {
-            const title = (item.title || 'Başlıksız').replace(/</g, '&lt;');
-            const link = item.link || 'https://www.polinasyon.org';
-            let desc = item.description
-                ? item.description.replace(/<[^>]*>?/gm, '').replace(/\s+/g, ' ').trim()
-                : '';
-            if (desc.length > 180) desc = desc.substring(0, 180) + '…';
-            if (!desc) desc = 'Detay için yazıyı açın.';
-
-            const tarih = item.pubDate
-                ? new Date(item.pubDate).toLocaleDateString('tr-TR', {
-                      year: 'numeric', month: 'short', day: 'numeric'
-                  })
-                : '';
-
-            const numMatch = (item.title || '').match(/(\d+)/);
-            const siraEtiket = numMatch ? `#${numMatch[1]}` : `#${index + 1}`;
-
-            html += `
-                <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
-                    <div onclick="this.nextElementSibling.classList.toggle('active')"
-                         class="p-4 cursor-pointer flex justify-between items-start gap-3 hover:bg-slate-50 transition">
-                        <div class="min-w-0 flex-1">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-amber-50 text-amber-700 shrink-0">${siraEtiket}</span>
-                                ${tarih ? `<span class="text-[10px] text-slate-400">${tarih}</span>` : ''}
-                            </div>
-                            <h4 class="font-semibold text-sm text-slate-800 leading-snug">${title}</h4>
-                        </div>
-                        <span class="text-xs text-slate-400 shrink-0 mt-1">▼</span>
-                    </div>
-                    <div class="accordion-panel px-4 pb-4 pt-2 border-t border-slate-100 text-xs text-slate-600">
-                        <p class="mb-3 leading-relaxed">${desc}</p>
-                        <a href="${link}" target="_blank" rel="noopener noreferrer"
-                           class="text-amber-600 font-bold underline inline-flex items-center gap-1">
-                            Devamını Oku →
-                        </a>
-                    </div>
-                </div>`;
-        });
-
-        container.innerHTML = html || `<p class="text-center py-8 text-slate-400 text-xs">Henüz yayın yok.</p>`;
-    } catch (e) {
-        console.warn('RSS hatası:', e);
-        container.innerHTML = `
-            <p class="text-center py-6 text-slate-400 text-xs">
-                Yayınlar yüklenemedi.
-                <a href="https://www.polinasyon.org" target="_blank" rel="noopener noreferrer"
-                   class="text-amber-600 underline font-semibold">polinasyon.org</a>
-            </p>`;
-    }
-},
-
-            // ===================== KOVAN TAKİP =====================
-            arayuzuGuncelle() {
-                const c = document.getElementById('kategoriListesiContainer');
-                if (!c) return;
-                let html = '';
-                (this.data.kategoriler || []).forEach(kat => {
-                    html += `
-                        <div onclick="uygulama.kategoriSec(${kat.id})" class="soft-card p-4 cursor-pointer hover:border-amber-400 flex items-center justify-between group transition">
-                            <div class="flex items-center gap-3.5">
-                                <div class="w-11 h-11 rounded-2xl bg-amber-50 group-hover:bg-amber-500 group-hover:text-white text-amber-600 flex items-center justify-center transition shrink-0">
-                                    <i data-lucide="folder-kanban" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-slate-800 text-base">${kat.isim}</h3>
-                                    <p class="text-[11px] text-slate-500 mt-0.5">${(kat.kovanlar || []).length} Kayıtlı Kovan</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <button type="button" onclick="event.stopPropagation(); uygulama.kategoriSil(${kat.id})" class="w-8 h-8 rounded-full bg-slate-100 border flex items-center justify-center text-slate-400 hover:text-rose-500 hover:bg-rose-50" title="Sil">
-                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                                </button>
-                                <div class="w-8 h-8 rounded-full bg-slate-100 border flex items-center justify-center text-slate-400 group-hover:text-amber-600">
-                                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                                </div>
-                            </div>
-                        </div>`;
-                });
-                c.innerHTML = html || `<p class="text-center py-8 text-slate-400 text-xs">Henüz kategori yok. + Kategori ile ekleyin.</p>`;
-                if (window.lucide) lucide.createIcons();
-            },
-
-            yeniKategoriEkle() {
-                const isim = prompt('Kategori adı (örn: Yayla, Merkez):');
-                if (!isim || !isim.trim()) return;
-                const id = Date.now();
-                this.data.kategoriler.push({ id, isim: isim.trim(), kovanlar: [] });
-                this.veriKaydet();
-                this.arayuzuGuncelle();
-            },
-
-            kategoriSil(id) {
-                if (!confirm('Bu kategoriyi ve içindeki tüm kovanları silmek istediğinize emin misiniz?')) return;
-                this.data.kategoriler = this.data.kategoriler.filter(k => k.id !== id);
-                this.veriKaydet();
-                this.arayuzuGuncelle();
-            },
-
-            kategoriSec(id) {
-                this.aktifKategoriId = id;
-                const kat = this.data.kategoriler.find(k => k.id === id);
-                if (!kat) return;
-                document.getElementById('kategoriListesiContainer').parentElement.classList.add('hidden');
-                document.getElementById('kovanListesiAlani').classList.remove('hidden');
-                document.getElementById('aktifKategoriBaslik').textContent = kat.isim;
-                this.kovanListesiniCiz();
-            },
-
-            kategoriGorunumuneDon() {
-                this.aktifKategoriId = null;
-                document.getElementById('kovanListesiAlani')?.classList.add('hidden');
-                document.getElementById('kategoriListesiContainer')?.parentElement.classList.remove('hidden');
-                this.arayuzuGuncelle();
-            },
-
-            kovanListesiniCiz() {
-                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
-                const c = document.getElementById('kovanListesiContainer');
-                if (!kat || !c) return;
-                let html = '';
-                (kat.kovanlar || []).forEach(k => {
-                    const son = (k.gecmisKontroller || [])[0];
-                    html += `
-                        <div class="border border-slate-200 rounded-2xl p-4 bg-white">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h4 class="font-bold text-slate-800">${k.isim}</h4>
-                                    <p class="text-xs text-slate-500">Ana Arı: ${k.anaAri || '-'}</p>
-                                    ${son ? `<p class="text-[11px] text-slate-400 mt-1">Son kontrol: ${son.tarih} • Bal: ${son.bal} çerçeve</p>` : ''}
-                                </div>
-                                <button onclick="uygulama.kovanSil(${k.id})" class="text-slate-400 hover:text-rose-500">
-                                    <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                </button>
-                            </div>
-                        </div>`;
-                });
-                c.innerHTML = html || `<p class="text-center py-6 text-slate-400 text-xs">Bu kategoride kovan yok.</p>`;
-                if (window.lucide) lucide.createIcons();
-            },
-
-            yeniKovanEkle() {
-                if (!this.aktifKategoriId) return;
-                const isim = prompt('Kovan adı:');
-                if (!isim) return;
-                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
-                kat.kovanlar.push({
-                    id: Date.now(),
-                    isim: isim.trim(),
-                    anaAri: new Date().getFullYear().toString(),
-                    gecmisKontroller: []
-                });
-                this.veriKaydet();
-                this.kovanListesiniCiz();
-            },
-
-            kovanSil(id) {
-                if (!confirm('Kovanı silmek istediğinize emin misiniz?')) return;
-                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
-                if (kat) {
-                    kat.kovanlar = kat.kovanlar.filter(k => k.id !== id);
-                    this.veriKaydet();
-                    this.kovanListesiniCiz();
-                }
-            },
-
-            // ===================== GDD + FENOLOJİ (önceki haliyle korundu) =====================
-            seciliFloraKaydi() {
-                const k = (this.data.konum || "").toLocaleLowerCase('tr-TR');
-                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
-                let secilen = this.floraVeritabani["varsayılan"] || { flora: "Varsayılan", timeline: [], gdd: {}, baseTemp: 10 };
-                let enIyi = "";
-                for (const ah of Object.keys(this.floraVeritabani || {})) {
-                    if (ah === "varsayılan" || ah === "bitki_gdd" || bolgeAdlari.has(ah)) continue;
-                    if (k.includes(ah) && ah.length > enIyi.length) {
-                        enIyi = ah;
-                        secilen = this.floraVeritabani[ah];
-                    }
-                }
-                if (!enIyi) {
-                    for (const b in this.bolgeHaritasi) {
-                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
-                            secilen = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || secilen;
-                            break;
-                        }
-                    }
-                }
-                return secilen;
-            },
-
-            async gddOraniniGetir(lat, lon, baseTemp = 10) {
-                const cacheAnahtari = 'polinasyon_gdd_cache_v2';
-                const bugunStr = new Date().toISOString().split('T')[0];
-                try {
-                    const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
-                    if (onbellek && onbellek.tarih === bugunStr && Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
-                        return onbellek;
-                    }
-                } catch (e) {}
-                try {
-                    const bugun = new Date();
-                    const yilBaslangici = new Date(Date.UTC(bugun.getFullYear(), 0, 1));
-                    let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 2;
-                    if (gunSayisi < 1) gunSayisi = 1;
-                    const buYilBitis = new Date(yilBaslangici.getTime() + gunSayisi * 86400000);
-                    const buYilBaslangicStr = yilBaslangici.toISOString().split('T')[0];
-                    const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
-                    const gecenYilBaslangici = new Date(Date.UTC(bugun.getFullYear() - 1, 0, 1));
-                    const gecenYilBitis = new Date(gecenYilBaslangici.getTime() + gunSayisi * 86400000);
-                    const gecenYilBaslangicStr = gecenYilBaslangici.toISOString().split('T')[0];
-                    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0];
-
-                    const [buYilRes, gecenYilRes] = await Promise.all([
-                        fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
-                        fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${gecenYilBaslangicStr}&end_date=${gecenYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`)
-                    ]);
-                    const buYilData = await buYilRes.json();
-                    const gecenYilData = await gecenYilRes.json();
-
-                    const gddTopla = (d, base) => {
-                        if (!d?.daily?.temperature_2m_max) return null;
-                        const mx = d.daily.temperature_2m_max;
-                        const mn = d.daily.temperature_2m_min;
-                        let toplam = 0;
-                        for (let i = 0; i < mx.length; i++) {
-                            if (typeof mx[i] === 'number' && typeof mn[i] === 'number') {
-                                const ort = (mx[i] + mn[i]) / 2;
-                                toplam += Math.max(0, ort - base);
-                            }
-                        }
-                        return Math.round(toplam);
-                    };
-
-                    const buYilGDD = gddTopla(buYilData, baseTemp);
-                    const gecenYilGDD = gddTopla(gecenYilData, baseTemp);
-                    let oran = 1;
-                    let veriVar = (buYilGDD !== null && gecenYilGDD !== null && gecenYilGDD > 20);
-                    if (veriVar) oran = Math.max(0.55, Math.min(1.55, buYilGDD / gecenYilGDD));
-
-                    const sonuc = { tarih: bugunStr, lat, lon, oran, buYilGDD: buYilGDD || 0, gecenYilGDD: gecenYilGDD || 0, veriVar, baseTemp };
-                    localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc));
-                    return sonuc;
-                } catch (e) {
-                    console.warn('GDD hatası:', e);
-                    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: 0, gecenYilGDD: 0, veriVar: false, baseTemp };
-                }
-            },
-
-            fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
-                if (!veriVar || typeof gddOran !== 'number') return hamFenoloji;
-                const carpan = 1 + (gddOran - 1) * 0.55;
-                return Math.max(5, Math.min(100, Math.round(hamFenoloji * carpan)));
-            },
-
-            aktifFenolojiyiBulGDD() {
-                const secilen = this.seciliFloraKaydi();
-                const birikmis = this.data.birikmisGDD || 0;
-                const eslesen = (secilen.timeline || []).find(t => {
-                    const min = t.gddMin ?? 0;
-                    const max = t.gddMax ?? 99999;
-                    return birikmis >= min && birikmis <= max;
-                });
-                if (eslesen) {
-                    const min = eslesen.gddMin ?? 0;
-                    const max = eslesen.gddMax ?? (min + 250);
-                    const progress = Math.max(0, Math.min(1, (birikmis - min) / (max - min || 1)));
-                    const faktor = 0.65 + 0.35 * Math.sin(progress * Math.PI);
-                    return Math.round(eslesen.verim * faktor);
-                }
-                const g = secilen.gdd || {};
-                if (birikmis < (g.ciceklenmeBaslangic || 300)) return 18;
-                if (birikmis < (g.nektarZirve || 550)) return 55;
-                if (birikmis < (g.nektarBitis || 850)) return 82;
-                return 28;
-            },
 
             aktifBolgesiBul() {
                 const k = this.data.konum.toLocaleLowerCase('tr-TR');
@@ -965,10 +619,153 @@
                         }
                     }
                 }
-                return bolge;
+                if (enIyi) return bolge;
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+                for (const a of Object.keys(this.floraVeritabani || {})) {
+                    if (a === "varsayılan" || bolgeAdlari.has(a)) continue;
+                    if (k.includes(a)) {
+                        for (const b in this.bolgeHaritasi) {
+                            if ((this.bolgeHaritasi[b] || []).includes(a)) return b;
+                        }
+                    }
+                }
+                return "varsayılan";
             },
 
-            // ===================== NEKTAR SKOR =====================
+            async gddOraniniGetir(lat, lon) {
+                const cacheAnahtari = 'polinasyon_gdd_cache_v1';
+                const bugunStr = new Date().toISOString().split('T')[0];
+                try {
+                    const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
+                    if (onbellek && onbellek.tarih === bugunStr && Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
+                        return onbellek;
+                    }
+                } catch (e) {}
+
+                try {
+                    const bugun = new Date();
+                    const yilBaslangici = new Date(Date.UTC(bugun.getFullYear(), 0, 1));
+                    let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 5;
+                    if (gunSayisi < 1) gunSayisi = 1;
+                    const buYilBitis = new Date(yilBaslangici.getTime() + gunSayisi * 86400000);
+                    const buYilBaslangicStr = yilBaslangici.toISOString().split('T')[0];
+                    const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
+
+                    const gecenYilBaslangici = new Date(Date.UTC(bugun.getFullYear() - 1, 0, 1));
+                    const gecenYilBitis = new Date(gecenYilBaslangici.getTime() + gunSayisi * 86400000);
+                    const gecenYilBaslangicStr = gecenYilBaslangici.toISOString().split('T')[0];
+                    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0];
+
+                    const [buYilRes, gecenYilRes] = await Promise.all([
+                        fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
+                        fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${gecenYilBaslangicStr}&end_date=${gecenYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`)
+                    ]);
+                    const buYilData = await buYilRes.json();
+                    const gecenYilData = await gecenYilRes.json();
+
+                    const gddTopla = (d) => {
+                        if (!d || !d.daily || !d.daily.temperature_2m_max) return null;
+                        const mx = d.daily.temperature_2m_max, mn = d.daily.temperature_2m_min;
+                        let toplam = 0;
+                        for (let i = 0; i < mx.length; i++) {
+                            if (typeof mx[i] !== 'number' || typeof mn[i] !== 'number') continue;
+                            toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
+                        }
+                        return toplam;
+                    };
+
+                    const buYilGDD = gddTopla(buYilData);
+                    const gecenYilGDD = gddTopla(gecenYilData);
+
+                    let oran = 1;
+                    let veriVar = buYilGDD !== null && gecenYilGDD !== null;
+                    if (veriVar && gecenYilGDD > 5) {
+                        oran = Math.max(0.5, Math.min(1.5, buYilGDD / gecenYilGDD));
+                    } else {
+                        veriVar = false;
+                    }
+
+                    const sonuc = { tarih: bugunStr, lat, lon, oran, buYilGDD, gecenYilGDD, veriVar };
+                    localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc));
+                    return sonuc;
+                } catch (e) {
+                    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: null, gecenYilGDD: null, veriVar: false };
+                }
+            },
+
+            fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
+                if (!veriVar || typeof gddOran !== 'number') return hamFenoloji;
+                const carpan = 1 + (gddOran - 1) * 0.5;
+                return Math.max(5, Math.min(100, Math.round(hamFenoloji * carpan)));
+            },
+
+            veriKaydet() { localStorage.setItem('polinasyon_data_v4', JSON.stringify(this.data)); },
+            veriYukle() {
+                const kayitli = localStorage.getItem('polinasyon_data_v4') || localStorage.getItem('polinasyon_data_v2');
+                if (kayitli) { try { this.data = { ...this.data, ...JSON.parse(kayitli) }; } catch (e) {} }
+            },
+
+            sayfaDegistir(sayfaId) {
+                if (sayfaId === 'Kovanlar') this.kategoriGorunumuneDon();
+                ['AnaSayfa', 'Kovanlar', 'Saglik', 'Akademi'].forEach(s => {
+                    const el = document.getElementById('sayfa' + s);
+                    const nav = document.getElementById('nav' + s);
+                    if (s === sayfaId) {
+                        el?.classList.remove('hidden');
+                        nav?.classList.add('nav-btn-active');
+                        if (s === 'Akademi') this.rssYukle();
+                    } else {
+                        el?.classList.add('hidden');
+                        nav?.classList.remove('nav-btn-active');
+                    }
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            otomatikKonumBul() {
+                if (!navigator.geolocation) return alert("Konum desteklenmiyor.");
+                document.getElementById('havaLokasyon').textContent = "GPS Aranıyor...";
+                navigator.geolocation.getCurrentPosition(async (pos) => {
+                    try {
+                        const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&localityLanguage=tr`);
+                        const data = await res.json();
+                        await this.havaDurumunuYukle(pos.coords.latitude, pos.coords.longitude, data.city || data.locality || "Bulunan Konum");
+                    } catch (e) { await this.havaDurumunuYukle(pos.coords.latitude, pos.coords.longitude, "GPS Konum"); }
+                }, () => { alert("Konum alınamadı."); document.getElementById('havaLokasyon').textContent = this.data.konum; }, { enableHighAccuracy: true });
+            },
+
+            aktifFenolojiyiBul() {
+                const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+                const suAnkiAy = aylar[new Date().getMonth()];
+                const k = this.data.konum.toLocaleLowerCase('tr-TR');
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+
+                let secilenVeri = this.floraVeritabani["varsayılan"] || { timeline: [] };
+                let enIyi = "";
+
+                for (const ah of Object.keys(this.floraVeritabani || {})) {
+                    if (ah === "varsayılan" || bolgeAdlari.has(ah)) continue;
+                    if (k.includes(ah) && ah.length > enIyi.length) {
+                        enIyi = ah;
+                        secilenVeri = this.floraVeritabani[ah];
+                    }
+                }
+
+                if (!enIyi) {
+                    for (const b in this.bolgeHaritasi) {
+                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
+                            secilenVeri = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || { timeline: [] };
+                            break;
+                        }
+                    }
+                }
+
+                const ayV = (secilenVeri.timeline || []).find(t => t.ay === suAnkiAy);
+                if (ayV) return ayV.verim;
+                const ayIdx = new Date().getMonth();
+                return (ayIdx >= 4 && ayIdx <= 8) ? 50 : 15;
+            },
+
             uçuşEgrisi(sicaklik) {
                 if (sicaklik < 10) return 0;
                 if (sicaklik < 20) return (sicaklik - 10) / 10;
@@ -979,30 +776,50 @@
 
             nektar_flow_score(temp, humidity, wind, dew, past, pheno, precipitation = 0, cloudCover = 40) {
                 const ag = this.bolgeAgirliklari[this.aktifBolgesiBul()] || this.bolgeAgirliklari["varsayılan"];
+
                 const t = Math.max(0, Math.min(1, this.uçuşEgrisi(temp))) * 22 * ag.t;
-                let wOran = wind <= 10 ? 1 : (wind < 24 ? 1 - (wind - 10) / 14 : 0);
+
+                let wOran;
+                if (wind <= 10) wOran = 1;
+                else if (wind < 24) wOran = 1 - (wind - 10) / 14;
+                else wOran = 0;
                 const w = Math.max(0, Math.min(1, wOran)) * 12 * ag.w;
+
                 let hOran;
                 if (humidity >= 40 && humidity <= 70) hOran = 1;
                 else if (humidity < 40) hOran = humidity / 40;
                 else hOran = Math.max(0, 1 - (humidity - 70) / 30);
                 const h = Math.max(0, Math.min(1, hOran)) * 12 * ag.h;
+
                 const doygunlukAcigi = temp - dew;
-                const d = (doygunlukAcigi >= 2 ? 1 : Math.max(0, doygunlukAcigi / 2)) * 5 * ag.d;
+                const dOran = doygunlukAcigi >= 2 ? 1 : Math.max(0, doygunlukAcigi / 2);
+                const d = dOran * 5 * ag.d;
+
                 const p = Math.max(0, Math.min(1, this.uçuşEgrisi(past))) * 8 * ag.p;
-                const rain = (precipitation <= 0 ? 1 : Math.max(0, 1 - precipitation / 2)) * 8 * ag.rain;
-                const sun = Math.max(0, Math.min(1, 1 - (cloudCover / 100))) * 8 * ag.sun;
+
+                const rainOran = precipitation <= 0 ? 1 : Math.max(0, 1 - precipitation / 2);
+                const rain = rainOran * 8 * ag.rain;
+
+                const sunOran = Math.max(0, Math.min(1, 1 - (cloudCover / 100)));
+                const sun = sunOran * 8 * ag.sun;
+
                 const ph = (pheno / 100) * 25 * ag.ph;
+
                 return Math.round(Math.max(0, Math.min(100, t + w + h + d + p + rain + sun + ph)));
             },
 
             nektarAkimiHesaplaVeGuncelle() {
-                const hamFenoloji = this.aktifFenolojiyiBulGDD();
+                const hamFenoloji = this.aktifFenolojiyiBul();
                 const pheno = (this.data.duzeltilmisFenoloji != null) ? this.data.duzeltilmisFenoloji : hamFenoloji;
                 const skor = this.nektar_flow_score(
-                    this.data.temp, this.data.humidity, this.data.windSpeed,
-                    this.data.dewPoint, this.data.pastAvgTemp || 22, pheno,
-                    this.data.precipitation || 0, this.data.cloudCover ?? 40
+                    this.data.temp,
+                    this.data.humidity,
+                    this.data.windSpeed,
+                    this.data.dewPoint,
+                    this.data.pastAvgTemp || 22,
+                    pheno,
+                    this.data.precipitation || 0,
+                    this.data.cloudCover ?? 40
                 );
 
                 document.getElementById('nektarSkor').textContent = `%${skor}`;
@@ -1010,10 +827,10 @@
                 document.getElementById('uiGecmis').textContent = `${this.data.pastAvgTemp || 22}°C Ortalama`;
 
                 let fenolojiMetin = `%${pheno} Kapasite`;
-                if (this.data.birikmisGDD > 0) fenolojiMetin += ` • GDD ${this.data.birikmisGDD}`;
-                if (this.data.gddVeriVar && Math.abs(this.data.gddOran - 1) > 0.03) {
-                    const fark = Math.round((this.data.gddOran - 1) * 100);
-                    fenolojiMetin += ` (${fark > 0 ? '+' : ''}${fark}%)`;
+                if (this.data.gddVeriVar && this.data.gddOran !== 1) {
+                    const farkYuzde = Math.round((this.data.gddOran - 1) * 100);
+                    const isaret = farkYuzde > 0 ? '+' : '';
+                    fenolojiMetin += ` (GDD ${isaret}${farkYuzde}%)`;
                 }
                 document.getElementById('uiFenoloji').textContent = fenolojiMetin;
 
@@ -1021,64 +838,81 @@
                 const aciklama = document.getElementById('nektarAciklama');
                 const dinamikNot = document.getElementById('dinamikDuzeltmeNotu');
                 dinamikNot.classList.remove('hidden');
+                dinamikNot.style.display = 'flex';
 
                 if (skor >= 70) {
                     etiket.textContent = "GÜÇLÜ";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800";
-                    aciklama.textContent = `Aktif bitki fenolojisi (GDD destekli) ile birleşen uygun hava değerleri nektar salgısını maksimize ediyor.`;
+                    aciklama.textContent = `Aktif bitki fenolojisi ile birleşen kusursuz anlık hava değerleri nektar salgısını maksimuma çıkarıyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-emerald-700 bg-emerald-50 p-2 rounded-xl border border-emerald-200/60 flex flex-wrap items-center gap-1.5";
-                    dinamikNot.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 shrink-0"></i> <span>Optimum Turgor Bonusu: +${Math.round(skor / 3)}%</span>`;
+                    dinamikNot.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 shrink-0"></i> <span>Optimum Turgor Bonusu: Akım Potansiyeli +${Math.round(skor / 3)}%</span>`;
                 } else if (skor >= 40) {
                     etiket.textContent = "ORTA";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800";
                     aciklama.textContent = `Nektar akımı için makul şartlar mevcut. Fenolojik kapasite ve iklim trendi dengeli seyrediyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-amber-700 bg-amber-50 p-2 rounded-xl border border-amber-200/60 flex flex-wrap items-center gap-1.5";
-                    dinamikNot.innerHTML = `<i data-lucide="info" class="w-3.5 h-3.5 shrink-0"></i> <span>Hava Etkisi: Dengeli (Nötr)</span>`;
+                    dinamikNot.innerHTML = `<i data-lucide="info" class="w-3.5 h-3.5 shrink-0"></i> <span>Hava Etkisi: Akım Dengeli (Nötr)</span>`;
                 } else {
                     etiket.textContent = "ZAYIF";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-rose-100 text-rose-800";
-                    aciklama.textContent = `Fenolojik uyumsuzluk veya olumsuz hava koşulları nektar salgısını kısıtlıyor.`;
+                    aciklama.textContent = `Bitkilerin fenolojik uyumsuzluğu veya aşırı sıcak/soğuk rüzgarlar bitkide strese yol açarak nektarı kısıtlıyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-rose-700 bg-rose-50 p-2 rounded-xl border border-rose-200/60 flex flex-wrap items-center gap-1.5";
-                    dinamikNot.innerHTML = `<i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0"></i> <span>İklim Kısıtlaması: -${Math.round((100 - skor) / 2)}%</span>`;
+                    dinamikNot.innerHTML = `<i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0"></i> <span>İklim Kısıtlaması: Akım -${Math.round((100 - skor) / 2)}%</span>`;
                 }
-                if (window.lucide) lucide.createIcons();
+                if (window.lucide) window.lucide.createIcons();
             },
 
             timelineCiz() {
                 const container = document.getElementById('floraTimelineContainer');
                 if (!container) return;
-                const sec = this.seciliFloraKaydi();
-                const birikmis = this.data.birikmisGDD || 0;
+
+                const k = this.data.konum.toLocaleLowerCase('tr-TR');
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+
+                let sec = this.floraVeritabani["varsayılan"] || { flora: "Yükleniyor...", timeline: [] };
+                let enIyi = "";
+
+                for (const a of Object.keys(this.floraVeritabani || {})) {
+                    if (a === "varsayılan" || bolgeAdlari.has(a)) continue;
+                    if (k.includes(a) && a.length > enIyi.length) {
+                        enIyi = a;
+                        sec = this.floraVeritabani[a];
+                    }
+                }
+
+                if (!enIyi) {
+                    for (const b in this.bolgeHaritasi) {
+                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
+                            sec = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || sec;
+                            break;
+                        }
+                    }
+                }
+
                 const floraEtiket = document.getElementById('bolgeFloraHaritasi');
                 if (floraEtiket) {
-                    const varsayilanMi = (sec.flora || "").includes("Varsayılan") || (sec.flora || "").includes("Çeşitli") || (sec.flora || "").includes("Yükleniyor");
+                    const varsayilanMi = !enIyi && ((sec.flora || "").includes("Çeşitli") || (sec.flora || "").includes("Yükleniyor"));
                     floraEtiket.textContent = `Flora: ${varsayilanMi ? (this.data.konum + " ve Çevresi") : sec.flora}`;
                 }
+
+                const aylarIsim = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+                const mevcutAy = aylarIsim[new Date().getMonth()];
+
                 let html = '';
                 (sec.timeline || []).forEach(t => {
-                    const rS = t.tur === "polen" ? "bg-amber-50 border-amber-300 text-amber-900"
-                             : (t.tur === "kıtlık" ? "bg-slate-100 border-slate-300 text-slate-700" : "bg-emerald-50 border-emerald-300 text-emerald-900");
+                    const rS = t.tur === "polen"
+                        ? "bg-amber-50 border-amber-300 text-amber-900"
+                        : (t.tur === "kıtlık"
+                            ? "bg-slate-100 border-slate-300 text-slate-700"
+                            : "bg-emerald-50 border-emerald-300 text-emerald-900");
                     const bS = t.tur === "polen" ? "bg-amber-500" : (t.tur === "kıtlık" ? "bg-slate-400" : "bg-emerald-500");
-                    const min = t.gddMin ?? 0;
-                    const max = t.gddMax ?? 99999;
-                    const aktif = birikmis >= min && birikmis <= max;
-                    const vurgu = aktif ? "ring-2 ring-amber-500 shadow-md scale-[1.02]" : "";
-                    html += `
-                        <div class="p-3 rounded-xl border ${rS} ${vurgu} flex flex-col gap-1.5 shadow-2xs transition-all">
-                            <div class="flex justify-between items-center text-xs font-bold">
-                                <span>${t.ay} — ${t.bitki}</span>
-                                <span>%${t.verim}${aktif ? ' ← şimdi' : ''}</span>
-                            </div>
-                            <div class="w-full bg-white/70 h-2 rounded-full overflow-hidden">
-                                <div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div>
-                            </div>
-                            ${t.gddMin ? `<div class="text-[10px] text-slate-500">GDD ${t.gddMin} – ${t.gddMax || '∞'}</div>` : ''}
-                        </div>`;
+                    const vurgu = (t.ay && t.ay.toLowerCase().includes(mevcutAy.toLowerCase())) ? "ring-2 ring-amber-500 shadow-md" : "";
+                    html += `<div class="p-3 rounded-xl border ${rS} ${vurgu} flex flex-col gap-1.5 shadow-2xs"><div class="flex justify-between items-center text-xs font-bold"><span>${t.ay} — ${t.bitki}</span><span>%${t.verim}</span></div><div class="w-full bg-white/70 h-2 rounded-full overflow-hidden"><div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div></div></div>`;
                 });
+
                 container.innerHTML = html || `<p class="text-xs text-slate-400">Bu konum için takvim kaydı yok.</p>`;
             },
 
-            // ===================== HAVA =====================
             async havaDurumunuYukle(lat, lon, sehirAd) {
                 document.getElementById('havaLokasyon').textContent = sehirAd;
                 this.data.konum = sehirAd;
@@ -1091,42 +925,46 @@
                         { cache: 'no-cache' }
                     );
                     const data = await res.json();
-                    if (!data?.current || typeof data.current.temperature_2m !== 'number') throw new Error('API yanıtı hatalı');
-
+                    if (!data || !data.current || typeof data.current.temperature_2m !== 'number') {
+                        throw new Error('Beklenmeyen API yanıtı');
+                    }
                     this.data.temp = Math.round(data.current.temperature_2m);
                     this.data.humidity = Math.round(data.current.relative_humidity_2m);
                     this.data.dewPoint = Math.round(data.current.dew_point_2m);
                     this.data.windSpeed = Math.round(data.current.wind_speed_10m);
                     this.data.precipitation = typeof data.current.precipitation === 'number' ? data.current.precipitation : 0;
                     this.data.cloudCover = typeof data.current.cloud_cover === 'number' ? Math.round(data.current.cloud_cover) : 40;
-
-                    if (data.daily?.temperature_2m_mean) {
+                    if (data.daily && data.daily.temperature_2m_mean) {
                         const g = data.daily.temperature_2m_mean;
                         this.data.pastAvgTemp = Math.round((g[0] + g[1] + g[2]) / 3);
                     }
-
                     document.getElementById('havaSicaklik').textContent = `${this.data.temp}°C`;
                     document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
                     document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
                     document.getElementById('havaRuzgar').textContent = `${this.data.windSpeed} km/s`;
                     document.getElementById('havaYagis').textContent = `${this.data.precipitation} mm`;
                     document.getElementById('havaBulut').textContent = `%${this.data.cloudCover}`;
-
                     localStorage.setItem('polinasyon_last_weather', JSON.stringify({
-                        temp: this.data.temp, humidity: this.data.humidity, dewPoint: this.data.dewPoint,
-                        windSpeed: this.data.windSpeed, pastAvgTemp: this.data.pastAvgTemp,
-                        precipitation: this.data.precipitation, cloudCover: this.data.cloudCover
+                        temp: this.data.temp,
+                        humidity: this.data.humidity,
+                        dewPoint: this.data.dewPoint,
+                        windSpeed: this.data.windSpeed,
+                        pastAvgTemp: this.data.pastAvgTemp,
+                        precipitation: this.data.precipitation,
+                        cloudCover: this.data.cloudCover
                     }));
                 } catch (e) {
                     const sH = localStorage.getItem('polinasyon_last_weather');
                     if (sH) {
                         try {
                             const p = JSON.parse(sH);
-                            Object.assign(this.data, {
-                                temp: p.temp, humidity: p.humidity, dewPoint: p.dewPoint || 12,
-                                windSpeed: p.windSpeed, pastAvgTemp: p.pastAvgTemp || 22,
-                                precipitation: p.precipitation ?? 0, cloudCover: p.cloudCover ?? 40
-                            });
+                            this.data.temp = p.temp;
+                            this.data.humidity = p.humidity;
+                            this.data.dewPoint = p.dewPoint || 12;
+                            this.data.windSpeed = p.windSpeed;
+                            this.data.pastAvgTemp = p.pastAvgTemp || 22;
+                            this.data.precipitation = p.precipitation ?? 0;
+                            this.data.cloudCover = p.cloudCover ?? 40;
                             document.getElementById('havaSicaklik').textContent = `${this.data.temp}°C`;
                             document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
                             document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
@@ -1138,20 +976,15 @@
                 }
 
                 try {
-                    const flora = this.seciliFloraKaydi();
-                    const base = flora.baseTemp || this.GDD_BASE_TEMP;
-                    const gdd = await this.gddOraniniGetir(lat, lon, base);
+                    const gdd = await this.gddOraniniGetir(lat, lon);
                     this.data.gddOran = gdd.oran;
                     this.data.gddVeriVar = gdd.veriVar;
-                    this.data.birikmisGDD = gdd.buYilGDD || 0;
-                    const ham = this.aktifFenolojiyiBulGDD();
+                    const ham = this.aktifFenolojiyiBul();
                     this.data.duzeltilmisFenoloji = this.fenolojiyiGddIleDuzelt(ham, gdd.oran, gdd.veriVar);
                 } catch (err) {
-                    console.warn(err);
                     this.data.gddOran = 1;
                     this.data.gddVeriVar = false;
-                    this.data.birikmisGDD = 0;
-                    this.data.duzeltilmisFenoloji = this.aktifFenolojiyiBulGDD();
+                    this.data.duzeltilmisFenoloji = this.aktifFenolojiyiBul();
                 }
 
                 this.veriKaydet();
@@ -1159,12 +992,297 @@
                 this.timelineCiz();
             },
 
-            // ===================== YEDEKLEME =====================
-            veriKaydet() { localStorage.setItem('polinasyon_data_v4', JSON.stringify(this.data)); },
-            veriYukle() {
-                const kayitli = localStorage.getItem('polinasyon_data_v4') || localStorage.getItem('polinasyon_data_v2');
-                if (kayitli) {
-                    try { this.data = { ...this.data, ...JSON.parse(kayitli) }; } catch (e) {}
+            arayuzuGuncelle() {
+                const c = document.getElementById('kategoriListesiContainer');
+                let html = '';
+                this.data.kategoriler.forEach(kat => {
+                    html += `
+                        <div onclick="uygulama.kategoriSec(${kat.id})" class="soft-card p-4 cursor-pointer hover:border-amber-400 flex items-center justify-between group transition">
+                            <div class="flex items-center gap-3.5">
+                                <div class="w-11 h-11 rounded-2xl bg-amber-50 group-hover:bg-amber-500 group-hover:text-white text-amber-600 flex items-center justify-center transition shrink-0"><i data-lucide="folder-kanban" class="w-5 h-5"></i></div>
+                                <div><h3 class="font-bold text-slate-800 text-base">${kat.isim}</h3><p class="text-[11px] text-slate-500 mt-0.5">${kat.kovanlar.length} Kayıtlı Kovan</p></div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <button type="button" onclick="uygulama.kategoriSil(${kat.id}, event)" class="w-8 h-8 rounded-full bg-slate-100 border flex items-center justify-center text-slate-400 hover:text-rose-500 hover:bg-rose-50" title="Kategoriyi Sil"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i></button>
+                                <div class="w-8 h-8 rounded-full bg-slate-100 border flex items-center justify-center text-slate-400 group-hover:text-amber-600"><i data-lucide="chevron-right" class="w-4 h-4"></i></div>
+                            </div>
+                        </div>`;
+                });
+                c.innerHTML = html || `<p class="text-center py-8 text-slate-400 text-xs">Henüz kategori bulunmuyor.</p>`;
+                if (window.lucide) window.lucide.createIcons();
+            },
+
+            kategoriSec(id) {
+                this.aktifKategoriId = id;
+                const kat = this.data.kategoriler.find(k => k.id === id);
+                if (!kat) return;
+                document.getElementById('aktifKategoriBaslik').textContent = kat.isim;
+                document.getElementById('kategoriAnaGorunum').classList.add('hidden');
+                document.getElementById('kategoriDetayGorunum').classList.remove('hidden');
+                this.aktifKovanlariCiz(kat.kovanlar);
+            },
+
+            kategoriGorunumuneDon() {
+                this.aktifKategoriId = null;
+                document.getElementById('kategoriDetayGorunum').classList.add('hidden');
+                document.getElementById('kategoriAnaGorunum').classList.remove('hidden');
+                this.arayuzuGuncelle();
+            },
+
+            kategoriSil(id, event) {
+                if (event) event.stopPropagation();
+                if (!confirm('Bu kategori ve içindeki tüm kovanlar silinsin mi?')) return;
+                this.data.kategoriler = this.data.kategoriler.filter(k => k.id !== id);
+                if (this.aktifKategoriId === id) this.kategoriGorunumuneDon();
+                this.veriKaydet();
+                this.arayuzuGuncelle();
+            },
+
+            aktifKovanlariCiz(kovanlar) {
+                const c = document.getElementById('aktifKovanlarContainer');
+                let html = '';
+                kovanlar.forEach(k => {
+                    const sk = k.gecmisKontroller?.length ? k.gecmisKontroller[k.gecmisKontroller.length - 1] : null;
+                    html += `
+                        <div class="p-4 rounded-2xl border border-slate-200 bg-white flex items-center justify-between hover:border-amber-400 transition cursor-pointer shadow-2xs" onclick="uygulama.kovanDetayModaliniAc(${k.id})">
+                            <div class="flex-1 pr-3">
+                                <div class="flex items-center gap-2"><h4 class="font-bold text-sm text-slate-800">${k.isim}</h4><span class="text-[10px] bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-lg">Bal: ${sk ? sk.bal : 0} kg</span></div>
+                                <p class="text-xs text-slate-600 mt-1 line-clamp-1">${sk ? sk.not : 'Kayıt yok'}</p>
+                            </div>
+                            <button type="button" onclick="event.stopPropagation(); uygulama.kovanSil(${k.id})" class="text-slate-400 hover:text-rose-500 p-2 transition rounded-lg hover:bg-rose-50"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>`;
+                });
+                c.innerHTML = html || `<p class="text-center py-12 text-slate-400 text-xs">Kovan bulunmuyor.</p>`;
+                if (window.lucide) window.lucide.createIcons();
+            },
+
+            kovanDetayModaliniAc(kovanId) {
+                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
+                if (!kat) return;
+                const kovan = kat.kovanlar.find(k => k.id === kovanId);
+                if (!kovan) return;
+                this.aktifDuzenlenenKovanId = kovanId;
+                document.getElementById('editKovanId').value = kovan.id;
+                document.getElementById('detayIsim').value = kovan.isim || "";
+                document.getElementById('detayAnaAri').value = kovan.anaAri || "";
+                document.getElementById('yeniBal').value = "";
+                document.getElementById('yeniHastalik').value = "";
+                document.getElementById('yeniNot').value = "";
+                this.gecmisKontrolleriCiz(kovan.gecmisKontroller);
+                this.gelisimGrafigiCiz(kovan.gecmisKontroller);
+                document.getElementById('kovanDetayModal').classList.remove('hidden');
+                if (window.lucide) window.lucide.createIcons();
+            },
+
+            kovanDetayModaliniKapat() {
+                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
+                if (kat && this.aktifDuzenlenenKovanId) {
+                    const kovan = kat.kovanlar.find(k => k.id === this.aktifDuzenlenenKovanId);
+                    if (kovan) {
+                        kovan.isim = document.getElementById('detayIsim').value.trim() || kovan.isim;
+                        kovan.anaAri = document.getElementById('detayAnaAri').value.trim() || kovan.anaAri;
+                        this.veriKaydet();
+                    }
+                }
+                document.getElementById('kovanDetayModal').classList.add('hidden');
+                if (kat) this.aktifKovanlariCiz(kat.kovanlar);
+                this.arayuzuGuncelle();
+            },
+
+            yeniKontrolEkle() {
+                const isim = document.getElementById('detayIsim').value.trim();
+                const anaAri = document.getElementById('detayAnaAri').value.trim();
+                const balInput = document.getElementById('yeniBal').value;
+                const bal = balInput !== "" ? parseFloat(balInput) : null;
+                const hastalik = document.getElementById('yeniHastalik').value.trim() || "Yok";
+                const not = document.getElementById('yeniNot').value.trim() || "Kontrol gerçekleştirildi.";
+                const tarih = new Date().toISOString().split('T')[0];
+                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
+                if (!kat) return;
+                const kovan = kat.kovanlar.find(k => k.id === this.aktifDuzenlenenKovanId);
+                if (!kovan) return;
+                if (isim) kovan.isim = isim;
+                if (anaAri) kovan.anaAri = anaAri;
+                if (bal !== null) {
+                    if (!kovan.gecmisKontroller) kovan.gecmisKontroller = [];
+                    kovan.gecmisKontroller.push({ tarih, bal, hastalik, not });
+                }
+                document.getElementById('yeniBal').value = "";
+                document.getElementById('yeniHastalik').value = "";
+                document.getElementById('yeniNot').value = "";
+                this.veriKaydet();
+                this.gecmisKontrolleriCiz(kovan.gecmisKontroller);
+                this.gelisimGrafigiCiz(kovan.gecmisKontroller);
+            },
+
+            gecmisKontrolleriCiz(kontroller) {
+                const container = document.getElementById('gecmisKontrollerListesi');
+                if (!kontroller || kontroller.length === 0) {
+                    container.innerHTML = `<p class="text-center py-4 text-slate-400 text-xs">Henüz kontrol kaydı yok.</p>`;
+                    return;
+                }
+                let html = '';
+                [...kontroller].reverse().forEach((k, idx) => {
+                    const gercekIdx = kontroller.length - 1 - idx;
+                    let trendIkon = '<i data-lucide="minus" class="w-3.5 h-3.5 text-slate-400"></i>';
+                    if (gercekIdx > 0) {
+                        const onceki = kontroller[gercekIdx - 1].bal;
+                        if (k.bal > onceki) trendIkon = '<i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-500"></i>';
+                        else if (k.bal < onceki) trendIkon = '<i data-lucide="trending-down" class="w-3.5 h-3.5 text-rose-500"></i>';
+                    }
+                    html += `<div class="p-3 rounded-xl border border-slate-200 bg-white flex items-center justify-between text-xs shadow-2xs"><div><div class="flex items-center gap-2 font-bold text-slate-800"><span>${k.tarih}</span><span class="text-amber-600 bg-amber-50 px-2 py-0.5 rounded">${k.bal} kg</span><span class="text-slate-500 font-normal">(${k.hastalik})</span></div><p class="text-slate-600 mt-1">${k.not}</p></div><div class="flex items-center gap-2 shrink-0">${trendIkon}<button type="button" onclick="uygulama.kontrolSil(${gercekIdx})" class="text-slate-300 hover:text-rose-500 p-1"><i data-lucide="x" class="w-3.5 h-3.5"></i></button></div></div>`;
+                });
+                container.innerHTML = html;
+                if (window.lucide) window.lucide.createIcons();
+            },
+
+            kontrolSil(idx) {
+                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
+                if (!kat) return;
+                const kovan = kat.kovanlar.find(k => k.id === this.aktifDuzenlenenKovanId);
+                if (!kovan) return;
+                kovan.gecmisKontroller.splice(idx, 1);
+                this.veriKaydet();
+                this.gecmisKontrolleriCiz(kovan.gecmisKontroller);
+                this.gelisimGrafigiCiz(kovan.gecmisKontroller);
+            },
+
+            gelisimGrafigiCiz(kontroller) {
+                const container = document.getElementById('gelisimGrafigi');
+                if (!kontroller || kontroller.length === 0) {
+                    container.innerHTML = `<p class="text-center text-xs text-slate-400 w-full m-auto">Grafik için kayıtlı bal verisi yok.</p>`;
+                    return;
+                }
+                if (kontroller.length === 1) {
+                    container.innerHTML = `<div class="flex flex-col items-center justify-center h-full text-slate-400 text-xs"><i data-lucide="line-chart" class="w-6 h-6 mb-1 text-amber-500 opacity-80 animate-pulse"></i><span>Trend eğrisi için en az 2 kayıt gerekiyor (${kontroller[0].bal} kg)</span></div>`;
+                    if (window.lucide) window.lucide.createIcons();
+                    return;
+                }
+                const width = 300, height = 90, padding = 20;
+                const baller = kontroller.map(k => Number(k.bal) || 0);
+                const minBal = Math.min(...baller);
+                const maxBal = Math.max(...baller, minBal + 5);
+                const rangeBal = maxBal - minBal || 1;
+                const points = kontroller.map((k, i) => {
+                    const x = padding + (i / (kontroller.length - 1)) * (width - padding * 2);
+                    const y = height - padding - ((k.bal - minBal) / rangeBal) * (height - padding * 2);
+                    return { x, y, bal: k.bal, tarih: k.tarih.slice(5) };
+                });
+                let pathData = `M ${points[0].x} ${points[0].y}`;
+                for (let i = 0; i < points.length - 1; i++) {
+                    const p0 = points[i], p1 = points[i + 1], midX = (p0.x + p1.x) / 2;
+                    pathData += ` Q ${midX} ${p0.y}, ${midX} ${(p0.y + p1.y) / 2} T ${p1.x} ${p1.y}`;
+                }
+                let areaData = `${pathData} L ${width - padding} ${height - 10} L ${padding} ${height - 10} Z`;
+                let svgHtml = `<svg viewBox="0 0 ${width} ${height}" class="w-full h-24 overflow-visible"><defs><linearGradient id="glowGradient" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.35"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0.0"/></linearGradient></defs><line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" stroke="#334155" stroke-width="1" stroke-dasharray="3 3"/><path d="${areaData}" fill="url(#glowGradient)" /><path d="${pathData}" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>`;
+                points.forEach((p, idx) => {
+                    let renkSinifi = "#fbbf24";
+                    if (idx > 0) {
+                        if (p.bal > points[idx - 1].bal) renkSinifi = "#10b981";
+                        else if (p.bal < points[idx - 1].bal) renkSinifi = "#f43f5e";
+                    }
+                    svgHtml += `<g class="cursor-pointer group"><circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${renkSinifi}" stroke="#0f172a" stroke-width="2"/><text x="${p.x}" y="${p.y - 9}" fill="#e2e8f0" font-size="9" font-weight="bold" text-anchor="middle">${p.bal}kg</text><text x="${p.x}" y="${height - 2}" fill="#64748b" font-size="8" text-anchor="middle">${p.tarih}</text></g>`;
+                });
+                svgHtml += `</svg>`;
+                container.innerHTML = svgHtml;
+            },
+
+            kontrolGecmisiniSifirla() {
+                if (!confirm("Tüm geçmiş kontrol kayıtları sıfırlansın mı?")) return;
+                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
+                if (!kat) return;
+                const kovan = kat.kovanlar.find(k => k.id === this.aktifDuzenlenenKovanId);
+                if (!kovan) return;
+                kovan.gecmisKontroller = [];
+                this.veriKaydet();
+                this.gecmisKontrolleriCiz(kovan.gecmisKontroller);
+                this.gelisimGrafigiCiz(kovan.gecmisKontroller);
+            },
+
+            kovanSil(kovanId) {
+                if (!confirm("Bu kovanı tamamen silmek istediğinize emin misiniz?")) return;
+                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
+                if (kat) {
+                    kat.kovanlar = kat.kovanlar.filter(k => k.id !== kovanId);
+                    this.veriKaydet();
+                    this.aktifKovanlariCiz(kat.kovanlar);
+                    this.arayuzuGuncelle();
+                }
+            },
+
+            konumModaliniAc() {
+                document.getElementById('sehirInput').value = "";
+                document.getElementById('konumModal').classList.remove('hidden');
+                document.getElementById('sehirInput').focus();
+            },
+            konumModaliniKapat() { document.getElementById('konumModal').classList.add('hidden'); },
+
+            async sehirAraVeGuncelle() {
+                const aranan = document.getElementById('sehirInput').value.trim();
+                if (!aranan) return;
+                this.konumModaliniKapat();
+                try {
+                    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(aranan)}&count=1&language=tr&format=json`);
+                    const data = await res.json();
+                    if (data && data.results && data.results.length > 0) {
+                        const yer = data.results[0];
+                        await this.havaDurumunuYukle(yer.latitude, yer.longitude, yer.name);
+                    } else alert("Aranan konum bulunamadı.");
+                } catch (e) { alert("Arama hatası."); }
+            },
+
+            yeniKategoriModaliniAc() {
+                document.getElementById('kategoriIsimInput').value = "";
+                document.getElementById('kategoriModal').classList.remove('hidden');
+                document.getElementById('kategoriIsimInput').focus();
+            },
+            yeniKategoriModaliniKapat() { document.getElementById('kategoriModal').classList.add('hidden'); },
+
+            kategoriKaydet() {
+                const isim = document.getElementById('kategoriIsimInput').value.trim();
+                if (!isim) return;
+                this.data.kategoriler.push({ id: Date.now(), isim, kovanlar: [] });
+                this.veriKaydet();
+                this.yeniKategoriModaliniKapat();
+                this.arayuzuGuncelle();
+            },
+
+            aktifKategoriyeKovanEkleModaliniAc() {
+                const yeniId = Date.now();
+                const kat = this.data.kategoriler.find(k => k.id === this.aktifKategoriId);
+                if (!kat) return;
+                const yeniKovan = {
+                    id: yeniId,
+                    isim: "Kovan #" + (kat.kovanlar.length + 1),
+                    anaAri: new Date().getFullYear().toString(),
+                    gecmisKontroller: [{ tarih: new Date().toISOString().split('T')[0], bal: 0, hastalik: "Yok", not: "İlk kurulum kaydı." }]
+                };
+                kat.kovanlar.push(yeniKovan);
+                this.veriKaydet();
+                this.aktifKovanlariCiz(kat.kovanlar);
+                this.kovanDetayModaliniAc(yeniId);
+            },
+
+            async rssYukle() {
+                const container = document.getElementById('makaleListesiContainer');
+                container.innerHTML = `<p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>`;
+                try {
+                    const targetUrl = encodeURIComponent("https://www.polinasyon.org/atom.xml?redirect=false&start-index=1&max-results=50");
+                    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${targetUrl}`);
+                    const data = await res.json();
+                    if (data && data.items && data.items.length > 0) {
+                        let html = '';
+                        data.items.forEach(item => {
+                            const descClean = item.description ? item.description.replace(/<[^>]*>?/gm, '').substring(0, 200) : "Detay bulunmuyor.";
+                            const safeTitle = (item.title || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                            html += `<div class="rounded-2xl border border-slate-200 bg-white overflow-hidden mb-3"><div onclick="this.nextElementSibling.classList.toggle('active')" class="p-4 cursor-pointer flex justify-between items-center hover:bg-slate-50 transition"><h4 class="font-semibold text-sm text-slate-800">${safeTitle}</h4><span class="text-xs text-slate-400">▼</span></div><div class="accordion-panel px-4 pb-4 pt-2 border-t border-slate-100 text-xs text-slate-600"><p class="mb-3">${descClean}...</p><a href="${item.link}" target="_blank" rel="noopener noreferrer" class="text-amber-600 font-bold underline inline-block">Devamını Oku →</a></div></div>`;
+                        });
+                        container.innerHTML = html;
+                    } else {
+                        container.innerHTML = `<p class="text-center py-6 text-slate-400 text-xs">Şu anda gösterilecek yayın bulunamadı. <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 underline">Siteyi ziyaret et</a></p>`;
+                    }
+                } catch (e) {
+                    container.innerHTML = `<p class="text-center py-6 text-slate-400 text-xs">Yayınlar yüklenemedi. <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 underline">Siteyi ziyaret et</a></p>`;
                 }
             },
 
@@ -1173,17 +1291,35 @@
                     const json = JSON.stringify(this.data, null, 2);
                     const blob = new Blob([json], { type: 'application/json' });
                     const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url; a.download = dosyaAdi; a.style.display = 'none';
-                    document.body.appendChild(a); a.click();
-                    setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
-                } catch (e) { alert('Yedek oluşturulurken hata oluştu.'); }
+                    if (navigator.share && navigator.canShare) {
+                        const file = new File([blob], dosyaAdi, { type: 'application/json' });
+                        if (navigator.canShare({ files: [file] })) {
+                            navigator.share({ files: [file], title: 'Polinasyon Yedek', text: 'Kovan verileri yedeği' }).catch(() => this._indirmeYap(blob, dosyaAdi));
+                            return;
+                        }
+                    }
+                    this._indirmeYap(blob, dosyaAdi);
+                } catch (e) {
+                    console.error(e);
+                    alert('Yedek oluşturulurken hata oluştu.');
+                }
+            },
+
+            _indirmeYap(blob, dosyaAdi) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = dosyaAdi;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
             },
 
             verileriIceAktar() {
                 const input = document.createElement('input');
-                input.type = 'file'; input.accept = 'application/json,.json';
+                input.type = 'file';
+                input.accept = 'application/json,.json';
                 input.onchange = (e) => {
                     const file = e.target.files?.[0];
                     if (!file) return;
@@ -1193,12 +1329,30 @@
                             const parsed = JSON.parse(ev.target.result);
                             if (!parsed || typeof parsed !== 'object') throw new Error('Geçersiz');
                             if (!confirm('Mevcut verilerin üzerine yazılacak. Devam edilsin mi?')) return;
-                            this.data = { ...this.data, ...parsed };
+                            this.data = {
+                                konum: parsed.konum || this.data.konum,
+                                lat: parsed.lat ?? this.data.lat,
+                                lon: parsed.lon ?? this.data.lon,
+                                temp: parsed.temp ?? this.data.temp,
+                                humidity: parsed.humidity ?? this.data.humidity,
+                                dewPoint: parsed.dewPoint ?? this.data.dewPoint,
+                                windSpeed: parsed.windSpeed ?? this.data.windSpeed,
+                                pastAvgTemp: parsed.pastAvgTemp ?? this.data.pastAvgTemp,
+                                precipitation: parsed.precipitation ?? 0,
+                                cloudCover: parsed.cloudCover ?? 40,
+                                gddOran: parsed.gddOran ?? 1,
+                                gddVeriVar: parsed.gddVeriVar ?? false,
+                                duzeltilmisFenoloji: parsed.duzeltilmisFenoloji ?? null,
+                                kategoriler: Array.isArray(parsed.kategoriler) ? parsed.kategoriler : this.data.kategoriler
+                            };
                             this.veriKaydet();
                             this.arayuzuGuncelle();
+                            this.kategoriGorunumuneDon();
                             this.havaDurumunuYukle(this.data.lat, this.data.lon, this.data.konum);
                             alert('Yedek başarıyla yüklendi.');
-                        } catch (err) { alert('Dosya okunamadı.'); }
+                        } catch (err) {
+                            alert('Dosya okunamadı. Geçerli bir Polinasyon JSON yedeği seçin.');
+                        }
                     };
                     reader.readAsText(file);
                 };
@@ -1210,7 +1364,7 @@
             uygulama.veriYukle();
             uygulama.arayuzuGuncelle();
             uygulama.havaDurumunuYukle(uygulama.data.lat, uygulama.data.lon, uygulama.data.konum);
-            if (window.lucide) lucide.createIcons();
+            if (window.lucide) window.lucide.createIcons();
         };
     </script>
 </body>
