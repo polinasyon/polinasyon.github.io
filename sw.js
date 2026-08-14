@@ -1,4 +1,4 @@
-const CACHE_VERSION = 11; // Versiyonu güncelledik
+const CACHE_VERSION = 11; //
 const CACHE_NAME = `polinasyon-static-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `polinasyon-dynamic-v${CACHE_VERSION}`;
 
