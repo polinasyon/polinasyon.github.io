@@ -20,16 +20,15 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Tailwind Kurulumu ve Derleme
+      - name: Tailwind v4 Kurulumu ve Derleme
         run: |
-          npm init -y
           npm install -D tailwindcss @tailwindcss/cli
-          npx tailwindcss -i ./input.css -o ./style.css --minify
+          npx @tailwindcss/cli -i ./input.css -o ./style.css --minify
 
       - name: Derlenen CSS'i Kaydet ve Gönder
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add style.css
-          git commit -m "Tailwind otomatik derleme" || echo "Değişiklik yok"
+          git commit -m "Tailwind v4 otomatik derleme" || echo "Değişiklik yok"
           git push
