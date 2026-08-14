@@ -653,6 +653,7 @@ try {
 
 try {
     const buYil = yerelZaman.getFullYear();
+    const gddTabanSicaklik = this.GDD_BASE_TEMP || 10; // 'this' bağlamının kaybolma ihtimaline karşı güvenli fallback
     
     // Saatleri sıfırlayarak gün farkını milisaniye cinsinden net ve temiz hesaplıyoruz
     const bugunMilisaniye = new Date(yerelZaman.getFullYear(), yerelZaman.getMonth(), yerelZaman.getDate()).getTime();
@@ -666,10 +667,10 @@ try {
     const gecenYilBitis = new Date(buYil - 1, 0, 1 + gunSayisi);
 
     const buYilBaslangicStr = `${buYil}-01-01`;
-    const buYilBitisStr = buYilBitis.toISOString().split('T')[0]; // [0] indeksi eklendi, hata çözüldü
+    const buYilBitisStr = buYilBitis.toISOString().split('T')[0]; // [0] indeksi eklendi, dizi hatası düzeltildi
 
     const gecenYilBaslangicStr = `${buYil - 1}-01-01`;
-    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0]; // [0] indeksi eklendi, hata çözüldü
+    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0]; // [0] indeksi eklendi, dizi hatası düzeltildi
 
     const [buYilRes, gecenYilRes] = await Promise.all([
         fetch(`https://open-meteo.com{lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
@@ -685,7 +686,7 @@ try {
         let toplam = 0;
         for (let i = 0; i < mx.length; i++) {
             if (typeof mx[i] !== 'number' || typeof mn[i] !== 'number') continue;
-            toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
+            toplam += Math.max(0, (mx[i] + mn[i]) / 2 - gddTabanSicaklik);
         }
         return toplam;
     };
@@ -705,7 +706,8 @@ try {
     localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc));
     return sonuc;
 } catch (e) {
-    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: null, gecenYilGDD: null, veriVar: false };
+    // catch durumunda arayüzün beklememesi için mantıksal bir fallback nesnesi dönüyoruz
+    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: 0, gecenYilGDD: 0, veriVar: false };
 }
 
             fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
