@@ -1,1502 +1,1220 @@
-// === TÜBİTAK / TARIM ORMAN BAKANLIĞI / ARAŞTIRMA ENSTİTÜLERİ FLORA VERİTABANI ===
+// floraveritabani.js 
+
 window.FLORA_VERITABANI = {
-    "muğla": { 
-        flora: "Ege Çam Balı & Püren Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar / Çiçek", verim: 65, tur: "polen" },
-            { ay: "Nisan", bitki: "Narenciye / Erken Maki", verim: 75, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Narenciye / Hayıt", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Dağ Florası", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla / Kurak Dönem", verim: 50, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam Pamuklu Koşnili", verim: 95, tur: "nektar" }, 
-            { ay: "Eylül", bitki: "Çam Balı Zirve", verim: 98, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Püreni", verim: 70, tur: "nektar" }
-        ] 
-    },
-    "simav": { 
-        flora: "Ege Geçiş Bölgesi Kestane & Çam", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar Badem/Erik", verim: 60, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve Bahçeleri", verim: 75, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kekik / Orman Altı", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 75, tur: "nektar" },
-            { ay: "Eylül", bitki: "Kır Çiçekleri", verim: 50, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 30, tur: "kıtlık" }
-        ] 
-    },
-    "rize": { 
-        flora: "Karadeniz Kestane & Ormangülü (Anzer)", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Gelişim", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Çayır ve Düğünçiçeği", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Komar / Ormangülü", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kestane Çiçeği", verim: 95, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 90, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı Flora", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Çiçekleri", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Bakımı", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "hatay": { 
-        flora: "Akdeniz Maki & Defne / Keçiboynuzu", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Maki / Narenciye", verim: 70, tur: "nektar" },
-            { ay: "Nisan", bitki: "Narenciye / Erken Maki", verim: 85, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Defne & Maki Zirve", verim: 90, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Yaz Maki Florası", verim: 60, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık Stresi", verim: 25, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık Dönemi", verim: 20, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Keçiboynuzu / Sonbahar", verim: 70, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Yağmurları Maki", verim: 75, tur: "nektar" }
-        ] 
-    },
-    "erzurum": { 
-        flora: "Doğu Anadolu Yüksek Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kar Altında Kışlatma", verim: 10, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Karların Erimesi", verim: 30, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "Uyanma & İlk Polen", verim: 60, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga & Yonca", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 80, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar Geçişi", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "ağrı": { 
-        flora: "Doğu Anadolu Yüksek Yayla ve Çayır Florası (TAGEM)", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 10, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Çözülme", verim: 30, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "Erken Çayır Meraları", verim: 65, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga & Yayla Çiçekleri", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve Akımı", verim: 95, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 75, tur: "nektar" },
-            { ay: "Eylül", bitki: "Geç Dönem", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "kars": { 
-        flora: "Kars-Ardahan Yüksek Rakım Kafkas Çiçek Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 10, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi", verim: 30, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "Uyanma & İlk Polen", verim: 60, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kars Çiçek Balı Zirvesi", verim: 96, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Yayla Florası", verim: 70, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar Çayırları", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "ardahan": { 
-        flora: "Ardahan Yüksek Yayla & Kafkas Çiçek Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 10, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi", verim: 30, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "İlk Çayır Polenleri", verim: 55, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga & Yayla", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Alpin Çayırlar", verim: 70, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "artvin": { 
-        flora: "Doğu Karadeniz Kestane & Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar Gelişimi", verim: 45, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Çiçek", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 90, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Akımı", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Önlemi", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "van": { 
-        flora: "Van Gölü Havzası Yüksek Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 15, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 35, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "Erken Çayır", verim: 55, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga & Yonca", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Zirve Akımı", verim: 92, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 70, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "hakkari": { 
-        flora: "Hakkari Yüksek Dağ & Alpin Flora", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 10, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi", verim: 30, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "Dağ Uyanması", verim: 50, tur: "polen" },
-            { ay: "Haziran", bitki: "Dağ Çayırları", verim: 75, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Alpin Çiçekler", verim: 80, tur: "nektar" }, 
-            { ay: "Eylül", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "bingöl": { 
-        flora: "Bingöl Yayla & Korunga Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 15, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 40, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "İlk Polen & Çayır", verim: 60, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga & Yonca", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Zirve", verim: 93, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Yayla", verim: 65, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "muş": { 
-        flora: "Muş Ovası & Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 15, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Ova Çiçekleri", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır Polenleri", verim: 60, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga / Yonca", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Akımı", verim: 90, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 55, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "bitlis": { 
-        flora: "Bitlis Yüksek Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 15, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Çayır", verim: 35, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "Uyanma Polen", verim: 55, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga & Çayır", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Zirve", verim: 92, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 70, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "malatya": { 
-        flora: "Malatya Kayısı & Yayla Geçiş Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Badem/Kayısı", verim: 60, tur: "polen" },
-            { ay: "Nisan", bitki: "Kayısı / Meyve", verim: 80, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Bahar Çiçekleri", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Korunga", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar Desteği", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "elazığ": { 
-        flora: "Elazığ Fırat Havzası & Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Erken Bahar", verim: 70, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Çayır & Akasya", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Korunga / Yonca", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "tunceli": { 
-        flora: "Tunceli Dağ & Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Bahar Çiçekleri", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Dağ Çayırları", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga & Yayla", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 92, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Yayla", verim: 60, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "erzincan": { 
-        flora: "Erzincan Yayla & Ova Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar Polen", verim: 65, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Korunga / Yonca", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Akımı", verim: 90, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 50, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "sivas": { 
-        flora: "Sivas Bozkır & Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Akasya", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kekik / Yonca", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "kayseri": { 
-        flora: "Kayseri Erciyes & Bozkır Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "konya": { 
-        flora: "Konya Ovası Bozkır & Ayçiçeği", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Akasya", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 90, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "ankara": { 
-        flora: "Ankara Bozkır & Yayla Geçiş", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Akasya", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "eskişehir": { 
-        flora: "Eskişehir Geçiş Bölgesi Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Çayır", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "afyon": { 
-        flora: "Afyonkarahisar Yayla & Haşhaş Bölgesi", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Çayır", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Haşhaş / Otsu", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "kütahya": { 
-        flora: "Kütahya Orman & Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar / Meyve", verim: 55, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kekik / Orman", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 50, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Çiçekleri", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 25, tur: "kıtlık" }
-        ] 
-    },
-    "uşak": { 
-        flora: "Uşak Geçiş & Kekik Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Dağ Florası", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "denizli": { 
-        flora: "Denizli Maki, Kekik & Çam", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 60, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Maki", verim: 75, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 75, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam Balı Devamı", verim: 80, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Yağmurları", verim: 60, tur: "nektar" }
-        ] 
-    },
-    "aydın": { 
-        flora: "Aydın Zeytin, Hayıt & Maki", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 65, tur: "polen" },
-            { ay: "Nisan", bitki: "Narenciye / Erken", verim: 75, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 30, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Zeytinaltı / Sonbahar", verim: 65, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Püreni", verim: 70, tur: "nektar" }
-        ] 
-    },
-    "izmir": { 
-        flora: "İzmir Maki, Kekik & Çam Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 60, tur: "polen" },
-            { ay: "Nisan", bitki: "Narenciye / Bahar", verim: 75, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yaz Kuraklığı", verim: 40, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 70, tur: "nektar" }, 
-            { ay: "Eylül", bitki: "Çam Zirve / Püren", verim: 85, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Florası", verim: 65, tur: "nektar" }
-        ] 
-    },
-    "manisa": { 
-        flora: "Manisa Bağ, Kekik & Maki", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 60, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Hayıt / Kekik", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Dağ Florası", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 30, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar Geçişi", verim: 55, tur: "nektar" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 40, tur: "polen" }
-        ] 
-    },
-    "antalya": { 
-        flora: "Antalya Narenciye, Maki & Çam", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Narenciye", verim: 80, tur: "nektar" }, 
-            { ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Maki (Hayıt/Püren)", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Yaz Maki Florası", verim: 65, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 20, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 70, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam Balı / Keçiboynuzu", verim: 80, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Maki", verim: 75, tur: "nektar" }
-        ] 
-    },
-    "mersin": { 
-        flora: "Mersin Narenciye & Maki Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Narenciye", verim: 80, tur: "nektar" }, 
-            { ay: "Nisan", bitki: "Portakal Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Maki / Defne", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Yaz Maki", verim: 55, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 20, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Keçiboynuzu", verim: 70, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Akımı", verim: 75, tur: "nektar" }
-        ] 
-    },
-    "adana": { 
-        flora: "Adana Çukurova Narenciye & Tarım", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Narenciye", verim: 75, tur: "nektar" }, 
-            { ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Maki / Bahar", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Ova Tarım Bitkileri", verim: 50, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 15, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar Tarım", verim: 50, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 40, tur: "polen" }
-        ] 
-    },
-    "ısparta": { 
-        flora: "Isparta Gül, Kekik & Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Mayıs", bitki: "Gül / Bahar", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Dağ Florası", verim: 75, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "burdur": { 
-        flora: "Burdur Göl Havzası & Kekik", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Dağ Florası", verim: 75, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "trabzon": { 
-        flora: "Trabzon Kestane & Ormangülü", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Gelişim", verim: 45, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar / Çayır", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Akımı", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 25, tur: "kıtlık" }
-        ] 
-    },
-    "ordu": { 
-        flora: "Ordu Kestane & Fındık Altı Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Gelişim", verim: 45, tur: "polen" },
-            { ay: "Nisan", bitki: "Fındık Altı / Çiçek", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Ormangülü / Bahar", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Florası", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "giresun": { 
-        flora: "Giresun Kestane & Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Gelişim", verim: 45, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar Çiçekleri", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "samsun": { 
-        flora: "Samsun Karadeniz Kıyı & İç Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Çayır", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kestane / Ihlamur", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla / Otsu", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "kastamonu": { 
-        flora: "Kastamonu Orman, Kestane & Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 92, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 50, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "sinop": { 
-        flora: "Sinop Kıyı Orman & Kestane", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 92, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla / Orman", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "bolu": { 
-        flora: "Bolu Orman, Ihlamur & Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Ihlamur & Kestane", verim: 92, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 50, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "bursa": { 
-        flora: "Bursa İznik, Kestane & Ihlamur", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar / Erik", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 95, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla / Otsu", verim: 70, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Desteği", verim: 45, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 25, tur: "kıtlık" }
-        ] 
-    },
-    "balıkesir": { 
-        flora: "Balıkesir Kazdağı, Kekik & Çam", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Çayır", verim: 70, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Hayıt", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Orman / Yayla", verim: 75, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 70, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam Balı Devamı", verim: 75, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Florası", verim: 60, tur: "nektar" }
-        ] 
-    },
-    "çanakkale": { 
-        flora: "Çanakkale Kazdağı & Maki Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Çiçek", verim: 70, tur: "polen" },
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Orman Altı", verim: 70, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Çam / Geç", verim: 65, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar Püreni", verim: 70, tur: "nektar" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 40, tur: "polen" }
-        ] 
-    },
-    "tekirdağ": { 
-        flora: "Tekirdağ Trakya Ayçiçeği & Tarım", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Akasya", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Çayır / Yonca", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "edirne": { 
-        flora: "Edirne Trakya Ayçiçeği & Ova", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yonca / Çayır", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "kırklareli": { 
-        flora: "Kırklareli Istranca Orman & Ayçiçeği", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Ihlamur / Orman", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği Zirve", verim: 92, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "gaziantep": { 
-        flora: "Gaziantep Antepfıstığı & Maki", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Maki / Kekik", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Dağ Florası", verim: 70, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 25, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 15, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "şanlıurfa": { 
-        flora: "Şanlıurfa Bozkır & Tarım Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 70, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Çayır / Yonca", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 40, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 10, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 25, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "diyarbakır": { 
-        flora: "Diyarbakır Ova & Bozkır Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar Polen", verim: 70, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Yonca / Çayır", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 10, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 25, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "mardin": { 
-        flora: "Mardin Maki & Bozkır Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar / Maki", verim: 75, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Kekik / Çayır", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 10, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "kahramanmaraş": { 
-        flora: "Kahramanmaraş Maki, Defne & Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 60, tur: "polen" },
-            { ay: "Nisan", bitki: "Narenciye / Maki", verim: 80, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Defne & Maki", verim: 88, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Yayla / Kekik", verim: 75, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 25, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 20, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar Akımı", verim: 50, tur: "nektar" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 30, tur: "kıtlık" }
-        ] 
-    },
-    "osmaniye": { 
-        flora: "Osmaniye Maki & Narenciye", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 65, tur: "polen" },
-            { ay: "Nisan", bitki: "Narenciye", verim: 85, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Maki / Defne", verim: 88, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Dağ Florası", verim: 70, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 20, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 20, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar Maki", verim: 55, tur: "nektar" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 35, tur: "kıtlık" }
-        ] 
-    },
-    "istanbul": { 
-        flora: "İstanbul Kıyı, Akasya & Kent Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Erken Bahar / Meyve", verim: 70, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Ihlamur / Kent Yeşili", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 70, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Çiçekleri", verim: 45, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 25, tur: "kıtlık" }
-        ] 
-    },
-    "kocaeli": { 
-        flora: "Kocaeli Orman, Ihlamur & Sanayi Çevresi", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve Çiçekleri", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Akasya / Bahar", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Ihlamur & Kestane", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Orman / Otsu", verim: 75, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "sakarya": { 
-        flora: "Sakarya Ova, Fındık & Ihlamur", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Fındık", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Ihlamur / Kestane", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Otsu / Tarım", verim: 75, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "yalova": { 
-        flora: "Yalova Kıyı & Bahçe Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 75, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Ihlamur", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Otsu / Bahçe", verim: 65, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 45, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 25, tur: "kıtlık" }
-        ] 
-    },
-    "zonguldak": { 
-        flora: "Zonguldak Kıyı Orman & Kestane", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Orman", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 92, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla / Orman", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "tokat": { 
-        flora: "Tokat Geçiş, Yonca & Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yonca / Yayla", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Otsu / Kekik", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "amasya": { 
-        flora: "Amasya Elma, Yonca & Ova", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 80, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Çayır / Akasya", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Yonca / Otsu", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kurak Başlangıç", verim: 40, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "niğde": { 
-        flora: "Niğde Bozkır & Yayla Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "nevşehir": { 
-        flora: "Nevşehir Kapadokya Bozkır Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "aksaray": { 
-        flora: "Aksaray Bozkır & Tarım Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Bahar", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yonca / Yayla", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "karaman": { 
-        flora: "Karaman Bozkır & Kekik", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "ığdır": { 
-        flora: "Iğdır Ova & Erken Bahar Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Uyanma", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Erken Bahar / Meyve", verim: 75, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Çayır / Yonca", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Ova Akımı", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "batman": { 
-        flora: "Batman Ova & Bozkır Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 70, tur: "polen" }, 
-            { ay: "Mayıs", bitki: "Yonca / Çayır", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 10, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 25, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "siirt": { 
-        flora: "Siirt Dağ & Bozkır Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar / Maki", verim: 70, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Kekik / Çayır", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 10, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 25, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "adıyaman": { 
-        flora: "Adıyaman Ova & Maki Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar / Maki", verim: 75, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Kekik / Yonca", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 10, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "kilis": { 
-        flora: "Kilis Maki & Zeytin Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar / Maki", verim: 75, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Kekik / Zeytin Altı", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 15, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Zeytin Çiçeklenmesi", verim: 50, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Akımı", verim: 60, tur: "nektar" }
-        ] 
-    },
-    "şırnak": { 
-        flora: "Şırnak Dağ & Yüksek Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Dağ Çayırları", verim: 65, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yüksek Yayla", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "iç anadolu": { 
-        flora: "İç Anadolu Bozkır & Kekik/Ayçiçeği", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Akasya", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "ege": { 
-        flora: "Ege Maki, Kekik & Çam Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 60, tur: "polen" },
-            { ay: "Nisan", bitki: "Narenciye / Erken Maki", verim: 75, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kekik / Dağ Florası", verim: 85, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 80, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam Zirve & Püren", verim: 90, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Florası", verim: 70, tur: "nektar" }
-        ] 
-    },
-    "karadeniz": { 
-        flora: "Karadeniz Kestane & Orman Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar Çiçekleri", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Ormangülü / Komar", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ] 
-    },
-    "akdeniz": { 
-        flora: "Akdeniz Narenciye & Maki", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Narenciye", verim: 80, tur: "nektar" },
-            { ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Maki (Hayıt/Püren)", verim: 85, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Yaz Maki", verim: 60, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 20, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Keçiboynuzu / Çam", verim: 75, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Maki", verim: 75, tur: "nektar" }
-        ] 
-    },
-    "doğu anadolu": { 
-        flora: "Doğu Anadolu Yüksek Yayla", 
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 10, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi", verim: 30, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "Erken Çayır", verim: 55, tur: "polen" },
-            { ay: "Haziran", bitki: "Korunga / Yonca", verim: 80, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Yayla Zirve Akımı", verim: 95, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 75, tur: "nektar" }, 
-            { ay: "Eylül", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
-    },
-    "marmara": { 
-        flora: "Marmara Ihlamur, Kestane & Ayçiçeği", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Çayır", verim: 70, tur: "polen" },
-            { ay: "Mayıs", bitki: "Akasya / Bahar", verim: 75, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Ihlamur & Kestane", verim: 92, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 85, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 40, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar Desteği", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 25, tur: "kıtlık" }
-        ] 
-    },
-    "güneydoğu": { 
-        flora: "Güneydoğu Bozkır & Maki Florası", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Erken Bahar / Maki", verim: 75, tur: "nektar" }, 
-            { ay: "Mayıs", bitki: "Kekik / Çayır", verim: 80, tur: "nektar" }, 
-            { ay: "Haziran", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" }, 
-            { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 15, tur: "kıtlık" }, 
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 10, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 25, tur: "kıtlık" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ] 
 
-     },
-    "bilecik": {
-        flora: "Marmara–İç Anadolu Geçiş: Orman, Ihlamur & Bozkır",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar / Meyve", verim: 55, tur: "polen" },
-            { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 75, tur: "nektar" },
-            { ay: "Haziran", bitki: "Ihlamur / Orman", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yayla / Otsu", verim: 70, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Geçiş", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar Desteği", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "çankırı": {
-        flora: "İç Anadolu Bozkır & Ilgaz Geçiş Florası",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Akasya", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Kekik / Otsu", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ]
-    },
-    "çorum": {
-        flora: "Karadeniz–İç Anadolu Geçiş: Yonca & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Yonca / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Otsu / Kekik", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Başlangıç", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "yozgat": {
-        flora: "İç Anadolu Bozkır & Yayla Florası",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Çayır", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 28, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ]
-    },
-    "kırıkkale": {
-        flora: "İç Anadolu Bozkır & Kızılırmak Havzası",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Akasya", verim: 72, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Yonca", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 78, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 28, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 32, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 18, tur: "kıtlık" }
-        ]
-    },
-    "kırşehir": {
-        flora: "İç Anadolu Bozkır & Kapadokya Geçiş",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Kekik", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 25, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 30, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ]
-    },
-    "bartın": {
-        flora: "Batı Karadeniz Kıyı Orman & Kestane",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 52, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Orman", verim: 72, tur: "polen" },
-            { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 92, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yayla / Orman", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "karabük": {
-        flora: "Batı Karadeniz–İç Anadolu Geçiş: Orman & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 28, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar Polen", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Kestane / Ihlamur", verim: 90, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 82, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 48, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "düzce": {
-        flora: "Marmara–Karadeniz Geçiş: Fındık, Ihlamur & Orman",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 48, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Fındık Altı", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 78, tur: "nektar" },
-            { ay: "Haziran", bitki: "Ihlamur & Kestane", verim: 92, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Orman / Otsu", verim: 75, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 42, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 22, tur: "kıtlık" }
-        ]
-    },
-    "gümüşhane": {
-        flora: "Doğu Karadeniz–İç Geçiş: Yayla & Orman",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi / Erken", verim: 40, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 65, tur: "polen" },
-            { ay: "Haziran", bitki: "Kestane / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 92, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Geç Yayla", verim: 55, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 18, tur: "kıtlık" }
-        ]
-    },
-    "bayburt": {
-        flora: "Doğu Karadeniz–Doğu Anadolu Geçiş Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 12, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi", verim: 32, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "İlk Çayır Polen", verim: 58, tur: "polen" },
-            { ay: "Haziran", bitki: "Korunga / Yayla", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 93, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 70, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ]
-    },
+  // ====================== BÖLGE / İL BAZLI KAYITLAR ======================
 
-    // —— Geçiş iklimi ilçeleri (önemli arıcılık noktaları) ——
-    "kızılcahamam": {
-        flora: "Ankara Kuzey Geçiş: Yayla, Orman & Bozkır",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 22, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Orman Altı", verim: 72, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Kekik / Yayla", verim: 82, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Geçiş", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "nallıhan": {
-        flora: "Ankara–Bolu Geçiş: Orman & Bozkır",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 22, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 48, tur: "polen" },
-            { ay: "Mayıs", bitki: "Meyve / Çayır", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Ihlamur / Yayla", verim: 86, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Kekik / Otsu", verim: 78, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 32, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 18, tur: "kıtlık" }
-        ]
-    },
-    "beypazarı": {
-        flora: "Ankara Batı Geçiş: Bahçe, Çayır & Bozkır",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 35, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Akasya / Çayır", verim: 78, tur: "nektar" },
-            { ay: "Haziran", bitki: "Yayla / Yonca", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Otsu / Kekik", verim: 72, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "ilgaz": {
-        flora: "Kastamonu–Çankırı Geçiş: Yüksek Yayla & Orman",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 15, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi", verim: 35, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "İlk Çayır", verim: 60, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Orman", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 92, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Geç Yayla", verim: 60, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ]
-    },
-    "tosya": {
-        flora: "Kastamonu Güney Geçiş: Pirinç Ovası & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Ihlamur", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Otsu / Kekik", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Geçiş", verim: 38, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "merzifon": {
-        flora: "Amasya–Samsun Geçiş: Ova, Yonca & Bahçe",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 72, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Çayır / Akasya", verim: 80, tur: "nektar" },
-            { ay: "Haziran", bitki: "Yonca / Otsu", verim: 86, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Kurak Başlangıç", verim: 42, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 32, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "vezirköprü": {
-        flora: "Samsun İç Geçiş: Orman, Yayla & Ova",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 30, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 52, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Çayır", verim: 72, tur: "polen" },
-            { ay: "Haziran", bitki: "Kestane / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Otsu / Yayla", verim: 78, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Geç Dönem", verim: 42, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "şebinkarahisar": {
-        flora: "Giresun İç Geçiş: Yayla & Kestane",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar / Orman", verim: 68, tur: "polen" },
-            { ay: "Haziran", bitki: "Kestane / Yayla", verim: 90, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yüksek Yayla", verim: 88, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Geç Yayla", verim: 50, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 18, tur: "kıtlık" }
-        ]
-    },
-    "kelkit": {
-        flora: "Gümüşhane Güney Geçiş: Yüksek Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 15, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Kar Erimesi", verim: 35, tur: "kıtlık" },
-            { ay: "Mayıs", bitki: "İlk Çayır", verim: 58, tur: "polen" },
-            { ay: "Haziran", bitki: "Korunga / Yayla", verim: 86, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yayla Zirve", verim: 92, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Geç Yayla", verim: 65, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ]
-    },
-    "yusufeli": {
-        flora: "Artvin İç Geçiş: Vadi, Kestane & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar (vadi)", verim: 40, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Çiçek", verim: 65, tur: "polen" },
-            { ay: "Mayıs", bitki: "Ormangülü / Bahar", verim: 80, tur: "nektar" },
-            { ay: "Haziran", bitki: "Kestane Zirve", verim: 94, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 88, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "acıpayam": {
-        flora: "Denizli Güney Geçiş: Kekik, Maki & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Maki", verim: 72, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Hayıt / Kekik", verim: 85, tur: "nektar" },
-            { ay: "Haziran", bitki: "Dağ / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 38, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam / Geç", verim: 65, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar Püren", verim: 70, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Yağmur", verim: 55, tur: "nektar" }
-        ]
-    },
-    "tavas": {
-        flora: "Denizli–Muğla Geçiş: Kekik & Çam",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Maki / Meyve", verim: 70, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Hayıt / Kekik", verim: 84, tur: "nektar" },
-            { ay: "Haziran", bitki: "Dağ Florası", verim: 86, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 72, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam / Püren", verim: 78, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar", verim: 55, tur: "nektar" }
-        ]
-    },
-    "dinar": {
-        flora: "Afyon–Denizli Geçiş: Yayla & Kekik",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 52, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 72, tur: "polen" },
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Dağ / Otsu", verim: 78, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "sandıklı": {
-        flora: "Afyon Güney Geçiş: Yayla, Haşhaş & Kekik",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 22, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Haşhaş / Otsu", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 38, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "emirdağ": {
-        flora: "Afyon–Eskişehir Geçiş: Bozkır & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 48, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 32, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 18, tur: "kıtlık" }
-        ]
-    },
-    "seydişehir": {
-        flora: "Konya Güney Geçiş: Göller Yöresi & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 22, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Bahar", verim: 72, tur: "polen" },
-            { ay: "Haziran", bitki: "Kekik / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Dağ Florası", verim: 78, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 32, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 18, tur: "kıtlık" }
-        ]
-    },
-    "bozkır": {
-        flora: "Konya–Toros Geçiş: Yüksek Yayla & Kekik",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 18, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 45, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Yayla", verim: 68, tur: "polen" },
-            { ay: "Haziran", bitki: "Kekik / Adaçayı", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yüksek Yayla", verim: 85, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak / Geç", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 15, tur: "kıtlık" }
-        ]
-    },
-    "elmali": {
-        flora: "Antalya Toros Geçiş: Yayla, Elma & Maki",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar (yüksek)", verim: 40, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Bahar", verim: 70, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Maki / Yayla", verim: 82, tur: "nektar" },
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 86, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam / Geç", verim: 60, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 55, tur: "nektar" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 35, tur: "polen" }
-        ]
-    },
-    "kaş": {
-        flora: "Antalya Batı Geçiş: Maki, Kekik & Kıyı",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Maki / Narenciye", verim: 70, tur: "nektar" },
-            { ay: "Nisan", bitki: "Narenciye / Maki", verim: 88, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" },
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 78, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 28, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam / Kurak", verim: 55, tur: "nektar" },
-            { ay: "Eylül", bitki: "Keçiboynuzu / Püren", verim: 72, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Maki", verim: 70, tur: "nektar" }
-        ]
-    },
-    "fethiye": {
-        flora: "Muğla–Akdeniz Geçiş: Maki, Kekik & Çam",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar / Maki", verim: 65, tur: "nektar" },
-            { ay: "Nisan", bitki: "Narenciye / Erken", verim: 80, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 85, tur: "nektar" },
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 82, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Yaz Kuraklığı", verim: 40, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 85, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam Zirve", verim: 92, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar Püren", verim: 70, tur: "nektar" }
-        ]
-    },
-    "marmaris": {
-        flora: "Muğla Güneybatı: Maki, Çam & Kıyı",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Maki", verim: 62, tur: "polen" },
-            { ay: "Nisan", bitki: "Narenciye / Maki", verim: 78, tur: "nektar" },
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 84, tur: "nektar" },
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 80, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 38, tur: "kıtlık" },
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 88, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam Zirve", verim: 95, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar", verim: 68, tur: "nektar" }
-        ]
-    },
-    "edremit": {
-        flora: "Balıkesir–Kazdağı Geçiş: Kekik, Zeytin & Çam",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 55, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Çayır", verim: 72, tur: "polen" },
-            { ay: "Mayıs", bitki: "Hayıt / Kekik", verim: 85, tur: "nektar" },
-            { ay: "Haziran", bitki: "Kazdağı / Kekik", verim: 92, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Orman / Yayla", verim: 75, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Çam Salgısı", verim: 72, tur: "nektar" },
-            { ay: "Eylül", bitki: "Çam / Püren", verim: 78, tur: "nektar" },
-            { ay: "Ekim", bitki: "Sonbahar", verim: 55, tur: "nektar" }
-        ]
-    },
-    "ayvacık": {
-        flora: "Çanakkale–Kazdağı Geçiş: Maki & Kekik",
-        timeline: [
-            { ay: "Mart", bitki: "Erken Bahar", verim: 52, tur: "polen" },
-            { ay: "Nisan", bitki: "Meyve / Maki", verim: 70, tur: "polen" },
-            { ay: "Mayıs", bitki: "Hayıt / Püren", verim: 82, tur: "nektar" },
-            { ay: "Haziran", bitki: "Kekik / Dağ", verim: 90, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Orman Altı", verim: 70, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Çam / Geç", verim: 65, tur: "nektar" },
-            { ay: "Eylül", bitki: "Sonbahar Püren", verim: 72, tur: "nektar" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 40, tur: "polen" }
-        ]
-    },
-    "iskilip": {
-        flora: "Çorum Geçiş: Ova, Yonca & Yayla",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma Çıkışı", verim: 25, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 50, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 72, tur: "polen" },
-            { ay: "Haziran", bitki: "Yonca / Yayla", verim: 88, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Otsu / Kekik", verim: 78, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kurak Dönem", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 35, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 20, tur: "kıtlık" }
-        ]
-    },
-    "sungurlu": {
-        flora: "Çorum–Yozgat Geçiş: Bozkır & Yonca",
-        timeline: [
-            { ay: "Mart", bitki: "Kışlatma", verim: 20, tur: "kıtlık" },
-            { ay: "Nisan", bitki: "Erken Bahar", verim: 48, tur: "polen" },
-            { ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" },
-            { ay: "Haziran", bitki: "Yonca / Yayla", verim: 85, tur: "nektar" },
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu", verim: 80, tur: "nektar" },
-            { ay: "Ağustos", bitki: "Kuraklık", verim: 30, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar", verim: 32, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma", verim: 18, tur: "kıtlık" }
-        ]
+  // ---------- İÇ ANADOLU ----------
+  "iç anadolu": {
+    flora: "İç Anadolu Bozkır & Kekik / Ayçiçeği / Geven",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 520, nektarBitis: 780 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",      verim: 75, tur: "polen",  gddMin: 250, gddMax: 420 },
+      { ay: "Haziran", bitki: "Yayla / Adaçayı",     verim: 90, tur: "nektar", gddMin: 420, gddMax: 620 },
+      { ay: "Temmuz",  bitki: "Kekik / Ayçiçeği",    verim: 85, tur: "nektar", gddMin: 580, gddMax: 850 },
+      { ay: "Ağustos", bitki: "Kurak Dönem / Geven", verim: 30, tur: "kıtlık", gddMin: 800, gddMax: 1100 }
+    ]
+  },
+  "ankara": {
+    flora: "Bozkır – Kekik, Geven, Yonca, Ayçiçeği",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 530, nektarBitis: 800 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 70, tur: "polen",  gddMin: 240, gddMax: 410 },
+      { ay: "Haziran", bitki: "Yonca / Adaçayı",    verim: 85, tur: "nektar", gddMin: 410, gddMax: 600 },
+      { ay: "Temmuz",  bitki: "Kekik / Ayçiçeği",   verim: 80, tur: "nektar", gddMin: 580, gddMax: 820 },
+      { ay: "Ağustos", bitki: "Geven / Kuraklık",   verim: 35, tur: "kıtlık", gddMin: 780, gddMax: 1050 }
+    ]
+  },
+  "konya": {
+    flora: "Bozkır – Kekik, Geven, Ayçiçeği, Yonca",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 540, nektarBitis: 810 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 65, tur: "polen",  gddMin: 250, gddMax: 420 },
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 80, tur: "nektar", gddMin: 420, gddMax: 620 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği / Geven",   verim: 85, tur: "nektar", gddMin: 600, gddMax: 850 },
+      { ay: "Ağustos", bitki: "Kurak Dönem",        verim: 25, tur: "kıtlık", gddMin: 820, gddMax: 1100 }
+    ]
+  },
+  "kayseri": {
+    flora: "Yüksek Bozkır – Kekik, Geven, Yayla Çiçekleri",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 560, nektarBitis: 850 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 70, tur: "polen",  gddMin: 260, gddMax: 430 },
+      { ay: "Haziran", bitki: "Yayla / Kekik",      verim: 90, tur: "nektar", gddMin: 430, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Otsu",       verim: 85, tur: "nektar", gddMin: 620, gddMax: 880 },
+      { ay: "Ağustos", bitki: "Kuraklık",           verim: 30, tur: "kıtlık", gddMin: 850, gddMax: 1150 }
+    ]
+  },
+  "sivas": {
+    flora: "Yüksek Yayla – Kekik, Geven, Çiçek Balı",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 580, nektarBitis: 880 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla Çiçekleri",    verim: 90, tur: "nektar", gddMin: 400, gddMax: 620 },
+      { ay: "Temmuz",  bitki: "Kekik / Geven",      verim: 95, tur: "nektar", gddMin: 580, gddMax: 850 },
+      { ay: "Ağustos", bitki: "Geven / Otsu",       verim: 70, tur: "nektar", gddMin: 800, gddMax: 1050 }
+    ]
+  },
+  "eskişehir": {
+    flora: "Geçiş Bozkır – Kekik, Yonca, Akasya",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 530, nektarBitis: 800 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 240, gddMax: 410 },
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 85, tur: "nektar", gddMin: 410, gddMax: 610 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği / Geven",   verim: 80, tur: "nektar", gddMin: 580, gddMax: 830 }
+    ]
+  },
+  "nevşehir": {
+    flora: "Kapadokya Bozkır – Kekik, Geven, Yonca",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 540, nektarBitis: 810 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 70, tur: "polen",  gddMin: 250, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kekik / Yonca",      verim: 85, tur: "nektar", gddMin: 420, gddMax: 620 },
+      { ay: "Temmuz",  bitki: "Geven / Ayçiçeği",   verim: 80, tur: "nektar", gddMin: 600, gddMax: 850 }
+    ]
+  },
+  "niğde": {
+    flora: "Yüksek Bozkır – Kekik, Geven, Yayla",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 560, nektarBitis: 850 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Kekik",      verim: 90, tur: "nektar", gddMin: 430, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Otsu",       verim: 85, tur: "nektar", gddMin: 620, gddMax: 880 }
+    ]
+  },
+  "aksaray": {
+    flora: "Bozkır – Ayçiçeği, Kekik, Geven",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 540, nektarBitis: 810 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 80, tur: "nektar", gddMin: 420, gddMax: 620 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği / Geven",   verim: 85, tur: "nektar", gddMin: 600, gddMax: 850 }
+    ]
+  },
+  "karaman": {
+    flora: "Bozkır – Kekik, Geven, Ayçiçeği",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 540, nektarBitis: 810 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Yonca",      verim: 85, tur: "nektar", gddMin: 420, gddMax: 620 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği / Geven",   verim: 80, tur: "nektar", gddMin: 600, gddMax: 850 }
+    ]
+  },
+  "kırıkkale": {
+    flora: "Bozkır – Kekik, Yonca, Akasya",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 530, nektarBitis: 800 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 70, tur: "polen",  gddMin: 240, gddMax: 410 },
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 85, tur: "nektar", gddMin: 410, gddMax: 610 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği",           verim: 80, tur: "nektar", gddMin: 580, gddMax: 830 }
+    ]
+  },
+  "kırşehir": {
+    flora: "Bozkır – Kekik, Geven, Yonca",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 540, nektarBitis: 810 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Yonca",      verim: 85, tur: "nektar", gddMin: 420, gddMax: 620 },
+      { ay: "Temmuz",  bitki: "Geven / Ayçiçeği",   verim: 80, tur: "nektar", gddMin: 600, gddMax: 850 }
+    ]
+  },
+  "çankırı": {
+    flora: "Geçiş – Kekik, Yonca, Orman Altı",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 550, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 250, gddMax: 420 },
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 85, tur: "nektar", gddMin: 420, gddMax: 630 },
+      { ay: "Temmuz",  bitki: "Geven / Otsu",       verim: 80, tur: "nektar", gddMin: 600, gddMax: 860 }
+    ]
+  },
+  "yozgat": {
+    flora: "Yüksek Bozkır – Kekik, Geven, Yayla",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 560, nektarBitis: 850 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Kekik",      verim: 90, tur: "nektar", gddMin: 430, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Ayçiçeği",   verim: 85, tur: "nektar", gddMin: 620, gddMax: 880 }
+    ]
+  },
 
+  // ---------- EGE ----------
+  "muğla": {
+    flora: "Ege Çam Balı & Püren / Kekik Florası",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 680, nektarBitis: 1050 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Narenciye / Hayıt",  verim: 80, tur: "nektar", gddMin: 280, gddMax: 480 },
+      { ay: "Haziran", bitki: "Kekik / Dağ Florası",verim: 85, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Ağustos", bitki: "Çam Pamuklu Koşnili",verim: 95, tur: "nektar", gddMin: 780, gddMax: 1100 },
+      { ay: "Eylül",   bitki: "Çam Balı Zirve",     verim: 98, tur: "nektar", gddMin: 950, gddMax: 1300 }
+    ]
+  },
+  "aydın": {
+    flora: "Ege – Çam, Narenciye, Kekik, Hayıt",
+    baseTemp: 11,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 650, nektarBitis: 1000 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Narenciye",          verim: 85, tur: "nektar", gddMin: 250, gddMax: 420 },
+      { ay: "Mayıs",   bitki: "Hayıt / Kekik",      verim: 80, tur: "nektar", gddMin: 400, gddMax: 600 },
+      { ay: "Ağustos", bitki: "Çam Salgısı",        verim: 90, tur: "nektar", gddMin: 750, gddMax: 1050 }
+    ]
+  },
+  "izmir": {
+    flora: "Ege – Çam, Kekik, Narenciye, Zeytin",
+    baseTemp: 11,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 640, nektarBitis: 980 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Narenciye / Defne",  verim: 80, tur: "nektar", gddMin: 250, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kekik / Dağ",        verim: 85, tur: "nektar", gddMin: 450, gddMax: 680 },
+      { ay: "Ağustos", bitki: "Çam Salgısı",        verim: 90, tur: "nektar", gddMin: 750, gddMax: 1050 }
+    ]
+  },
+  "manisa": {
+    flora: "Ege Geçiş – Kekik, Üzüm, Çam, Yonca",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 620, nektarBitis: 950 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 75, tur: "polen",  gddMin: 260, gddMax: 450 },
+      { ay: "Haziran", bitki: "Kekik / Yonca",      verim: 85, tur: "nektar", gddMin: 450, gddMax: 680 },
+      { ay: "Ağustos", bitki: "Çam / Kurak",        verim: 70, tur: "nektar", gddMin: 750, gddMax: 1000 }
+    ]
+  },
+  "denizli": {
+    flora: "Ege Geçiş – Kekik, Çam, Pamuk, Yayla",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 630, nektarBitis: 960 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Hayıt",      verim: 75, tur: "nektar", gddMin: 260, gddMax: 450 },
+      { ay: "Haziran", bitki: "Kekik / Dağ",        verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Pamuk / Otsu",       verim: 70, tur: "nektar", gddMin: 650, gddMax: 900 }
+    ]
+  },
+  "uşak": {
+    flora: "Ege-İç Anadolu Geçiş – Kekik, Yonca, Geven",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 70, tur: "polen",  gddMin: 250, gddMax: 430 },
+      { ay: "Haziran", bitki: "Kekik / Yonca",      verim: 90, tur: "nektar", gddMin: 430, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Otsu",       verim: 80, tur: "nektar", gddMin: 600, gddMax: 880 }
+    ]
+  },
+  "afyonkarahisar": {
+    flora: "Ege-İç Anadolu Geçiş – Kekik, Geven, Yayla",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 570, nektarBitis: 890 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Yayla",      verim: 90, tur: "nektar", gddMin: 420, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Otsu",       verim: 85, tur: "nektar", gddMin: 600, gddMax: 880 }
+    ]
+  },
+  "kütahya": {
+    flora: "Ege-İç Anadolu Geçiş – Kestane, Kekik, Çam",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 920 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Çayır / Meyve",      verim: 70, tur: "polen",  gddMin: 230, gddMax: 410 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Kekik / Orman Altı", verim: 85, tur: "nektar", gddMin: 580, gddMax: 820 }
+    ]
+  },
+
+  // ---------- AKDENİZ ----------
+  "antalya": {
+    flora: "Akdeniz – Narenciye, Kekik, Çam, Püren",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 250, nektarZirve: 550, nektarBitis: 950 },
+    timeline: [
+      { ay: "Mart",    bitki: "Narenciye",          verim: 90, tur: "nektar", gddMin: 200, gddMax: 380 },
+      { ay: "Mayıs",   bitki: "Kekik / Hayıt",      verim: 85, tur: "nektar", gddMin: 400, gddMax: 600 },
+      { ay: "Haziran", bitki: "Püren / Dağ",        verim: 80, tur: "nektar", gddMin: 550, gddMax: 780 },
+      { ay: "Ağustos", bitki: "Çam Salgısı",        verim: 75, tur: "nektar", gddMin: 800, gddMax: 1100 }
+    ]
+  },
+  "mersin": {
+    flora: "Akdeniz – Narenciye, Kekik, Çam, Sedir",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 250, nektarZirve: 560, nektarBitis: 960 },
+    timeline: [
+      { ay: "Mart",    bitki: "Narenciye",          verim: 90, tur: "nektar", gddMin: 200, gddMax: 380 },
+      { ay: "Mayıs",   bitki: "Kekik / Geven",      verim: 85, tur: "nektar", gddMin: 400, gddMax: 620 },
+      { ay: "Haziran", bitki: "Sedir / Püren",      verim: 80, tur: "nektar", gddMin: 550, gddMax: 800 }
+    ]
+  },
+  "adana": {
+    flora: "Çukurova – Narenciye, Ayçiçeği, Pamuk, Kekik",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 240, nektarZirve: 540, nektarBitis: 920 },
+    timeline: [
+      { ay: "Mart",    bitki: "Narenciye",          verim: 95, tur: "nektar", gddMin: 180, gddMax: 360 },
+      { ay: "Mayıs",   bitki: "Ayçiçeği / Akasya",  verim: 85, tur: "nektar", gddMin: 400, gddMax: 600 },
+      { ay: "Haziran", bitki: "Pamuk / Kekik",      verim: 75, tur: "nektar", gddMin: 550, gddMax: 780 }
+    ]
+  },
+  "hatay": {
+    flora: "Akdeniz – Narenciye, Kekik, Zeytin, Defne",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 240, nektarZirve: 550, nektarBitis: 930 },
+    timeline: [
+      { ay: "Mart",    bitki: "Narenciye / Defne",  verim: 90, tur: "nektar", gddMin: 180, gddMax: 360 },
+      { ay: "Mayıs",   bitki: "Kekik / Hayıt",      verim: 85, tur: "nektar", gddMin: 400, gddMax: 620 },
+      { ay: "Haziran", bitki: "Dağ Florası",        verim: 80, tur: "nektar", gddMin: 550, gddMax: 800 }
+    ]
+  },
+  "osmaniye": {
+    flora: "Akdeniz Geçiş – Narenciye, Kekik, Çam",
+    baseTemp: 11,
+    gdd: { ciceklenmeBaslangic: 260, nektarZirve: 560, nektarBitis: 940 },
+    timeline: [
+      { ay: "Mart",    bitki: "Narenciye",          verim: 85, tur: "nektar", gddMin: 200, gddMax: 380 },
+      { ay: "Mayıs",   bitki: "Kekik / Geven",      verim: 85, tur: "nektar", gddMin: 400, gddMax: 620 },
+      { ay: "Haziran", bitki: "Çam / Dağ",          verim: 75, tur: "nektar", gddMin: 550, gddMax: 800 }
+    ]
+  },
+  "kahramanmaraş": {
+    flora: "Akdeniz-Doğu Geçiş – Kekik, Geven, Sedir",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 580, nektarBitis: 920 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Kekik",      verim: 80, tur: "nektar", gddMin: 250, gddMax: 450 },
+      { ay: "Haziran", bitki: "Geven / Sedir",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Yayla Çiçekleri",    verim: 85, tur: "nektar", gddMin: 650, gddMax: 900 }
+    ]
+  },
+  "isparta": {
+    flora: "Göller Yöresi – Kekik, Gül, Sedir, Yayla",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 570, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Gül / Meyve",        verim: 75, tur: "nektar", gddMin: 250, gddMax: 450 },
+      { ay: "Haziran", bitki: "Kekik / Sedir",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Yayla / Geven",      verim: 85, tur: "nektar", gddMin: 650, gddMax: 900 }
+    ]
+  },
+  "burdur": {
+    flora: "Göller Yöresi – Kekik, Geven, Sedir",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 570, nektarBitis: 900 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Geven",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Yayla / Sedir",      verim: 85, tur: "nektar", gddMin: 650, gddMax: 900 }
+    ]
+  },
+
+  // ---------- KARADENİZ ----------
+  "ordu": {
+    flora: "Karadeniz – Kestane, Fındık, Yayla Çiçekleri",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 850 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Meyve",     verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 95, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Yayla Çiçekleri",    verim: 90, tur: "nektar", gddMin: 600, gddMax: 850 }
+    ]
+  },
+  "giresun": {
+    flora: "Karadeniz – Kestane, Fındık, Yayla",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 850 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Akasya",    verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane",            verim: 95, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Yayla / Otsu",       verim: 90, tur: "nektar", gddMin: 600, gddMax: 850 }
+    ]
+  },
+  "trabzon": {
+    flora: "Karadeniz – Kestane, Ihlamur, Yayla",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 860 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Fındık",    verim: 70, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 95, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Yayla Çiçekleri",    verim: 90, tur: "nektar", gddMin: 600, gddMax: 860 }
+    ]
+  },
+  "rize": {
+    flora: "Doğu Karadeniz – Anzer, Kestane, Yayla, Rhododendron",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Akasya",    verim: 70, tur: "polen",  gddMin: 230, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Anzer / Yayla",      verim: 98, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "artvin": {
+    flora: "Doğu Karadeniz – Kestane, Yayla, Endemik Çiçekler",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Akasya",    verim: 75, tur: "polen",  gddMin: 230, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kestane",            verim: 95, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Yayla / Endemik",    verim: 98, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "samsun": {
+    flora: "Orta Karadeniz – Kestane, Fındık, Ayçiçeği",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Akasya",    verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği / Yayla",   verim: 85, tur: "nektar", gddMin: 580, gddMax: 850 }
+    ]
+  },
+  "sinop": {
+    flora: "Karadeniz – Kestane, Fındık, Orman",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Akasya",    verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane",            verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 },
+      { ay: "Temmuz",  bitki: "Yayla / Otsu",       verim: 85, tur: "nektar", gddMin: 580, gddMax: 850 }
+    ]
+  },
+  "kastamonu": {
+    flora: "Batı Karadeniz – Kestane, Ihlamur, Çam",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 540, nektarBitis: 840 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Fındık",    verim: 70, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 95, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Yayla / Kekik",      verim: 85, tur: "nektar", gddMin: 600, gddMax: 860 }
+    ]
+  },
+  "zonguldak": {
+    flora: "Batı Karadeniz – Kestane, Ihlamur, Orman",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Fındık",    verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 },
+      { ay: "Temmuz",  bitki: "Yayla",              verim: 80, tur: "nektar", gddMin: 580, gddMax: 840 }
+    ]
+  },
+  "bolu": {
+    flora: "Batı Karadeniz Geçiş – Kestane, Ihlamur, Yayla",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 540, nektarBitis: 840 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 95, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Yayla / Kekik",      verim: 85, tur: "nektar", gddMin: 600, gddMax: 860 }
+    ]
+  },
+  "düzce": {
+    flora: "Batı Karadeniz – Kestane, Fındık, Ihlamur",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Akasya",    verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 }
+    ]
+  },
+  "bartın": {
+    flora: "Batı Karadeniz – Kestane, Ihlamur, Orman",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Fındık",    verim: 70, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 }
+    ]
+  },
+  "karabük": {
+    flora: "Batı Karadeniz Geçiş – Kestane, Ihlamur, Çam",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 540, nektarBitis: 840 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 70, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 650 }
+    ]
+  },
+  "gümüşhane": {
+    flora: "Doğu Karadeniz İç – Yayla, Kekik, Geven",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 920 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Kekik",      verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven / Endemik",    verim: 95, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "bayburt": {
+    flora: "Doğu Karadeniz-İç Geçiş – Yayla, Geven",
+    baseTemp: 6,
+    gdd: { ciceklenmeBaslangic: 330, nektarZirve: 620, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla Çiçekleri",    verim: 90, tur: "nektar", gddMin: 430, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 680, gddMax: 950 }
+    ]
+  },
+  "tokat": {
+    flora: "Orta Karadeniz Geçiş – Kestane, Kekik, Yonca",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 540, nektarBitis: 840 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 230, gddMax: 410 },
+      { ay: "Haziran", bitki: "Kestane / Yonca",    verim: 90, tur: "nektar", gddMin: 410, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Kekik / Yayla",      verim: 85, tur: "nektar", gddMin: 600, gddMax: 860 }
+    ]
+  },
+  "amasya": {
+    flora: "Orta Karadeniz Geçiş – Elma, Kestane, Kekik",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 540, nektarBitis: 840 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Elma / Akasya",      verim: 80, tur: "polen",  gddMin: 230, gddMax: 410 },
+      { ay: "Haziran", bitki: "Kestane / Yonca",    verim: 90, tur: "nektar", gddMin: 410, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Kekik",              verim: 80, tur: "nektar", gddMin: 600, gddMax: 860 }
+    ]
+  },
+  "çorum": {
+    flora: "Karadeniz-İç Anadolu Geçiş – Kekik, Yonca, Geven",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 550, nektarBitis: 850 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 70, tur: "polen",  gddMin: 240, gddMax: 420 },
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 85, tur: "nektar", gddMin: 420, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Ayçiçeği",   verim: 80, tur: "nektar", gddMin: 600, gddMax: 870 }
+    ]
+  },
+
+  // ---------- MARMARA ----------
+  "bursa": {
+    flora: "Marmara – Kestane, Ihlamur, Uludağ Yaylası",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 540, nektarBitis: 850 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 80, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 95, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Uludağ Yayla",       verim: 90, tur: "nektar", gddMin: 600, gddMax: 870 }
+    ]
+  },
+  "balıkesir": {
+    flora: "Marmara-Ege Geçiş – Kestane, Çam, Kekik",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 560, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 230, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kestane / Kekik",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Ağustos", bitki: "Çam Salgısı",        verim: 80, tur: "nektar", gddMin: 750, gddMax: 1050 }
+    ]
+  },
+  "çanakkale": {
+    flora: "Marmara-Ege – Çam, Kekik, Zeytin, Kestane",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 560, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Zeytin",    verim: 75, tur: "nektar", gddMin: 230, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kekik / Kestane",    verim: 85, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Ağustos", bitki: "Çam Salgısı",        verim: 80, tur: "nektar", gddMin: 750, gddMax: 1050 }
+    ]
+  },
+  "tekirdağ": {
+    flora: "Trakya – Ayçiçeği, Yonca, Akasya",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Yonca / Ayçiçeği",   verim: 90, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği Zirve",     verim: 95, tur: "nektar", gddMin: 580, gddMax: 850 }
+    ]
+  },
+  "edirne": {
+    flora: "Trakya – Ayçiçeği, Yonca, Akasya",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya",             verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Yonca / Ayçiçeği",   verim: 90, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği",           verim: 95, tur: "nektar", gddMin: 580, gddMax: 850 }
+    ]
+  },
+  "kırklareli": {
+    flora: "Trakya – Ayçiçeği, Ihlamur, Orman",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Ihlamur",   verim: 80, tur: "nektar", gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Yonca / Ayçiçeği",   verim: 90, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği",           verim: 95, tur: "nektar", gddMin: 580, gddMax: 850 }
+    ]
+  },
+  "istanbul": {
+    flora: "Marmara – Akasya, Ihlamur, Kentsel & Orman",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 260, nektarZirve: 520, nektarBitis: 800 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Ihlamur",   verim: 80, tur: "nektar", gddMin: 210, gddMax: 400 },
+      { ay: "Haziran", bitki: "Yonca / Otsu",       verim: 70, tur: "nektar", gddMin: 400, gddMax: 620 }
+    ]
+  },
+  "kocaeli": {
+    flora: "Marmara – Kestane, Ihlamur, Fındık",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Fındık",    verim: 75, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 }
+    ]
+  },
+  "sakarya": {
+    flora: "Marmara – Fındık, Kestane, Ihlamur",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Fındık / Akasya",    verim: 80, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 }
+    ]
+  },
+  "yalova": {
+    flora: "Marmara – Kestane, Ihlamur, Meyve",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 530, nektarBitis: 820 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 80, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 }
+    ]
+  },
+  "bilecik": {
+    flora: "Marmara-İç Anadolu Geçiş – Kestane, Kekik, Yonca",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 850 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 230, gddMax: 410 },
+      { ay: "Haziran", bitki: "Kestane / Yonca",    verim: 90, tur: "nektar", gddMin: 410, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Kekik / Geven",      verim: 80, tur: "nektar", gddMin: 600, gddMax: 870 }
+    ]
+  },
+
+  // ---------- DOĞU ANADOLU ----------
+  "erzurum": {
+    flora: "Doğu Anadolu Yayla – Geven, Kekik, Endemik",
+    baseTemp: 5,
+    gdd: { ciceklenmeBaslangic: 350, nektarZirve: 650, nektarBitis: 1000 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla Başlangıç",    verim: 80, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 620, gddMax: 900 },
+      { ay: "Ağustos", bitki: "Yayla Zirve",        verim: 90, tur: "nektar", gddMin: 850, gddMax: 1150 }
+    ]
+  },
+  "kars": {
+    flora: "Doğu Anadolu – Kafkas Yayla, Geven, Çiçek",
+    baseTemp: 5,
+    gdd: { ciceklenmeBaslangic: 360, nektarZirve: 660, nektarBitis: 1020 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla Çiçekleri",    verim: 85, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven / Endemik",    verim: 98, tur: "nektar", gddMin: 650, gddMax: 950 },
+      { ay: "Ağustos", bitki: "Yayla Devam",        verim: 90, tur: "nektar", gddMin: 900, gddMax: 1200 }
+    ]
+  },
+  "ardahan": {
+    flora: "Doğu Anadolu – Yüksek Yayla, Geven",
+    baseTemp: 4,
+    gdd: { ciceklenmeBaslangic: 370, nektarZirve: 680, nektarBitis: 1050 },
+    timeline: [
+      { ay: "Temmuz",  bitki: "Yayla / Geven",      verim: 95, tur: "nektar", gddMin: 650, gddMax: 950 },
+      { ay: "Ağustos", bitki: "Endemik Çiçekler",   verim: 90, tur: "nektar", gddMin: 900, gddMax: 1200 }
+    ]
+  },
+  "ağrı": {
+    flora: "Doğu Anadolu – Yayla, Geven, Kekik",
+    baseTemp: 5,
+    gdd: { ciceklenmeBaslangic: 360, nektarZirve: 660, nektarBitis: 1020 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 80, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 650, gddMax: 950 }
+    ]
+  },
+  "van": {
+    flora: "Doğu Anadolu – Yayla, Geven, Çiçek",
+    baseTemp: 6,
+    gdd: { ciceklenmeBaslangic: 340, nektarZirve: 640, nektarBitis: 980 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla Çiçekleri",    verim: 85, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 620, gddMax: 920 }
+    ]
+  },
+  "bitlis": {
+    flora: "Doğu Anadolu – Yayla, Geven, Endemik",
+    baseTemp: 6,
+    gdd: { ciceklenmeBaslangic: 340, nektarZirve: 640, nektarBitis: 980 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 85, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 620, gddMax: 920 }
+    ]
+  },
+  "muş": {
+    flora: "Doğu Anadolu – Yayla, Geven",
+    baseTemp: 6,
+    gdd: { ciceklenmeBaslangic: 340, nektarZirve: 640, nektarBitis: 980 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 85, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 95, tur: "nektar", gddMin: 620, gddMax: 920 }
+    ]
+  },
+  "hakkari": {
+    flora: "Doğu Anadolu – Yüksek Yayla, Endemik",
+    baseTemp: 5,
+    gdd: { ciceklenmeBaslangic: 360, nektarZirve: 670, nektarBitis: 1050 },
+    timeline: [
+      { ay: "Temmuz",  bitki: "Yayla / Geven",      verim: 95, tur: "nektar", gddMin: 650, gddMax: 950 },
+      { ay: "Ağustos", bitki: "Endemik",            verim: 90, tur: "nektar", gddMin: 900, gddMax: 1200 }
+    ]
+  },
+  "iğdır": {
+    flora: "Doğu Anadolu Mikro Klima – Meyve, Yonca, Geven",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 80, tur: "polen",  gddMin: 250, gddMax: 430 },
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 85, tur: "nektar", gddMin: 430, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 80, tur: "nektar", gddMin: 620, gddMax: 900 }
+    ]
+  },
+  "erzincan": {
+    flora: "Doğu Anadolu – Yayla, Geven, Kekik",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Kekik",      verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 95, tur: "nektar", gddMin: 650, gddMax: 950 }
+    ]
+  },
+  "tunceli": {
+    flora: "Doğu Anadolu – Yayla, Geven, Kekik",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 650, gddMax: 950 }
+    ]
+  },
+  "bingöl": {
+    flora: "Doğu Anadolu – Yayla, Geven, Kekik",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 650, gddMax: 950 }
+    ]
+  },
+  "malatya": {
+    flora: "Doğu-İç Geçiş – Kayısı, Geven, Kekik",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 880 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Kayısı / Meyve",     verim: 85, tur: "polen",  gddMin: 200, gddMax: 380 },
+      { ay: "Haziran", bitki: "Kekik / Geven",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Yayla",              verim: 85, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "elazığ": {
+    flora: "Doğu-İç Geçiş – Geven, Kekik, Yonca",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 880 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 75, tur: "polen",  gddMin: 240, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kekik / Geven",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Yayla",              verim: 85, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+
+  // ---------- GÜNEYDOĞU ANADOLU ----------
+  "şanlıurfa": {
+    flora: "Güneydoğu – Pamuk, Geven, Kekik, Yonca",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 260, nektarZirve: 580, nektarBitis: 950 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Meyve / Akasya",     verim: 70, tur: "polen",  gddMin: 200, gddMax: 380 },
+      { ay: "Mayıs",   bitki: "Yonca / Kekik",      verim: 80, tur: "nektar", gddMin: 380, gddMax: 580 },
+      { ay: "Haziran", bitki: "Pamuk / Geven",      verim: 75, tur: "nektar", gddMin: 550, gddMax: 800 }
+    ]
+  },
+  "diyarbakır": {
+    flora: "Güneydoğu – Pamuk, Geven, Kekik",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 260, nektarZirve: 580, nektarBitis: 950 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Meyve / Akasya",     verim: 70, tur: "polen",  gddMin: 200, gddMax: 380 },
+      { ay: "Mayıs",   bitki: "Yonca / Kekik",      verim: 80, tur: "nektar", gddMin: 380, gddMax: 580 },
+      { ay: "Haziran", bitki: "Pamuk / Geven",      verim: 75, tur: "nektar", gddMin: 550, gddMax: 800 }
+    ]
+  },
+  "mardin": {
+    flora: "Güneydoğu – Pamuk, Geven, Kekik, Antep Fıstığı",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 260, nektarZirve: 580, nektarBitis: 950 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Meyve / Fıstık",     verim: 75, tur: "polen",  gddMin: 200, gddMax: 380 },
+      { ay: "Mayıs",   bitki: "Kekik / Yonca",      verim: 80, tur: "nektar", gddMin: 380, gddMax: 580 },
+      { ay: "Haziran", bitki: "Pamuk / Geven",      verim: 75, tur: "nektar", gddMin: 550, gddMax: 800 }
+    ]
+  },
+  "gaziantep": {
+    flora: "Güneydoğu – Antep Fıstığı, Kekik, Geven, Zahter",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 250, nektarZirve: 560, nektarBitis: 920 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Fıstık / Meyve",     verim: 80, tur: "polen",  gddMin: 190, gddMax: 360 },
+      { ay: "Mayıs",   bitki: "Kekik / Zahter",     verim: 90, tur: "nektar", gddMin: 360, gddMax: 560 },
+      { ay: "Haziran", bitki: "Geven / Yonca",      verim: 80, tur: "nektar", gddMin: 540, gddMax: 780 }
+    ]
+  },
+  "kilis": {
+    flora: "Güneydoğu – Kekik, Geven, Zeytin",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 250, nektarZirve: 560, nektarBitis: 920 },
+    timeline: [
+      { ay: "Nisan",   bitki: "Zeytin / Meyve",     verim: 75, tur: "polen",  gddMin: 190, gddMax: 360 },
+      { ay: "Mayıs",   bitki: "Kekik / Zahter",     verim: 90, tur: "nektar", gddMin: 360, gddMax: 560 },
+      { ay: "Haziran", bitki: "Geven",              verim: 80, tur: "nektar", gddMin: 540, gddMax: 780 }
+    ]
+  },
+  "adıyaman": {
+    flora: "Güneydoğu – Geven, Kekik, Pamuk",
+    baseTemp: 11,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 570, nektarBitis: 930 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Kekik / Geven",      verim: 85, tur: "nektar", gddMin: 250, gddMax: 450 },
+      { ay: "Haziran", bitki: "Pamuk / Yonca",      verim: 80, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 75, tur: "nektar", gddMin: 650, gddMax: 900 }
+    ]
+  },
+  "siirt": {
+    flora: "Güneydoğu – Pervari Yayla, Geven, Kekik",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 590, nektarBitis: 950 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Kekik / Geven",      verim: 85, tur: "nektar", gddMin: 260, gddMax: 460 },
+      { ay: "Haziran", bitki: "Yayla / Geven",      verim: 95, tur: "nektar", gddMin: 460, gddMax: 720 },
+      { ay: "Temmuz",  bitki: "Pervari Zirve",      verim: 98, tur: "nektar", gddMin: 700, gddMax: 980 }
+    ]
+  },
+  "batman": {
+    flora: "Güneydoğu – Geven, Kekik, Pamuk",
+    baseTemp: 11,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 570, nektarBitis: 930 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Kekik / Geven",      verim: 85, tur: "nektar", gddMin: 250, gddMax: 450 },
+      { ay: "Haziran", bitki: "Pamuk / Yonca",      verim: 80, tur: "nektar", gddMin: 450, gddMax: 700 }
+    ]
+  },
+  "şırnak": {
+    flora: "Güneydoğu – Yüksek Yayla, Geven, Kekik",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 600, nektarBitis: 970 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Geven",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 720 },
+      { ay: "Temmuz",  bitki: "Kekik / Endemik",    verim: 95, tur: "nektar", gddMin: 700, gddMax: 980 }
+    ]
+  },
+
+  // ====================== GEÇİŞ İKLİMİ İLÇELERİ ======================
+  "simav": {
+    flora: "Ege Geçiş – Kestane, Çam, Kekik, Ihlamur",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 920 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Çayır / Meyve",      verim: 70, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane & Ihlamur",  verim: 90, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Kekik / Orman Altı", verim: 85, tur: "nektar", gddMin: 580, gddMax: 820 },
+      { ay: "Ağustos", bitki: "Çam Salgısı",        verim: 75, tur: "nektar", gddMin: 750, gddMax: 1050 }
+    ]
+  },
+  "domaniç": {
+    flora: "Ege-İç Geçiş – Kestane, Kekik, Geven",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 590, nektarBitis: 930 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kestane / Kekik",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven / Yayla",      verim: 85, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "tavşanlı": {
+    flora: "Ege-İç Geçiş – Kekik, Yonca, Geven",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 570, nektarBitis: 900 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Yonca",      verim: 85, tur: "nektar", gddMin: 420, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Otsu",       verim: 80, tur: "nektar", gddMin: 600, gddMax: 880 }
+    ]
+  },
+  "emet": {
+    flora: "Ege-İç Geçiş – Kekik, Geven, Çam",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 910 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Dağ",        verim: 85, tur: "nektar", gddMin: 430, gddMax: 660 },
+      { ay: "Temmuz",  bitki: "Geven / Çam",        verim: 80, tur: "nektar", gddMin: 620, gddMax: 900 }
+    ]
+  },
+  "gediz": {
+    flora: "Ege Geçiş – Kekik, Kestane, Üzüm",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 890 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Meyve / Akasya",     verim: 75, tur: "polen",  gddMin: 240, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kekik / Kestane",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 660 }
+    ]
+  },
+  "saphane": {
+    flora: "Ege Yüksek Geçiş – Kekik, Geven, Yayla",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 940 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Yayla",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 85, tur: "nektar", gddMin: 680, gddMax: 950 }
+    ]
+  },
+  "banaz": {
+    flora: "Ege-İç Geçiş – Kekik, Yonca, Geven",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 570, nektarBitis: 900 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Yonca",      verim: 85, tur: "nektar", gddMin: 420, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 80, tur: "nektar", gddMin: 600, gddMax: 880 }
+    ]
+  },
+  "sivaslı": {
+    flora: "Ege-İç Geçiş – Kekik, Geven",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 570, nektarBitis: 900 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik",              verim: 85, tur: "nektar", gddMin: 420, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Geven / Otsu",       verim: 80, tur: "nektar", gddMin: 600, gddMax: 880 }
+    ]
+  },
+  "çivril": {
+    flora: "Ege Geçiş – Kekik, Pamuk, Yayla",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Hayıt / Kekik",      verim: 80, tur: "nektar", gddMin: 250, gddMax: 450 },
+      { ay: "Haziran", bitki: "Kekik / Pamuk",      verim: 85, tur: "nektar", gddMin: 450, gddMax: 700 }
+    ]
+  },
+  "çal": {
+    flora: "Ege Yüksek – Kekik (yoğun), Geven",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 920 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik Zirve",        verim: 95, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven / Yayla",      verim: 85, tur: "nektar", gddMin: 680, gddMax: 950 }
+    ]
+  },
+  "güney": {
+    flora: "Ege – Kekik, Geven, Çam",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 570, nektarBitis: 910 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Çam",        verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 80, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "pozantı": {
+    flora: "Toros Geçiş – Kekik, Geven, Sedir, Çam",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 920 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Kekik / Geven",      verim: 85, tur: "nektar", gddMin: 250, gddMax: 450 },
+      { ay: "Haziran", bitki: "Sedir / Püren",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Yayla",              verim: 85, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "feke": {
+    flora: "Toros Geçiş – Kekik, Geven, Sedir",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 920 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Sedir",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven / Yayla",      verim: 85, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "saimbeyli": {
+    flora: "Toros Geçiş – Kekik, Geven, Sedir",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 590, nektarBitis: 940 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Sedir",      verim: 90, tur: "nektar", gddMin: 460, gddMax: 720 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 85, tur: "nektar", gddMin: 680, gddMax: 950 }
+    ]
+  },
+  "tufanbeyli": {
+    flora: "Toros Yüksek Geçiş – Kekik, Geven, Yayla",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Kekik",      verim: 90, tur: "nektar", gddMin: 470, gddMax: 730 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 90, tur: "nektar", gddMin: 700, gddMax: 980 }
+    ]
+  },
+  "karaisalı": {
+    flora: "Toros Geçiş – Kekik, Çam, Geven",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Kekik / Akasya",     verim: 80, tur: "nektar", gddMin: 240, gddMax: 440 },
+      { ay: "Haziran", bitki: "Çam / Geven",        verim: 85, tur: "nektar", gddMin: 450, gddMax: 700 }
+    ]
+  },
+  "aladağ": {
+    flora: "Toros Geçiş – Kekik, Sedir, Geven",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 580, nektarBitis: 920 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Sedir",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven / Yayla",      verim: 85, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "kozan": {
+    flora: "Çukurova-Toros Geçiş – Narenciye, Kekik, Çam",
+    baseTemp: 11,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 550, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mart",    bitki: "Narenciye",          verim: 85, tur: "nektar", gddMin: 200, gddMax: 380 },
+      { ay: "Mayıs",   bitki: "Kekik / Akasya",     verim: 80, tur: "nektar", gddMin: 400, gddMax: 600 },
+      { ay: "Haziran", bitki: "Çam / Geven",        verim: 75, tur: "nektar", gddMin: 550, gddMax: 800 }
+    ]
+  },
+  "imamoğlu": {
+    flora: "Çukurova Geçiş – Narenciye, Ayçiçeği, Pamuk",
+    baseTemp: 12,
+    gdd: { ciceklenmeBaslangic: 250, nektarZirve: 540, nektarBitis: 900 },
+    timeline: [
+      { ay: "Mart",    bitki: "Narenciye",          verim: 90, tur: "nektar", gddMin: 180, gddMax: 360 },
+      { ay: "Mayıs",   bitki: "Ayçiçeği / Akasya",  verim: 85, tur: "nektar", gddMin: 400, gddMax: 600 }
+    ]
+  },
+  "uludağ": {
+    flora: "Uludağ Yayla – Endemik, Kekik, Çiçek, Kestane",
+    baseTemp: 6,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla Başlangıç",    verim: 85, tur: "nektar", gddMin: 400, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Endemik / Kekik",    verim: 95, tur: "nektar", gddMin: 620, gddMax: 920 }
+    ]
+  },
+  "inegöl": {
+    flora: "Marmara-İç Geçiş – Kestane, Ihlamur, Kekik",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 860 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 230, gddMax: 410 },
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 410, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Kekik",              verim: 80, tur: "nektar", gddMin: 600, gddMax: 870 }
+    ]
+  },
+  "mustafakemalpaşa": {
+    flora: "Marmara Geçiş – Kestane, Yonca, Akasya",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 540, nektarBitis: 840 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 80, tur: "polen",  gddMin: 220, gddMax: 400 },
+      { ay: "Haziran", bitki: "Kestane / Yonca",    verim: 90, tur: "nektar", gddMin: 400, gddMax: 640 }
+    ]
+  },
+  "dursunbey": {
+    flora: "Marmara-Ege Geçiş – Kestane, Çam, Kekik",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 890 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kestane / Kekik",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Çam / Geven",        verim: 80, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "sındırgı": {
+    flora: "Marmara-Ege Geçiş – Kekik, Çam, Kestane",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 890 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kekik / Kestane",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Çam Salgısı",        verim: 80, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "edremit": {
+    flora: "Kazdağı Geçiş – Kestane, Kekik, Çam, Defne",
+    baseTemp: 10,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 880 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Defne / Akasya",     verim: 80, tur: "nektar", gddMin: 230, gddMax: 420 },
+      { ay: "Haziran", bitki: "Kestane / Kekik",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 670 },
+      { ay: "Ağustos", bitki: "Çam Salgısı",        verim: 85, tur: "nektar", gddMin: 750, gddMax: 1050 }
+    ]
+  },
+  "ayvacık": {
+    flora: "Kazdağı – Kekik, Çam, Zeytin",
+    baseTemp: 11,
+    gdd: { ciceklenmeBaslangic: 270, nektarZirve: 540, nektarBitis: 880 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Kekik / Zeytin",     verim: 85, tur: "nektar", gddMin: 230, gddMax: 430 },
+      { ay: "Haziran", bitki: "Kekik / Çam",        verim: 90, tur: "nektar", gddMin: 430, gddMax: 680 }
+    ]
+  },
+  "boyabat": {
+    flora: "Karadeniz-İç Geçiş – Kestane, Kekik, Yonca",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 860 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Fındık",    verim: 75, tur: "polen",  gddMin: 230, gddMax: 410 },
+      { ay: "Haziran", bitki: "Kestane / Yonca",    verim: 90, tur: "nektar", gddMin: 410, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Kekik",              verim: 80, tur: "nektar", gddMin: 600, gddMax: 870 }
+    ]
+  },
+  "tosya": {
+    flora: "Karadeniz-İç Geçiş – Pirinç, Kekik, Yonca",
+    baseTemp: 9,
+    gdd: { ciceklenmeBaslangic: 280, nektarZirve: 550, nektarBitis: 860 },
+    timeline: [
+      { ay: "Mayıs",   bitki: "Akasya / Meyve",     verim: 75, tur: "polen",  gddMin: 230, gddMax: 410 },
+      { ay: "Haziran", bitki: "Yonca / Kekik",      verim: 85, tur: "nektar", gddMin: 410, gddMax: 650 }
+    ]
+  },
+  "ilgaz": {
+    flora: "Karadeniz-İç Yüksek Geçiş – Yayla, Kekik, Geven",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 940 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Kekik",      verim: 90, tur: "nektar", gddMin: 450, gddMax: 700 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 90, tur: "nektar", gddMin: 680, gddMax: 950 }
+    ]
+  },
+  "gerede": {
+    flora: "Karadeniz-İç Geçiş – Kestane, Yayla, Kekik",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 300, nektarZirve: 570, nektarBitis: 900 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kestane / Yayla",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Kekik / Geven",      verim: 85, tur: "nektar", gddMin: 650, gddMax: 920 }
+    ]
+  },
+  "mudurnu": {
+    flora: "Karadeniz-İç Geçiş – Kestane, Ihlamur, Yayla",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 290, nektarZirve: 560, nektarBitis: 890 },
+    timeline: [
+      { ay: "Haziran", bitki: "Kestane / Ihlamur",  verim: 90, tur: "nektar", gddMin: 410, gddMax: 660 },
+      { ay: "Temmuz",  bitki: "Yayla / Kekik",      verim: 85, tur: "nektar", gddMin: 630, gddMax: 900 }
+    ]
+  },
+  "anzer": {
+    flora: "Anzer Yaylası – 400+ Endemik Çiçek",
+    baseTemp: 5,
+    gdd: { ciceklenmeBaslangic: 350, nektarZirve: 650, nektarBitis: 1000 },
+    timeline: [
+      { ay: "Temmuz",  bitki: "Anzer Florası",      verim: 99, tur: "nektar", gddMin: 650, gddMax: 950 },
+      { ay: "Ağustos", bitki: "Yayla Devam",        verim: 90, tur: "nektar", gddMin: 900, gddMax: 1200 }
+    ]
+  },
+  "pervari": {
+    flora: "Pervari Yayla – Geven, Kekik, Çiçek",
+    baseTemp: 8,
+    gdd: { ciceklenmeBaslangic: 310, nektarZirve: 600, nektarBitis: 960 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla / Geven",      verim: 95, tur: "nektar", gddMin: 450, gddMax: 720 },
+      { ay: "Temmuz",  bitki: "Pervari Zirve",      verim: 98, tur: "nektar", gddMin: 700, gddMax: 980 }
+    ]
+  },
+  "çatak": {
+    flora: "Van Geçiş – Yayla, Geven, Endemik",
+    baseTemp: 6,
+    gdd: { ciceklenmeBaslangic: 340, nektarZirve: 640, nektarBitis: 980 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 85, tur: "nektar", gddMin: 420, gddMax: 680 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 650, gddMax: 950 }
+    ]
+  },
+  "başkale": {
+    flora: "Van Yüksek – Yayla, Geven",
+    baseTemp: 5,
+    gdd: { ciceklenmeBaslangic: 360, nektarZirve: 670, nektarBitis: 1020 },
+    timeline: [
+      { ay: "Temmuz",  bitki: "Yayla / Geven",      verim: 95, tur: "nektar", gddMin: 680, gddMax: 980 },
+      { ay: "Ağustos", bitki: "Endemik",            verim: 90, tur: "nektar", gddMin: 950, gddMax: 1250 }
+    ]
+  },
+  "solhan": {
+    flora: "Bingöl Geçiş – Yayla, Geven, Kekik",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 90, tur: "nektar", gddMin: 430, gddMax: 690 },
+      { ay: "Temmuz",  bitki: "Geven / Kekik",      verim: 95, tur: "nektar", gddMin: 660, gddMax: 960 }
+    ]
+  },
+  "genç": {
+    flora: "Bingöl Geçiş – Yayla, Geven",
+    baseTemp: 7,
+    gdd: { ciceklenmeBaslangic: 320, nektarZirve: 600, nektarBitis: 950 },
+    timeline: [
+      { ay: "Haziran", bitki: "Yayla",              verim: 90, tur: "nektar", gddMin: 430, gddMax: 690 },
+      { ay: "Temmuz",  bitki: "Geven",              verim: 95, tur: "nektar", gddMin: 660, gddMax: 960 }
+    ]
+  },
+
+  // ====================== BİTKİ SPESİFİK GDD (TAM) ======================
+  "bitki_gdd": {
+    "akasya":      { baseTemp: 10, ciceklenme: 420, zirve: 580, bitis: 750 },
+    "kestane":     { baseTemp: 8,  ciceklenme: 480, zirve: 650, bitis: 850 },
+    "ayçiçeği":    { baseTemp: 10, ciceklenme: 550, zirve: 720, bitis: 950 },
+    "kekik":       { baseTemp: 9,  ciceklenme: 380, zirve: 560, bitis: 780 },
+    "adaçayı":     { baseTemp: 9,  ciceklenme: 400, zirve: 580, bitis: 800 },
+    "çam_salgısı": { baseTemp: 10, ciceklenme: 700, zirve: 950, bitis: 1250 },
+    "ihlamur":     { baseTemp: 8,  ciceklenme: 450, zirve: 600, bitis: 780 },
+    "narenciye":   { baseTemp: 12, ciceklenme: 280, zirve: 420, bitis: 600 },
+    "geven":       { baseTemp: 8,  ciceklenme: 450, zirve: 650, bitis: 900 },
+    "yonca":       { baseTemp: 9,  ciceklenme: 400, zirve: 550, bitis: 750 },
+    "hayıt":       { baseTemp: 11, ciceklenme: 350, zirve: 500, bitis: 700 },
+    "püren":       { baseTemp: 10, ciceklenme: 500, zirve: 700, bitis: 950 },
+    "fındık":      { baseTemp: 8,  ciceklenme: 300, zirve: 450, bitis: 600 },
+    "sedir":       { baseTemp: 9,  ciceklenme: 480, zirve: 650, bitis: 900 },
+    "pamuk":       { baseTemp: 12, ciceklenme: 600, zirve: 800, bitis: 1050 },
+    "üçgül":       { baseTemp: 9,  ciceklenme: 380, zirve: 520, bitis: 720 },
+    "korunga":     { baseTemp: 8,  ciceklenme: 400, zirve: 550, bitis: 750 },
+    "ballıbaba":   { baseTemp: 9,  ciceklenme: 420, zirve: 580, bitis: 780 },
+    "lavanta":     { baseTemp: 10, ciceklenme: 450, zirve: 620, bitis: 850 },
+    "hardal":      { baseTemp: 8,  ciceklenme: 300, zirve: 420, bitis: 580 },
+    "kenger":      { baseTemp: 9,  ciceklenme: 480, zirve: 650, bitis: 880 },
+    "çiriş":       { baseTemp: 8,  ciceklenme: 350, zirve: 500, bitis: 700 },
+    "nane":        { baseTemp: 10, ciceklenme: 450, zirve: 600, bitis: 800 },
+    "defne":       { baseTemp: 11, ciceklenme: 320, zirve: 450, bitis: 620 },
+    "erguvan":     { baseTemp: 10, ciceklenme: 280, zirve: 400, bitis: 550 },
+    "meşe":        { baseTemp: 9,  ciceklenme: 350, zirve: 500, bitis: 700 },
+    "söğüt":       { baseTemp: 8,  ciceklenme: 250, zirve: 380, bitis: 520 },
+    "badem":       { baseTemp: 10, ciceklenme: 220, zirve: 350, bitis: 500 },
+    "kayısı":      { baseTemp: 10, ciceklenme: 240, zirve: 370, bitis: 520 },
+    "elma":        { baseTemp: 9,  ciceklenme: 300, zirve: 450, bitis: 620 },
+    "kiraz":       { baseTemp: 9,  ciceklenme: 280, zirve: 420, bitis: 580 },
+    "zeytin":      { baseTemp: 12, ciceklenme: 400, zirve: 550, bitis: 750 },
+    "okaliptüs":   { baseTemp: 12, ciceklenme: 500, zirve: 700, bitis: 1000 },
+    "fiğ":         { baseTemp: 8,  ciceklenme: 350, zirve: 480, bitis: 650 },
+    "taş_yoncası": { baseTemp: 9,  ciceklenme: 420, zirve: 580, bitis: 780 },
+    "sığırdili":   { baseTemp: 9,  ciceklenme: 400, zirve: 550, bitis: 750 },
+    "devedikeni":  { baseTemp: 10, ciceklenme: 500, zirve: 680, bitis: 900 },
+    "karahindiba": { baseTemp: 8,  ciceklenme: 280, zirve: 400, bitis: 550 }
+  },
+
+  // ====================== VARSAYILAN ======================
+  "varsayılan": {
+    flora: "Çeşitli Yayla & Tarım Çiçekleri",
+    baseTemp: 10,
+    gdd: {
+      ciceklenmeBaslangic: 300,
+      nektarZirve: 550,
+      nektarBitis: 850
     },
-    "varsayılan": { 
-        flora: "Çeşitli Yayla & Tarım Çiçekleri", 
-        timeline: [
-            { ay: "Mart", bitki: "Erken Gelişim", verim: 45, tur: "polen" },
-            { ay: "Nisan", bitki: "Bahar Çiçekleri", verim: 60, tur: "polen" },
-            { ay: "Mayıs", bitki: "Bahar Çiçekleri", verim: 70, tur: "polen" }, 
-            { ay: "Haziran", bitki: "Ana Akım Florası", verim: 90, tur: "nektar" }, 
-            { ay: "Temmuz", bitki: "Ayçiçeği / Otsu Bitkiler", verim: 80, tur: "nektar" }, 
-            { ay: "Ağustos", bitki: "Yaz Sonu Kuraklığı", verim: 35, tur: "kıtlık" },
-            { ay: "Eylül", bitki: "Sonbahar Desteği", verim: 40, tur: "polen" },
-            { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 25, tur: "kıtlık" }
-        ] 
-    }
+    timeline: [
+      { ay: "Mayıs",   bitki: "Bahar Çiçekleri",     verim: 70, tur: "polen",  gddMin: 250, gddMax: 420 },
+      { ay: "Haziran", bitki: "Ana Akım Florası",    verim: 90, tur: "nektar", gddMin: 420, gddMax: 650 },
+      { ay: "Temmuz",  bitki: "Ayçiçeği / Otsu",     verim: 80, tur: "nektar", gddMin: 600, gddMax: 850 },
+      { ay: "Ağustos", bitki: "Yaz Sonu Kuraklığı",  verim: 35, tur: "kıtlık", gddMin: 800, gddMax: 1100 }
+    ]
+  }
 };
