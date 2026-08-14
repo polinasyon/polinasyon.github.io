@@ -1,5 +1,5 @@
 // === 7 BÖLGE FLORA VERİTABANI (TÜBİTAK / TAGEM temelli referans) ===
-window.bolgeHaritasi = {
+window.BOLGE_HARITASI = { ... }
   // 1) MARMARA
   "marmara": {
     flora: "Marmara: Ihlamur, Kestane, Akasya & Ayçiçeği",
