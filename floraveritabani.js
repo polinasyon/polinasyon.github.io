@@ -257,6 +257,21 @@ window.FLORA_VERITABANI = {
       { ay: "Ekim",    bitki: "Kışa Hazırlık",       verim: 10, tur: "kıtlık", gddMin: 1210, gddMax: 1300 }
     ]
   },
+  "simav": { 
+    flora: "İç Ege Geçiş Bölgesi - Ayçiçeği & Orman Altı", 
+    baseTemp: 8, gdd: { 
+        ciceklenmeBaslangic: 260, nektarZirve: 520, nektarBitis: 820 },
+    timeline: [
+        { ay: "Mart", bitki: "Erken Bahar Badem/Erik", verim: 60, tur: "polen" },
+        { ay: "Nisan", bitki: "Meyve Bahçeleri", verim: 75, tur: "nektar" },
+        { ay: "Mayıs", bitki: "Çayır / Çiçekli Bitkiler", verim: 70, tur: "polen" }, 
+        { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, 
+        { ay: "Temmuz", bitki: "Orman Altı / Kekik", verim: 85, tur: "nektar" }, 
+        { ay: "Ağustos", bitki: "Ayçiçeği & Orman Altı", verim: 75, tur: "nektar" },
+        { ay: "Eylül", bitki: "Kır Çiçekleri / Sonbahar", verim: 50, tur: "polen" },
+        { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 30, tur: "kıtlık" }
+    ] 
+},
   "afyonkarahisar": {
     flora: "İç Ege Yüksek Geçiş – Haşhaş, Geven, Kekik, Yayla",
     baseTemp: 8, gdd: { ciceklenmeBaslangic: 260, nektarZirve: 520, nektarBitis: 820 },
