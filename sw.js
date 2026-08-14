@@ -47,7 +47,7 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
-/ Aktivasyon - Eski cache sürümlerini temizle
+// Aktivasyon - Eski cache sürümlerini temizle ve kontrolü ele al
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -61,6 +61,8 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
+  self.clients.claim(); 
+});
   // Doğru yazılış şekli (clients.claim()):
   self.clients.claim(); 
 });
