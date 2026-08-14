@@ -638,9 +638,9 @@
             },
 
             async gddOraniniGetir(lat, lon) {
-                cconst cacheAnahtari = 'polinasyon_gdd_cache_v1';
+                const cacheAnahtari = 'polinasyon_gdd_cache_v1';
 
-// Gece yarısı UTC zaman dilimi kaymalarını önlemek için yerel tarihi YYYY-MM-DD formatına getiriyoruz
+// Gece yarısı UTC zaman dilimi kaymalarını önleyen yerel tarih formatı (YYYY-MM-DD)
 const yerelZaman = new Date();
 const bugunStr = `${yerelZaman.getFullYear()}-${String(yerelZaman.getMonth() + 1).padStart(2, '0')}-${String(yerelZaman.getDate()).padStart(2, '0')}`;
 
@@ -654,22 +654,22 @@ try {
 try {
     const buYil = yerelZaman.getFullYear();
     
-    // Saat, dakika ve saniyeleri sıfırlayarak gün farkını net hesaplıyoruz
+    // Saatleri sıfırlayarak gün farkını milisaniye cinsinden net ve temiz hesaplıyoruz
     const bugunMilisaniye = new Date(yerelZaman.getFullYear(), yerelZaman.getMonth(), yerelZaman.getDate()).getTime();
     const buYil1OcakMilisaniye = new Date(buYil, 0, 1).getTime();
 
     let gunSayisi = Math.floor((bugunMilisaniye - buYil1OcakMilisaniye) / 86400000) - 5;
     if (gunSayisi < 1) gunSayisi = 1;
 
-    // Artık yıl (29 Şubat) kaymalarını önlemek için gün eklemesini doğrudan takvim nesnesi üzerinden yapıyoruz
+    // Artık yıl (29 Şubat) kaymalarını önleyen takvim nesnesi eşitlemesi
     const buYilBitis = new Date(buYil, 0, 1 + gunSayisi);
     const gecenYilBitis = new Date(buYil - 1, 0, 1 + gunSayisi);
 
     const buYilBaslangicStr = `${buYil}-01-01`;
-    const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
+    const buYilBitisStr = buYilBitis.toISOString().split('T')[0]; // [0] indeksi eklendi, hata çözüldü
 
     const gecenYilBaslangicStr = `${buYil - 1}-01-01`;
-    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0];
+    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0]; // [0] indeksi eklendi, hata çözüldü
 
     const [buYilRes, gecenYilRes] = await Promise.all([
         fetch(`https://open-meteo.com{lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
