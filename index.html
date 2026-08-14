@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <link rel="icon" href="ikon.png" sizes="any">
-    <link rel="apple-touch-icon" href="ikon.png">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Polinasyon | Kanatların Matematiği</title>
+    <meta name="description" content="Arıcılık için nektar akım tahmini, flora takvimi, kovan takibi ve arı sağlığı rehberi. Konuma göre hava, fenoloji ve GDD analizi.">
+    <meta name="keywords" content="arıcılık, nektar akımı, flora takvimi, kovan takip, polinasyon, arı sağlığı, bal">
+    <meta name="author" content="Polinasyon">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#f59e0b">
+    <meta name="color-scheme" content="light">
+
+    <!-- PWA / mobil -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Polinasyon">
-    <link rel="manifest" href="manifest.json">
-    <title>POLİNASYON | Kanatların Matematiği (v4.0 - GDD Entegre)</title>
+    <meta name="application-name" content="Polinasyon">
+    <meta name="format-detection" content="telephone=no">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- İkonlar -->
+    <link rel="icon" href="./ikon.png" type="image/png">
+    <link rel="apple-touch-icon" href="./ikon.png">
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- Open Graph (paylaşım) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:site_name" content="Polinasyon">
+    <meta property="og:title" content="Polinasyon | Kanatların Matematiği">
+    <meta property="og:description" content="Nektar akım tahmini, flora takvimi ve kovan takibi — arıcılık için pratik karar destek aracı.">
+    <meta property="og:image" content="https://polinasyon.github.io/ikon.png">
+    <meta property="og:url" content="https://polinasyon.github.io/">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Polinasyon | Kanatların Matematiği">
+    <meta name="twitter:description" content="Nektar akım tahmini, flora takvimi ve kovan takibi.">
+    <meta name="twitter:image" content="https://polinasyon.github.io/ikon.png">
+
+    <!-- Tailwind & Lucide -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <meta name="theme-color" content="#f1f5f9">
 
     <style>
         body {
@@ -51,7 +81,7 @@
 
             <div class="text-center flex flex-col items-center">
                 <div class="flex items-center justify-center gap-1.1">
-                    <img src="https://raw.githubusercontent.com/polinasyon/polinasyon/refs/heads/main/Favicon.ICO" alt="Polinasyon Logo" class="h-6 w-auto object-contain">
+                    <img src="https://polinasyon.github.io/ikon.png" alt="Polinasyon Logo" class="h-6 w-auto object-contain">
                     <h1 class="text-xl font-bold text-slate-900 leading-tight brand-arial tracking-wide">Polinasyon</h1>
                 </div>
                 <p class="text-[9px] text-slate-500 font-semibold tracking-wider uppercase leading-none mt-1 flex items-center justify-center gap-1.5 translate-x-[3px]">
@@ -97,7 +127,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
                     <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
                         <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">SICAKLIK</p>
                         <p id="havaSicaklik" class="text-2xl font-bold text-slate-800 mt-1">--°C</p>
@@ -113,6 +143,14 @@
                     <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
                         <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">RÜZGAR</p>
                         <p id="havaRuzgar" class="text-2xl font-bold text-slate-800 mt-1">--</p>
+                    </div>
+                    <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
+                        <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">YAĞIŞ</p>
+                        <p id="havaYagis" class="text-2xl font-bold text-slate-800 mt-1">--</p>
+                    </div>
+                    <div class="bg-slate-100/70 border border-slate-200/80 rounded-2xl p-3.5 text-center">
+                        <p class="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">BULUT</p>
+                        <p id="havaBulut" class="text-2xl font-bold text-slate-800 mt-1">--%</p>
                     </div>
                 </div>
 
@@ -151,7 +189,7 @@
                     </div>
                     <p id="nektarAciklama" class="text-sm text-slate-600">Meteoroloji ve fenoloji analiz ediliyor...</p>
                     <div id="dinamikDuzeltmeNotu" class="mt-2 text-[11px] font-bold hidden"></div>
-                    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">Bu skor; arı uçuş sıcaklığı (~10–30°C optimal aralık), rüzgar ve nem için yayınlanmış arıcılık/entomoloji literatüründeki eşiklere dayanır ve bu yılın ısı birikimini (GDD) geçen yılla karşılaştırarak fenolojiyi düzeltir. Yine de kalibre edilmiş bir bilimsel ölçüm değil, literatür temelli deneysel bir tahmindir.</p>
+                    <p class="mt-2 text-[10px] text-slate-400 leading-relaxed">Bu skor; arı uçuş sıcaklığı (~10–30°C), rüzgar, nem, çiy açığı, 3 günlük trend, anlık yağış, bulut örtüsü (güneş potansiyeli) ve GDD ile düzeltilmiş fenolojiyi bölgeye göre ağırlıklandırarak hesaplar. Literatür temelli deneysel bir tahmindir; kalibre bilimsel ölçüm değildir.</p>
                 </div>
 
                 <div class="border border-slate-200/80 bg-slate-100/60 rounded-2xl p-5 space-y-4">
@@ -159,10 +197,9 @@
                         <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
                             <i data-lucide="calendar-range" class="w-4 h-4 text-amber-600"></i> Flora Takvimi
                         </h3>
-                        <button onclick="uygulama.sahaRaporuModaliniAc()" class="text-[11px] font-bold text-amber-700 bg-amber-100 hover:bg-amber-200 px-2.5 py-1 rounded-lg transition flex items-center gap-1">
-                            <i data-lucide="plus-circle" class="w-3.5 h-3.5"></i> Gözlem Ekle
-                        </button>
-                    </div>
+                       </div>
+
+
                     <p class="text-xs text-slate-600 leading-relaxed">
                         Renk Kodları: <span class="font-bold text-emerald-700">Yeşil:</span> Güçlü Nektar | <span class="font-bold text-amber-600">Sarı:</span> Polen/Orta Akım | <span class="font-bold text-slate-500">Gri:</span> Kıtlık (Dearth)
                     </p>
@@ -207,7 +244,7 @@
             </div>
         </section>
 
-        <section id="sayfaSaglik" class="space-y-5 hidden">
+       <section id="sayfaSaglik" class="space-y-5 hidden">
             <div class="soft-card p-6 sm:p-8 space-y-5">
                 <div class="border-b border-slate-100 pb-4">
                     <h2 class="text-lg font-bold text-slate-800 flex items-center gap-2">
@@ -266,7 +303,7 @@
                                 <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Akut Arı Felci (ABPV)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
                                 <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
                                     <p><strong>Belirti:</strong> Kolonileri hızla çökerten, ani işçi arı ölümlerine neden olan agresif virüstür.</p>
-                                    <p><strong>Mücadele:</strong> Varroa’yı düşük seviyede tutmak en kritik önlemdir. Stres azaltma ve besleme takviyesi yapılır.</p>
+                                    <p><strong>Mücadele:</strong> Varroa'yı düşük seviyede tutmak en kritik önlemdir. Stres azaltma ve besleme takviyesi yapılır.</p>
                                 </div>
                             </details>
                         </div>
@@ -317,7 +354,7 @@
                                 <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Deforme Kanat Virüsü (DWV) & Diğer Viral</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
                                 <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
                                     <p><strong>Belirti:</strong> Kanatsız veya deforme kanatlı arılar, zayıf yavru ve koloni gerilemesi. Varroa ile sıkı ilişkilidir.</p>
-                                    <p><strong>Mücadele:</strong> En etkili yol Varroa’yı düşük seviyede tutmaktır. Hijyen ve stres azaltma destekler.</p>
+                                    <p><strong>Mücadele:</strong> En etkili yol Varroa'yı düşük seviyede tutmaktır. Hijyen ve stres azaltma destekler.</p>
                                 </div>
                             </details>
                         </div>
@@ -339,7 +376,7 @@
                                         <li><strong>Biyoteknik:</strong> Drone yavru tuzak petekleri, kuluçkasız dönem oluşturma.</li>
                                         <li><strong>Organik asitler:</strong>
                                             <ul class="list-circle pl-4">
-                                                <li>Formik asit (%65): 15–25°C’de yavaş buharlaştırma. Kapalı yavruya nüfuz eder.</li>
+                                                <li>Formik asit (%65): 15–25°C'de yavaş buharlaştırma. Kapalı yavruya nüfuz eder.</li>
                                                 <li>Oksalik asit: Kuluçkasız dönemde buharlaştırma veya damlatma (%95+ başarı).</li>
                                             </ul>
                                         </li>
@@ -351,8 +388,8 @@
                             <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
                                 <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Tropilaelaps spp.</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
                                 <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
-                                    <p><strong>Belirti:</strong> Varroa’ya benzer ancak üreme hızı çok daha yüksek, özellikle Asya kökenli agresif akar. Yavru hasarı şiddetlidir.</p>
-                                    <p><strong>Mücadele:</strong> Varroa yöntemlerinin çoğu etkilidir (formik, oksalik, kuluçkasız dönem). Erken tespit ve karantina kritiktir. Türkiye’de henüz yaygın değildir; giriş riski takip edilmelidir.</p>
+                                    <p><strong>Belirti:</strong> Varroa'ya benzer ancak üreme hızı çok daha yüksek, özellikle Asya kökenli agresif akar. Yavru hasarı şiddetlidir.</p>
+                                    <p><strong>Mücadele:</strong> Varroa yöntemlerinin çoğu etkilidir (formik, oksalik, kuluçkasız dönem). Erken tespit ve karantina kritiktir. Türkiye'de henüz yaygın değildir; giriş riski takip edilmelidir.</p>
                                 </div>
                             </details>
                             <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
@@ -382,7 +419,7 @@
                                 <summary class="font-bold cursor-pointer text-slate-900 flex justify-between items-center"><span>Küçük Kovan Böceği (Aethina tumida)</span><span class="text-[10px] text-amber-600 font-semibold group-open/sub:underline">Detay</span></summary>
                                 <div class="mt-2 space-y-1.5 text-slate-600 border-t border-slate-200/60 pt-2">
                                     <p><strong>Belirti:</strong> Petekleri, balı ve poleni çiğneyerek ekşiten istilacı böcektir. Larvaları fermente koku yapar.</p>
-                                    <p><strong>Mücadele:</strong> Güçlü koloniler, dar kovan girişi, tuzaklar (yağ tuzakları), hijyen. Ağır istilada petek imhası gerekebilir. Türkiye’de takip edilmesi gereken türdür.</p>
+                                    <p><strong>Mücadele:</strong> Güçlü koloniler, dar kovan girişi, tuzaklar (yağ tuzakları), hijyen. Ağır istilada petek imhası gerekebilir. Türkiye'de takip edilmesi gereken türdür.</p>
                                 </div>
                             </details>
                             <details class="p-3 bg-slate-50 rounded-xl border border-slate-100 group/sub">
@@ -414,7 +451,7 @@
                             <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-600"></i> Genel Önlemler & İyi Uygulamalar
                         </h4>
                         <ul class="list-disc pl-4 space-y-1 text-xs text-slate-700">
-                            <li>Her sezon kuluçkalıktaki peteklerin en az 1/3’ünü yenileyin.</li>
+                            <li>Her sezon kuluçkalıktaki peteklerin en az 1/3'ünü yenileyin.</li>
                             <li>Fileli (varroa çekmeceli) taban kullanarak havalandırmayı artırın.</li>
                             <li>Ayda bir kez düzenli Varroa popülasyon testi yapın.</li>
                             <li>Zayıf kolonileri birleştirin, boş petekleri depoda soğukta saklayın.</li>
@@ -425,26 +462,13 @@
             </div>
         </section>
 
+
         <section id="sayfaAkademi" class="space-y-5 hidden">
             <div class="soft-card p-6 space-y-4">
                 <div class="border border-slate-200/80 bg-slate-50 rounded-2xl p-3.5 flex items-center justify-between shadow-2xs">
-                    <div class="flex items-center gap-4 text-slate-700">
-                        <a href="https://facebook.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="Facebook">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                        </a>
-                        <a href="https://twitter.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="X (Twitter)">
-                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        </a>
-                        <a href="https://instagram.com/polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="Instagram">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        </a>
-                        <a href="https://youtube.com/@polinasyon" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 transition" title="YouTube">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                        </a>
-                    </div>
                     <span class="text-xs font-bold text-slate-800 tracking-wide">@polinasyon</span>
+                    <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 text-xs font-semibold underline">Web Sitesi →</a>
                 </div>
-
                 <div class="space-y-3" id="makaleListesiContainer">
                     <p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>
                 </div>
@@ -460,32 +484,10 @@
                 <h3 class="font-bold text-slate-800 text-base">Konum Değiştir</h3>
                 <button onclick="uygulama.konumModaliniKapat()" class="text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
             </div>
-            <input type="text" id="sehirInput" placeholder="İl veya İlçe yazın (Örn: Muğla, Fethiye)..." class="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-amber-500">
+            <input type="text" id="sehirInput" placeholder="İl veya İlçe yazın (Örn: Ağrı, Kars, Muğla)..." class="w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-amber-500">
             <div class="flex gap-2">
                 <button onclick="uygulama.konumModaliniKapat()" class="flex-1 py-3 bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl">İptal</button>
                 <button onclick="uygulama.sehirAraVeGuncelle()" class="flex-1 py-3 bg-amber-500 text-white text-xs font-semibold rounded-xl">Güncelle</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="sahaRaporuModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="soft-card bg-white p-6 w-full max-w-md space-y-4 modal-enter shadow-xl">
-            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-800 text-base">Saha Gözlemi Raporla</h3>
-                <button onclick="uygulama.sahaRaporuModaliniKapat()" class="text-slate-400 hover:text-slate-600 p-1"><i data-lucide="x" class="w-5 h-5"></i></button>
-            </div>
-            <div class="space-y-3">
-                <select id="raporTurInput" class="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs font-semibold">
-                    <option value="Nektar Akımı">Güçlü Nektar Akımı Başladı</option>
-                    <option value="Polen Akımı">Yoğun Polen Girişi Var</option>
-                    <option value="Kuraklık/Kıtlık">Flora Kurudu / Dearth (Kıtlık)</option>
-                </select>
-                <input type="text" id="raporBitkiInput" placeholder="Bölgedeki Hakim Çiçek/Bitki..." class="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs">
-                <textarea id="raporNotInput" rows="2" placeholder="Gözlemlerinizi paylaşın..." class="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs"></textarea>
-            </div>
-            <div class="flex gap-2">
-                <button onclick="uygulama.sahaRaporuModaliniKapat()" class="flex-1 py-3 bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl">İptal</button>
-                <button onclick="uygulama.sahaRaporuKaydet()" class="flex-1 py-3 bg-amber-500 text-white text-xs font-semibold rounded-xl">Gönder</button>
             </div>
         </div>
     </div>
@@ -556,6 +558,10 @@
         </div>
     </nav>
 
+
+    <script src="./bolgeharitasi.js"></script>
+    <script src="./floraveritabani.js"></script>
+
     <script>
         window.addEventListener('offline', () => document.getElementById('offlineBadge').classList.remove('hidden'));
         window.addEventListener('online', () => {
@@ -573,24 +579,50 @@
         const uygulama = {
             data: {
                 konum: "Ankara", lat: 39.9208, lon: 32.8541, temp: 22, humidity: 65, dewPoint: 12, windSpeed: 8, pastAvgTemp: 22,
+                precipitation: 0, cloudCover: 40,
                 gddOran: 1, gddVeriVar: false, duzeltilmisFenoloji: null,
-                kategoriler: [{ id: 1, isim: "Merkez", kovanlar: [{ id: 101, isim: "Kovan #1", anaAri: "2024", gecmisKontroller: [{ tarih: "2026-06-01", bal: 4, hastalik: "Yok", not: "İlk kontrol" }] }] }],
-                sahaGozlemleri: []
+                kategoriler: [{ id: 1, isim: "Merkez", kovanlar: [{ id: 101, isim: "Kovan #1", anaAri: "2024", gecmisKontroller: [{ tarih: "2026-06-01", bal: 4, hastalik: "Yok", not: "İlk kontrol" }] }] }]
             },
             aktifKategoriId: null,
             aktifDuzenlenenKovanId: null,
 
-            bolgeHaritasi: {
-                "iç anadolu": ["ankara", "konya", "kayseri", "eskişehir", "sivas", "kırıkkale", "aksaray", "karaman", "kırşehir", "niğde", "nevşehir", "yozgat", "çankırı"],
-                "ege": ["izmir", "manisa", "aydın", "denizli", "kütahya", "afyon", "uşak", "muğla", "simav"],
-                "akdeniz": ["antalya", "adana", "mersin", "burdur", "hatay", "osmaniye", "ısparta", "kahramanmaraş"],
-                "karadeniz": ["trabzon", "rize", "artvin", "ordu", "giresun", "samsun", "zonguldak", "sinop", "tokat", "çorum", "amasya", "kastamonu", "karabük", "bartın", "bolu", "düzce"],
-                "doğu anadolu": ["erzurum", "erzincan", "kars", "ardahan", "ağrı", "ığdır", "van", "bingöl", "muş", "bitlis", "tunceli", "elazığ", "malatya", "hakkari", "şırnak"]
+            // Dış JS dosyalarından
+            bolgeHaritasi: window.BOLGE_HARITASI || {},
+            bolgeAgirliklari: window.BOLGE_AGIRLIKLARI || {
+                "varsayılan": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 }
+            },
+            floraVeritabani: window.FLORA_VERITABANI || {
+                "varsayılan": { flora: "Yükleniyor...", timeline: [] }
             },
 
             GDD_BASE_TEMP: 10,
+            GDD_MIN_GUN: 12,
 
-        async gddOraniniGetir(lat, lon) {
+            aktifBolgesiBul() {
+                const k = this.data.konum.toLocaleLowerCase('tr-TR');
+                let enIyi = "", bolge = "varsayılan";
+                for (const b in this.bolgeHaritasi) {
+                    for (const s of (this.bolgeHaritasi[b] || [])) {
+                        if (k.includes(s) && s.length > enIyi.length) {
+                            enIyi = s;
+                            bolge = b;
+                        }
+                    }
+                }
+                if (enIyi) return bolge;
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+                for (const a of Object.keys(this.floraVeritabani || {})) {
+                    if (a === "varsayılan" || bolgeAdlari.has(a)) continue;
+                    if (k.includes(a)) {
+                        for (const b in this.bolgeHaritasi) {
+                            if ((this.bolgeHaritasi[b] || []).includes(a)) return b;
+                        }
+                    }
+                }
+                return "varsayılan";
+            },
+
+            async gddOraniniGetir(lat, lon) {
     const cacheAnahtari = 'polinasyon_gdd_cache_v1';
     const simdi = new Date();
     const bugunStr = `${simdi.getFullYear()}-${String(simdi.getMonth() + 1).padStart(2, '0')}-${String(simdi.getDate()).padStart(2, '0')}`;
@@ -704,69 +736,92 @@
                 }, () => { alert("Konum alınamadı."); document.getElementById('havaLokasyon').textContent = this.data.konum; }, { enableHighAccuracy: true });
             },
 
-            floraVeritabani: {
-                "muğla": { flora: "Ege Çam Balı & Püren Florası", timeline: [{ ay: "Mayıs", bitki: "Narenciye / Hayıt", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ Florası", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Pamuklu Koşnili", verim: 95, tur: "nektar" }, { ay: "Eylül", bitki: "Çam Balı Zirve", verim: 98, tur: "nektar" }] },
-                "simav": { flora: "Ege Geçiş Bölgesi Kestane & Çam", timeline: [{ ay: "Mayıs", bitki: "Çayır / Meyve", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Orman Altı", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 75, tur: "nektar" }] },
-                "rize": { flora: "Karadeniz Kestane & Ormangülü", timeline: [{ ay: "Mayıs", bitki: "Komar / Ormangülü", verim: 85, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Çiçeği", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 90, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı Flora", verim: 40, tur: "polen" }] },
-                "hatay": { flora: "Akdeniz Maki & Defne / Keçi", timeline: [{ ay: "Nisan", bitki: "Narenciye / Erken Maki", verim: 85, tur: "nektar" }, { ay: "Mayıs", bitki: "Defne & Maki Zirve", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık Stresi", verim: 25, tur: "kıtlık" }, { ay: "Eylül", bitki: "Keçiboynuzu", verim: 70, tur: "nektar" }] },
-                "erzurum": { flora: "Doğu Anadolu Yüksek Yayla", timeline: [{ ay: "Mayıs", bitki: "Uyanma & İlk Polen", verim: 60, tur: "polen" }, { ay: "Haziran", bitki: "Korunga & Yonca", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Yüksek Yayla Zirve", verim: 95, tur: "nektar" }, { ay: "Ağustos", bitki: "Alpin Çayırlar", verim: 80, tur: "nektar" }] },
-                "iç anadolu": { flora: "İç Anadolu Bozkır & Kekik", timeline: [{ ay: "Mayıs", bitki: "Meyve / Akasya", verim: 75, tur: "polen" }, { ay: "Haziran", bitki: "Yayla / Adaçayı", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Kekik / Ayçiçeği", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Kurak Dönem", verim: 30, tur: "kıtlık" }] },
-                "ege": { flora: "Ege Maki, Kekik & Çam", timeline: [{ ay: "Mayıs", bitki: "Hayıt / Püren", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kekik / Dağ Florası", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Sıcaklık Stresi", verim: 35, tur: "kıtlık" }, { ay: "Ağustos", bitki: "Çam Salgısı", verim: 80, tur: "nektar" }] },
-                "karadeniz": { flora: "Karadeniz Kestane & Orman", timeline: [{ ay: "Mayıs", bitki: "Ormangülü", verim: 80, tur: "nektar" }, { ay: "Haziran", bitki: "Kestane Zirve", verim: 95, tur: "nektar" }, { ay: "Temmuz", bitki: "Yayla Çiçekleri", verim: 85, tur: "nektar" }, { ay: "Ağustos", bitki: "Orman Altı", verim: 45, tur: "polen" }] },
-                "akdeniz": { flora: "Akdeniz Narenciye & Maki", timeline: [{ ay: "Nisan", bitki: "Portakal / Narenciye", verim: 95, tur: "nektar" }, { ay: "Mayıs", bitki: "Maki", verim: 85, tur: "nektar" }, { ay: "Temmuz", bitki: "Aşırı Sıcaklık", verim: 20, tur: "kıtlık" }, { ay: "Eylül", bitki: "Keçiboynuzu", verim: 75, tur: "nektar" }] },
-                "varsayılan": { flora: "Çeşitli Yayla & Tarım Çiçekleri", timeline: [{ ay: "Mayıs", bitki: "Bahar Çiçekleri", verim: 70, tur: "polen" }, { ay: "Haziran", bitki: "Ana Akım Florası", verim: 90, tur: "nektar" }, { ay: "Temmuz", bitki: "Ayçiçeği", verim: 80, tur: "nektar" }, { ay: "Ağustos", bitki: "Yaz Sonu Kuraklığı", verim: 35, tur: "kıtlık" }] }
-            },
-
             aktifFenolojiyiBul() {
                 const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
                 const suAnkiAy = aylar[new Date().getMonth()];
-                const konumKucuk = this.data.konum.toLocaleLowerCase('tr-TR');
-                let secilenVeri = this.floraVeritabani["varsayılan"];
-                let bulundu = false;
-                for (let ah in this.floraVeritabani) {
-                    if (ah !== "varsayılan" && konumKucuk.includes(ah)) {
+                const k = this.data.konum.toLocaleLowerCase('tr-TR');
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+
+                let secilenVeri = this.floraVeritabani["varsayılan"] || { timeline: [] };
+                let enIyi = "";
+
+                for (const ah of Object.keys(this.floraVeritabani || {})) {
+                    if (ah === "varsayılan" || bolgeAdlari.has(ah)) continue;
+                    if (k.includes(ah) && ah.length > enIyi.length) {
+                        enIyi = ah;
                         secilenVeri = this.floraVeritabani[ah];
-                        bulundu = true;
-                        break;
                     }
                 }
-                if (!bulundu) {
-                    for (let b in this.bolgeHaritasi) {
-                        if (this.bolgeHaritasi[b].some(s => konumKucuk.includes(s))) {
-                            secilenVeri = this.floraVeritabani[b];
+
+                if (!enIyi) {
+                    for (const b in this.bolgeHaritasi) {
+                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
+                            secilenVeri = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || { timeline: [] };
                             break;
                         }
                     }
                 }
-                const ayV = secilenVeri.timeline.find(t => t.ay === suAnkiAy);
+
+                const ayV = (secilenVeri.timeline || []).find(t => t.ay === suAnkiAy);
                 if (ayV) return ayV.verim;
                 const ayIdx = new Date().getMonth();
                 return (ayIdx >= 4 && ayIdx <= 8) ? 50 : 15;
             },
 
-            nektar_flow_score(temp, humidity, wind, dew, past, pheno) {
-                const t = Math.max(0, 1 - Math.abs(temp - 24) / 12) * 20;
-                const h = Math.max(0, 1 - Math.abs(humidity - 65) / 30) * 15;
-                const d = Math.max(0, 1 - Math.abs(dew - 14) / 10) * 10;
-                const w = Math.max(0, 1 - wind / 25) * 10;
-                const p = Math.max(0, 1 - Math.abs(past - 22) / 15) * 15;
-                const ph = (pheno / 100) * 30;
-                return Math.round(t + h + d + w + p + ph);
+            uçuşEgrisi(sicaklik) {
+                if (sicaklik < 10) return 0;
+                if (sicaklik < 20) return (sicaklik - 10) / 10;
+                if (sicaklik <= 30) return 1;
+                if (sicaklik < 38) return 1 - (sicaklik - 30) / 8;
+                return 0;
+            },
+
+            nektar_flow_score(temp, humidity, wind, dew, past, pheno, precipitation = 0, cloudCover = 40) {
+                const ag = this.bolgeAgirliklari[this.aktifBolgesiBul()] || this.bolgeAgirliklari["varsayılan"];
+
+                const t = Math.max(0, Math.min(1, this.uçuşEgrisi(temp))) * 22 * ag.t;
+
+                let wOran;
+                if (wind <= 10) wOran = 1;
+                else if (wind < 24) wOran = 1 - (wind - 10) / 14;
+                else wOran = 0;
+                const w = Math.max(0, Math.min(1, wOran)) * 12 * ag.w;
+
+                let hOran;
+                if (humidity >= 40 && humidity <= 70) hOran = 1;
+                else if (humidity < 40) hOran = humidity / 40;
+                else hOran = Math.max(0, 1 - (humidity - 70) / 30);
+                const h = Math.max(0, Math.min(1, hOran)) * 12 * ag.h;
+
+                const doygunlukAcigi = temp - dew;
+                const dOran = doygunlukAcigi >= 2 ? 1 : Math.max(0, doygunlukAcigi / 2);
+                const d = dOran * 5 * ag.d;
+
+                const p = Math.max(0, Math.min(1, this.uçuşEgrisi(past))) * 8 * ag.p;
+
+                const rainOran = precipitation <= 0 ? 1 : Math.max(0, 1 - precipitation / 2);
+                const rain = rainOran * 8 * ag.rain;
+
+                const sunOran = Math.max(0, Math.min(1, 1 - (cloudCover / 100)));
+                const sun = sunOran * 8 * ag.sun;
+
+                const ph = (pheno / 100) * 25 * ag.ph;
+
+                return Math.round(Math.max(0, Math.min(100, t + w + h + d + p + rain + sun + ph)));
             },
 
             nektarAkimiHesaplaVeGuncelle() {
                 const hamFenoloji = this.aktifFenolojiyiBul();
-                const pheno = (this.data.duzeltilmisFenoloji != null)
-                    ? this.data.duzeltilmisFenoloji
-                    : hamFenoloji;
-
+                const pheno = (this.data.duzeltilmisFenoloji != null) ? this.data.duzeltilmisFenoloji : hamFenoloji;
                 const skor = this.nektar_flow_score(
                     this.data.temp,
                     this.data.humidity,
                     this.data.windSpeed,
                     this.data.dewPoint,
                     this.data.pastAvgTemp || 22,
-                    pheno
+                    pheno,
+                    this.data.precipitation || 0,
+                    this.data.cloudCover ?? 40
                 );
 
                 document.getElementById('nektarSkor').textContent = `%${skor}`;
@@ -806,55 +861,58 @@
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-rose-700 bg-rose-50 p-2 rounded-xl border border-rose-200/60 flex flex-wrap items-center gap-1.5";
                     dinamikNot.innerHTML = `<i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0"></i> <span>İklim Kısıtlaması: Akım -${Math.round((100 - skor) / 2)}%</span>`;
                 }
-
-                if (this.data.gddVeriVar) {
-                    const oran = this.data.gddOran;
-                    let gddAciklama = '';
-                    if (oran >= 1.15) gddAciklama = 'Bu yıl ısı birikimi geçen yıla göre yüksek → fenoloji önde.';
-                    else if (oran <= 0.85) gddAciklama = 'Bu yıl ısı birikimi geçen yıla göre düşük → fenoloji geride.';
-                    else gddAciklama = 'Isı birikimi geçen yıla yakın → takvim referansı geçerli.';
-                    dinamikNot.innerHTML += `<span class="opacity-90 w-full sm:w-auto">| GDD: ${oran.toFixed(2)}x — ${gddAciklama}</span>`;
-                }
-
                 if (window.lucide) window.lucide.createIcons();
             },
 
             timelineCiz() {
                 const container = document.getElementById('floraTimelineContainer');
+                if (!container) return;
+
                 const k = this.data.konum.toLocaleLowerCase('tr-TR');
-                let sec = this.floraVeritabani["varsayılan"];
-                let bul = false;
-                for (let a in this.floraVeritabani) {
-                    if (a !== "varsayılan" && k.includes(a)) {
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+
+                let sec = this.floraVeritabani["varsayılan"] || { flora: "Yükleniyor...", timeline: [] };
+                let enIyi = "";
+
+                for (const a of Object.keys(this.floraVeritabani || {})) {
+                    if (a === "varsayılan" || bolgeAdlari.has(a)) continue;
+                    if (k.includes(a) && a.length > enIyi.length) {
+                        enIyi = a;
                         sec = this.floraVeritabani[a];
-                        bul = true;
-                        break;
                     }
                 }
-                if (!bul) {
-                    for (let b in this.bolgeHaritasi) {
-                        if (this.bolgeHaritasi[b].some(s => k.includes(s))) {
-                            sec = this.floraVeritabani[b];
+
+                if (!enIyi) {
+                    for (const b in this.bolgeHaritasi) {
+                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
+                            sec = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || sec;
                             break;
                         }
                     }
                 }
-                document.getElementById('bolgeFloraHaritasi').textContent =
-                    `Flora: ${!bul && sec.flora === "Çeşitli Yayla & Tarım Çiçekleri" ? this.data.konum + " ve Çevresi" : sec.flora}`;
-                let html = '';
-                sec.timeline.forEach(t => {
-                    let rS = t.tur === "polen" ? "bg-amber-50 border-amber-300 text-amber-900" : (t.tur === "kıtlık" ? "bg-slate-100 border-slate-300 text-slate-700" : "bg-emerald-50 border-emerald-300 text-emerald-900");
-                    let bS = t.tur === "polen" ? "bg-amber-500" : (t.tur === "kıtlık" ? "bg-slate-400" : "bg-emerald-500");
-                    html += `<div class="p-3 rounded-xl border ${rS} flex flex-col gap-1.5 shadow-2xs"><div class="flex justify-between items-center text-xs font-bold"><span>${t.ay} — ${t.bitki}</span><span>%${t.verim}</span></div><div class="w-full bg-white/70 h-2 rounded-full overflow-hidden"><div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div></div></div>`;
-                });
-                if (this.data.sahaGozlemleri && this.data.sahaGozlemleri.length > 0) {
-                    html += `<div class="mt-3 border-t border-slate-200 pt-2"><p class="text-[11px] font-bold text-slate-700 mb-1">Son Saha Gözlemleri:</p>`;
-                    this.data.sahaGozlemleri.forEach(g => {
-                        html += `<div class="p-2 bg-white rounded-lg border border-slate-200 text-[11px] text-slate-600 mb-1"><span class="font-bold">${g.tarih}</span> - <span class="text-amber-700">${g.tur}</span> (${g.bitki}): ${g.not}</div>`;
-                    });
-                    html += `</div>`;
+
+                const floraEtiket = document.getElementById('bolgeFloraHaritasi');
+                if (floraEtiket) {
+                    const varsayilanMi = !enIyi && ((sec.flora || "").includes("Çeşitli") || (sec.flora || "").includes("Yükleniyor"));
+                    floraEtiket.textContent = `Flora: ${varsayilanMi ? (this.data.konum + " ve Çevresi") : sec.flora}`;
                 }
-                container.innerHTML = html;
+
+                const aylarIsim = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+                const mevcutAy = aylarIsim[new Date().getMonth()];
+
+                let html = '';
+                (sec.timeline || []).forEach(t => {
+                    const rS = t.tur === "polen"
+                        ? "bg-amber-50 border-amber-300 text-amber-900"
+                        : (t.tur === "kıtlık"
+                            ? "bg-slate-100 border-slate-300 text-slate-700"
+                            : "bg-emerald-50 border-emerald-300 text-emerald-900");
+                    const bS = t.tur === "polen" ? "bg-amber-500" : (t.tur === "kıtlık" ? "bg-slate-400" : "bg-emerald-500");
+                    const vurgu = (t.ay && t.ay.toLowerCase().includes(mevcutAy.toLowerCase())) ? "ring-2 ring-amber-500 shadow-md" : "";
+                    html += `<div class="p-3 rounded-xl border ${rS} ${vurgu} flex flex-col gap-1.5 shadow-2xs"><div class="flex justify-between items-center text-xs font-bold"><span>${t.ay} — ${t.bitki}</span><span>%${t.verim}</span></div><div class="w-full bg-white/70 h-2 rounded-full overflow-hidden"><div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div></div></div>`;
+                });
+
+                container.innerHTML = html || `<p class="text-xs text-slate-400">Bu konum için takvim kaydı yok.</p>`;
             },
 
             async havaDurumunuYukle(lat, lon, sehirAd) {
@@ -865,7 +923,7 @@
 
                 try {
                     const res = await fetch(
-                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,dew_point_2m&daily=temperature_2m_mean&past_days=3&forecast_days=1&timezone=auto`,
+                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,dew_point_2m,precipitation,cloud_cover&daily=temperature_2m_mean&past_days=3&forecast_days=1&timezone=auto`,
                         { cache: 'no-cache' }
                     );
                     const data = await res.json();
@@ -876,6 +934,8 @@
                     this.data.humidity = Math.round(data.current.relative_humidity_2m);
                     this.data.dewPoint = Math.round(data.current.dew_point_2m);
                     this.data.windSpeed = Math.round(data.current.wind_speed_10m);
+                    this.data.precipitation = typeof data.current.precipitation === 'number' ? data.current.precipitation : 0;
+                    this.data.cloudCover = typeof data.current.cloud_cover === 'number' ? Math.round(data.current.cloud_cover) : 40;
                     if (data.daily && data.daily.temperature_2m_mean) {
                         const g = data.daily.temperature_2m_mean;
                         this.data.pastAvgTemp = Math.round((g[0] + g[1] + g[2]) / 3);
@@ -884,12 +944,16 @@
                     document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
                     document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
                     document.getElementById('havaRuzgar').textContent = `${this.data.windSpeed} km/s`;
+                    document.getElementById('havaYagis').textContent = `${this.data.precipitation} mm`;
+                    document.getElementById('havaBulut').textContent = `%${this.data.cloudCover}`;
                     localStorage.setItem('polinasyon_last_weather', JSON.stringify({
                         temp: this.data.temp,
                         humidity: this.data.humidity,
                         dewPoint: this.data.dewPoint,
                         windSpeed: this.data.windSpeed,
-                        pastAvgTemp: this.data.pastAvgTemp
+                        pastAvgTemp: this.data.pastAvgTemp,
+                        precipitation: this.data.precipitation,
+                        cloudCover: this.data.cloudCover
                     }));
                 } catch (e) {
                     const sH = localStorage.getItem('polinasyon_last_weather');
@@ -901,10 +965,14 @@
                             this.data.dewPoint = p.dewPoint || 12;
                             this.data.windSpeed = p.windSpeed;
                             this.data.pastAvgTemp = p.pastAvgTemp || 22;
+                            this.data.precipitation = p.precipitation ?? 0;
+                            this.data.cloudCover = p.cloudCover ?? 40;
                             document.getElementById('havaSicaklik').textContent = `${this.data.temp}°C`;
                             document.getElementById('havaNem').textContent = `%${this.data.humidity}`;
                             document.getElementById('havaCiy').textContent = `${this.data.dewPoint}°C`;
                             document.getElementById('havaRuzgar').textContent = `${this.data.windSpeed} km/s`;
+                            document.getElementById('havaYagis').textContent = `${this.data.precipitation} mm`;
+                            document.getElementById('havaBulut').textContent = `%${this.data.cloudCover}`;
                         } catch (err) {}
                     }
                 }
@@ -1197,26 +1265,6 @@
                 this.kovanDetayModaliniAc(yeniId);
             },
 
-            sahaRaporuModaliniAc() {
-                document.getElementById('raporTurInput').value = 'Nektar Akımı';
-                document.getElementById('raporBitkiInput').value = '';
-                document.getElementById('raporNotInput').value = '';
-                document.getElementById('sahaRaporuModal').classList.remove('hidden');
-            },
-            sahaRaporuModaliniKapat() { document.getElementById('sahaRaporuModal').classList.add('hidden'); },
-            sahaRaporuKaydet() {
-                const tur = document.getElementById('raporTurInput').value;
-                const bitki = document.getElementById('raporBitkiInput').value.trim() || 'Belirtilmedi';
-                const not = document.getElementById('raporNotInput').value.trim() || '-';
-                const tarih = new Date().toISOString().split('T')[0];
-                if (!this.data.sahaGozlemleri) this.data.sahaGozlemleri = [];
-                this.data.sahaGozlemleri.unshift({ tarih, tur, bitki, not });
-                if (this.data.sahaGozlemleri.length > 30) this.data.sahaGozlemleri.length = 30;
-                this.veriKaydet();
-                this.sahaRaporuModaliniKapat();
-                this.timelineCiz();
-            },
-
             async rssYukle() {
                 const container = document.getElementById('makaleListesiContainer');
                 container.innerHTML = `<p class="text-center py-12 text-slate-400 text-xs">Yayınlar yükleniyor...</p>`;
@@ -1236,51 +1284,40 @@
                         container.innerHTML = `<p class="text-center py-6 text-slate-400 text-xs">Şu anda gösterilecek yayın bulunamadı. <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 underline">Siteyi ziyaret et</a></p>`;
                     }
                 } catch (e) {
-                    container.innerHTML = `<p class="text-center py-6 text-slate-400 text-xs">Yayınlar yüklenemedi. <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 underline">Ziyaret et</a></p>`;
+                    container.innerHTML = `<p class="text-center py-6 text-slate-400 text-xs">Yayınlar yüklenemedi. <a href="https://www.polinasyon.org" target="_blank" class="text-amber-600 underline">Siteyi ziyaret et</a></p>`;
                 }
             },
 
             verileriYedekle() {
-    try {
-        const json = JSON.stringify(this.data, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
-
-        if (navigator.share && navigator.canShare) {
-            const file = new File([blob], dosyaAdi, { type: 'application/json' });
-            if (navigator.canShare({ files: [file] })) {
-                navigator.share({
-                    files: [file],
-                    title: 'Polinasyon Yedek',
-                    text: 'Kovan ve saha verileri yedeği'
-                }).catch(() => {
+                try {
+                    const json = JSON.stringify(this.data, null, 2);
+                    const blob = new Blob([json], { type: 'application/json' });
+                    const dosyaAdi = 'polinasyon_yedek_' + new Date().toISOString().slice(0, 10) + '.json';
+                    if (navigator.share && navigator.canShare) {
+                        const file = new File([blob], dosyaAdi, { type: 'application/json' });
+                        if (navigator.canShare({ files: [file] })) {
+                            navigator.share({ files: [file], title: 'Polinasyon Yedek', text: 'Kovan verileri yedeği' }).catch(() => this._indirmeYap(blob, dosyaAdi));
+                            return;
+                        }
+                    }
                     this._indirmeYap(blob, dosyaAdi);
-                });
-                return;
-            }
-        }
+                } catch (e) {
+                    console.error(e);
+                    alert('Yedek oluşturulurken hata oluştu.');
+                }
+            },
 
-        this._indirmeYap(blob, dosyaAdi);
+            _indirmeYap(blob, dosyaAdi) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = dosyaAdi;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 200);
+            },
 
-    } catch (e) {
-        console.error(e);
-        alert('Yedek oluşturulurken hata oluştu.');
-    }
-},
-
-_indirmeYap(blob, dosyaAdi) {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = dosyaAdi;
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }, 200);
-},
             verileriIceAktar() {
                 const input = document.createElement('input');
                 input.type = 'file';
@@ -1303,11 +1340,12 @@ _indirmeYap(blob, dosyaAdi) {
                                 dewPoint: parsed.dewPoint ?? this.data.dewPoint,
                                 windSpeed: parsed.windSpeed ?? this.data.windSpeed,
                                 pastAvgTemp: parsed.pastAvgTemp ?? this.data.pastAvgTemp,
+                                precipitation: parsed.precipitation ?? 0,
+                                cloudCover: parsed.cloudCover ?? 40,
                                 gddOran: parsed.gddOran ?? 1,
                                 gddVeriVar: parsed.gddVeriVar ?? false,
                                 duzeltilmisFenoloji: parsed.duzeltilmisFenoloji ?? null,
-                                kategoriler: Array.isArray(parsed.kategoriler) ? parsed.kategoriler : this.data.kategoriler,
-                                sahaGozlemleri: Array.isArray(parsed.sahaGozlemleri) ? parsed.sahaGozlemleri : []
+                                kategoriler: Array.isArray(parsed.kategoriler) ? parsed.kategoriler : this.data.kategoriler
                             };
                             this.veriKaydet();
                             this.arayuzuGuncelle();
@@ -1333,4 +1371,3 @@ _indirmeYap(blob, dosyaAdi) {
     </script>
 </body>
 </html>
-
