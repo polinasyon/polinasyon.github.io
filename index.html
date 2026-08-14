@@ -638,71 +638,75 @@
             },
 
             async gddOraniniGetir(lat, lon) {
-                const cacheAnahtari = 'polinasyon_gdd_cache_v1';
-                const bugunStr = new Date().toISOString().split('T')[0];
-                try {
-                    const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
-                    if (onbellek && onbellek.tarih === bugunStr && Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
-                        return onbellek;
-                    }
-                } catch (e) {}
+                cconst cacheAnahtari = 'polinasyon_gdd_cache_v1';
 
-                try {
-                    const bugun = new Date();
-                    const yilBaslangici = new Date(Date.UTC(bugun.getFullYear(), 0, 1));
-                    let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 5;
-                    if (gunSayisi < this.GDD_MIN_GUN) gunSayisi = this.GDD_MIN_GUN;
-                    const buYilBitis = new Date(yilBaslangici.getTime() + gunSayisi * 86400000);
-                    const buYilBaslangicStr = yilBaslangici.toISOString().split('T')[0];
-                    const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
+// Gece yarısı UTC zaman dilimi kaymalarını önlemek için yerel tarihi YYYY-MM-DD formatına getiriyoruz
+const yerelZaman = new Date();
+const bugunStr = `${yerelZaman.getFullYear()}-${String(yerelZaman.getMonth() + 1).padStart(2, '0')}-${String(yerelZaman.getDate()).padStart(2, '0')}`;
 
-                    const gecenYilBaslangici = new Date(Date.UTC(bugun.getFullYear() - 1, 0, 1));
-                    const gecenYilBitis = new Date(gecenYilBaslangici.getTime() + gunSayisi * 86400000);
-                    const gecenYilBaslangicStr = gecenYilBaslangici.toISOString().split('T')[0];
-                    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0];
+try {
+    const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
+    if (onbellek && onbellek.tarih === bugunStr && Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
+        return onbellek;
+    }
+} catch (e) {}
 
-                    const [buYilRes, gecenYilRes] = await Promise.all([
-                        fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
-                        fetch(`https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}&start_date=${gecenYilBaslangicStr}&end_date=${gecenYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`)
-                    ]);
+try {
+    const buYil = yerelZaman.getFullYear();
+    
+    // Saat, dakika ve saniyeleri sıfırlayarak gün farkını net hesaplıyoruz
+    const bugunMilisaniye = new Date(yerelZaman.getFullYear(), yerelZaman.getMonth(), yerelZaman.getDate()).getTime();
+    const buYil1OcakMilisaniye = new Date(buYil, 0, 1).getTime();
 
-                    if (!buYilRes.ok || !gecenYilRes.ok) {
-                        throw new Error(`GDD API hatası: ${buYilRes.status} / ${gecenYilRes.status}`);
-                    }
+    let gunSayisi = Math.floor((bugunMilisaniye - buYil1OcakMilisaniye) / 86400000) - 5;
+    if (gunSayisi < 1) gunSayisi = 1;
 
-                    const buYilData = await buYilRes.json();
-                    const gecenYilData = await gecenYilRes.json();
+    // Artık yıl (29 Şubat) kaymalarını önlemek için gün eklemesini doğrudan takvim nesnesi üzerinden yapıyoruz
+    const buYilBitis = new Date(buYil, 0, 1 + gunSayisi);
+    const gecenYilBitis = new Date(buYil - 1, 0, 1 + gunSayisi);
 
-                    const gddTopla = (d) => {
-                        if (!d || !d.daily || !d.daily.temperature_2m_max) return null;
-                        const mx = d.daily.temperature_2m_max, mn = d.daily.temperature_2m_min;
-                        let toplam = 0;
-                        for (let i = 0; i < mx.length; i++) {
-                            if (typeof mx[i] !== 'number' || typeof mn[i] !== 'number') continue;
-                            toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
-                        }
-                        return toplam;
-                    };
+    const buYilBaslangicStr = `${buYil}-01-01`;
+    const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
 
-                    const buYilGDD = gddTopla(buYilData);
-                    const gecenYilGDD = gddTopla(gecenYilData);
+    const gecenYilBaslangicStr = `${buYil - 1}-01-01`;
+    const gecenYilBitisStr = gecenYilBitis.toISOString().split('T')[0];
 
-                    let oran = 1;
-                    let veriVar = buYilGDD !== null && gecenYilGDD !== null;
-                    if (veriVar && gecenYilGDD > 5) {
-                        oran = Math.max(0.5, Math.min(1.5, buYilGDD / gecenYilGDD));
-                    } else {
-                        veriVar = false;
-                    }
+    const [buYilRes, gecenYilRes] = await Promise.all([
+        fetch(`https://open-meteo.com{lat}&longitude=${lon}&start_date=${buYilBaslangicStr}&end_date=${buYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`),
+        fetch(`https://open-meteo.com{lat}&longitude=${lon}&start_date=${gecenYilBaslangicStr}&end_date=${gecenYilBitisStr}&daily=temperature_2m_max,temperature_2m_min&timezone=auto`)
+    ]);
+    
+    const buYilData = await buYilRes.json();
+    const gecenYilData = await gecenYilRes.json();
 
-                    const sonuc = { tarih: bugunStr, lat, lon, oran, buYilGDD, gecenYilGDD, veriVar };
-                    try { localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc)); } catch (e) {}
-                    return sonuc;
-                } catch (e) {
-                    console.warn('GDD hesaplanamadı:', e);
-                    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: null, gecenYilGDD: null, veriVar: false };
-                }
-            },
+    const gddTopla = (d) => {
+        if (!d || !d.daily || !d.daily.temperature_2m_max) return null;
+        const mx = d.daily.temperature_2m_max, mn = d.daily.temperature_2m_min;
+        let toplam = 0;
+        for (let i = 0; i < mx.length; i++) {
+            if (typeof mx[i] !== 'number' || typeof mn[i] !== 'number') continue;
+            toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
+        }
+        return toplam;
+    };
+
+    const buYilGDD = gddTopla(buYilData);
+    const gecenYilGDD = gddTopla(gecenYilData);
+
+    let oran = 1;
+    let veriVar = buYilGDD !== null && gecenYilGDD !== null;
+    if (veriVar && gecenYilGDD > 5) {
+        oran = Math.max(0.5, Math.min(1.5, buYilGDD / gecenYilGDD));
+    } else {
+        veriVar = false;
+    }
+
+    const sonuc = { tarih: bugunStr, lat, lon, oran, buYilGDD, gecenYilGDD, veriVar };
+    localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc));
+    return sonuc;
+} catch (e) {
+    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: null, gecenYilGDD: null, veriVar: false };
+}
 
             fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
                 if (!veriVar || typeof gddOran !== 'number') return hamFenoloji;
