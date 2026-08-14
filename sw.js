@@ -1,4 +1,4 @@
-const CACHE_VERSION = 3; // her önemli güncellemede +1
+const CACHE_VERSION = 3;
 const CACHE_NAME = `polinasyon-static-v${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `polinasyon-dynamic-v${CACHE_VERSION}`;
 
@@ -10,7 +10,7 @@ const STATIC_ASSETS = [
   './bolgeharitasi.js',
   './floraveritabani.js',
   'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
-  'https://unpkg.com/lucide@0.469.0'
+  'https://unpkg.com/lucide@latest'
 ];
 
 // 1. Kurulum
