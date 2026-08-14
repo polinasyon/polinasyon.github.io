@@ -1,5 +1,5 @@
-const CACHE_NAME = 'polinasyon-static-v10';
-const DYNAMIC_CACHE = 'polinasyon-dynamic-v10';
+const CACHE_NAME = 'polinasyon-static-v11'; // Sürümü güncelledik (v10 -> v11)
+const DYNAMIC_CACHE = 'polinasyon-dynamic-v11';
 
 const STATIC_ASSETS = [
   './',
@@ -10,16 +10,21 @@ const STATIC_ASSETS = [
   './polinasyon.png',
   './polinasyon_logo.png',
   './favicon.ico',
+  // Yeni eklenen veri dosyaları:
+  './bolgeharitasi.js',
+  './floraveritabani.js',
+  // Dış kaynaklar
   'https://raw.githubusercontent.com/polinasyon/polinasyon/refs/heads/main/Favicon.ICO',
   'https://cdn.tailwindcss.com',
   'https://unpkg.com/lucide@latest'
 ];
 
-// Kurulum - Varlıkları güvenli şekilde önbelleğe al (Tek bir hata yüzünden patlamaz)
+// Kurulum - Varlıkları önbelleğe al
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
+      console.log('[SW] Statik varlıklar ve veri dosyaları önbelleğe alınıyor...');
+      // mode: 'no-cors' kullanıyoruz ki dış kaynaklar hata verirse SW kurulumu durmasın
       return Promise.allSettled(
         STATIC_ASSETS.map(url => cache.add(new Request(url, { mode: 'no-cors' })))
       );
@@ -49,7 +54,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // 1. API İstekleri: Önce Ağ, çevrimdışıysa son önbellekteki veriyi dön
+  // 1. API İstekleri (Önce Ağ)
   if (
     url.hostname.includes('api.open-meteo.com') ||
     url.hostname.includes('archive-api.open-meteo.com') ||
@@ -71,51 +76,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Sayfa Navigasyonu: Önce ağ, çevrimdışıysa index.html
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request)
-        .then((networkResponse) => {
-          const resClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, resClone);
-          });
-          return networkResponse;
-        })
-        .catch(() => caches.match('./index.html') || caches.match('./'))
-    );
-    return;
-  }
-
-  // 3. Statik Dosyalar ve Harici Kütüphaneler: Önce Önbellek (Cache-First)
+  // 2. Statik Dosyalar (Cache-First - Veri dosyalarınız burada otomatik yakalanacak)
+  // Eğer fetch başarısız olursa (ağ yoksa), cache'e bakacak
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      return fetch(event.request)
-        .then((networkResponse) => {
-          if (!networkResponse || networkResponse.status !== 200) {
-            if (networkResponse && networkResponse.type === 'opaque') {
-              const resClone = networkResponse.clone();
-              caches.open(DYNAMIC_CACHE).then((cache) => {
-                cache.put(event.request, resClone);
-              });
-            }
-            return networkResponse;
-          }
-
-          const resClone = networkResponse.clone();
-          caches.open(DYNAMIC_CACHE).then((cache) => {
-            cache.put(event.request, resClone);
-          });
-          return networkResponse;
-        })
-        .catch(() => {
-          return new Response('Çevrimdışı modda içerik yüklenemedi.', { status: 503, statusText: 'Service Unavailable' });
-        });
+      return cachedResponse || fetch(event.request).then((networkResponse) => {
+        // Gelen yanıtı dinamik cache'e ekle
+        if (networkResponse && networkResponse.status === 200) {
+           const resClone = networkResponse.clone();
+           caches.open(DYNAMIC_CACHE).then((cache) => {
+             cache.put(event.request, resClone);
+           });
+        }
+        return networkResponse;
+      });
     })
   );
 });
-
