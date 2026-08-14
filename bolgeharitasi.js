@@ -123,7 +123,7 @@ window.BOLGE_HARITASI = { ... }
 
 
 // === 7 BÖLGE HARİTASI (il + geçiş ilçeleri) ===
-window.BOLGE_AGIRLIKLARI = {
+window.BOLGE_AGIRLIKLARI = { ... }
   "iç anadolu": [
     "ankara", "konya", "kayseri", "eskişehir", "sivas", "kırıkkale", "aksaray",
     "karaman", "kırşehir", "niğde", "nevşehir", "yozgat", "çankırı",
