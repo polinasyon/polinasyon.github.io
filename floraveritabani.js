@@ -1,5 +1,7 @@
-window.FLORA_VERITABANI = {
+// floraveritabani.js 
 
+window.FLORA_VERITABANI = {
+  
   // ====================== MARMARA BÖLGESİ ======================
   "istanbul": {
     flora: "Kentsel Orman – Akasya, Ihlamur, Kestane, Funda",
