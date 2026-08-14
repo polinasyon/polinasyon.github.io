@@ -1,29 +1,22 @@
 const CACHE_NAME = 'polinasyon-static-v9';
 const DYNAMIC_CACHE = 'polinasyon-dynamic-v9';
+
 const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './ikon.png',
-  './logo.png',
-  './polinasyon.png',
-  './polinasyon_logo.png',
-  './favicon.ico',
-  // Yeni eklenen veri dosyaları:
   './bolgeharitasi.js',
   './floraveritabani.js',
-  // Dış kaynaklar
-  'https://raw.githubusercontent.com/polinasyon/polinasyon/refs/heads/main/Favicon.ICO',
   'https://cdn.tailwindcss.com',
   'https://unpkg.com/lucide@latest'
 ];
 
-// Kurulum - Varlıkları önbelleğe al
+// Kurulum
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[SW] Statik varlıklar ve veri dosyaları önbelleğe alınıyor...');
-      // mode: 'no-cors' kullanıyoruz ki dış kaynaklar hata verirse SW kurulumu durmasın
+      console.log('[SW] Statik varlıklar önbelleğe alınıyor...');
       return Promise.allSettled(
         STATIC_ASSETS.map(url => cache.add(new Request(url, { mode: 'no-cors' })))
       );
@@ -32,7 +25,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Aktivasyon - Eski cache sürümlerini temizle
+// Aktivasyon - Eski cache'leri temizle
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -46,36 +39,16 @@ self.addEventListener('activate', (event) => {
       );
     })
   );
-// Aktivasyon - Eski cache sürümlerini temizle ve kontrolü ele al
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME && key !== DYNAMIC_CACHE) {
-            console.log('[SW] Eski cache siliniyor:', key);
-            return caches.delete(key);
-          }
-        })
-      );
-    })
-  );
-  self.clients.claim(); 
-});
-  // Doğru yazılış şekli (clients.claim()):
-  self.clients.claim(); 
+  self.clients.claim();
 });
 
-// Fetch İstek Stratejisi
+// Fetch stratejisi
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
 
-  // Chrome eklentileri veya harici protokolleri işleme alma
-  if (!url.protocol.startsWith('http')) {
-    return;
-  }
+  if (!url.protocol.startsWith('http')) return;
 
-  // 1. API İstekleri: Önce Ağ, çevrimdışıysa son önbellekteki veriyi dön
+  // API istekleri - Network first
   if (
     url.hostname.includes('api.open-meteo.com') ||
     url.hostname.includes('archive-api.open-meteo.com') ||
@@ -97,19 +70,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Statik Dosyalar (Cache-First - Veri dosyalarınız burada otomatik yakalanacak)
-  // Eğer fetch başarısız olursa (ağ yoksa), cache'e bakacak
+  // Statik dosyalar - Cache first
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request).then((networkResponse) => {
-        // Gelen yanıtı dinamik cache'e ekle
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(event.request).then((networkResponse) => {
         if (networkResponse && networkResponse.status === 200) {
-           const resClone = networkResponse.clone();
-           caches.open(DYNAMIC_CACHE).then((cache) => {
-             cache.put(event.request, resClone);
-           });
+          const resClone = networkResponse.clone();
+          caches.open(DYNAMIC_CACHE).then((cache) => {
+            cache.put(event.request, resClone);
+          });
         }
         return networkResponse;
+      }).catch(() => {
+        return new Response('Çevrimdışı', { status: 503 });
       });
     })
   );
