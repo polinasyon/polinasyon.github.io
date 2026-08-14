@@ -220,13 +220,13 @@
             </div>
         </section>
 
-        <!-- KOVANLAR, SAĞLIK, AKADEMİ sayfaları (orijinal kodunuzdakiyle aynı kalabilir) -->
-        <!-- ... (Kovanlar, Sağlık ve Akademi section'larını kendi kodunuzdan olduğu gibi ekleyebilirsiniz) ... -->
+        <!-- KOVANLAR, SAĞLIK, AKADEMİ sayfalarını kendi orijinal kodundan buraya ekle -->
+        <!-- ... -->
 
     </main>
 
-    <!-- MODALLAR (orijinalinizdeki gibi) -->
-    <!-- ... konumModal, kategoriModal, kovanDetayModal ... -->
+    <!-- MODALLAR (konum, kategori, kovan detay) kendi orijinal kodundan ekle -->
+    <!-- ... -->
 
     <!-- NAV -->
     <nav class="fixed bottom-0 left-0 right-0 glass border-t border-slate-200 z-40">
@@ -269,7 +269,10 @@
                 konum: "Ankara", lat: 39.9208, lon: 32.8541,
                 temp: 22, humidity: 65, dewPoint: 12, windSpeed: 8, pastAvgTemp: 22,
                 precipitation: 0, cloudCover: 40,
-                gddOran: 1, gddVeriVar: false, duzeltilmisFenoloji: null,
+                gddOran: 1,
+                gddVeriVar: false,
+                birikmisGDD: 0,               // ← eklendi
+                duzeltilmisFenoloji: null,
                 kategoriler: [{ id: 1, isim: "Merkez", kovanlar: [{ id: 101, isim: "Kovan #1", anaAri: "2024", gecmisKontroller: [{ tarih: "2026-06-01", bal: 4, hastalik: "Yok", not: "İlk kontrol" }] }] }]
             },
             aktifKategoriId: null,
@@ -280,28 +283,56 @@
                 "varsayılan": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 }
             },
             floraVeritabani: window.FLORA_VERITABANI || {
-                "varsayılan": { flora: "Yükleniyor...", timeline: [] }
+                "varsayılan": { flora: "Yükleniyor...", timeline: [], gdd: {}, baseTemp: 10 }
             },
 
-            GDD_BASE_TEMP: 10,   // Bitki gelişimi için klasik base temperature (°C)
+            GDD_BASE_TEMP: 10,
 
-            // ---------- GDD MODÜLÜ ----------
-            async gddOraniniGetir(lat, lon) {
-                const cacheKey = 'polinasyon_gdd_cache_v1';
+            // ===================== GDD + FENOLOJİ MODÜLÜ =====================
+            seciliFloraKaydi() {
+                const k = (this.data.konum || "").toLocaleLowerCase('tr-TR');
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+
+                let secilen = this.floraVeritabani["varsayılan"] || { 
+                    flora: "Varsayılan", timeline: [], gdd: {}, baseTemp: 10 
+                };
+                let enIyi = "";
+
+                for (const ah of Object.keys(this.floraVeritabani || {})) {
+                    if (ah === "varsayılan" || ah === "bitki_gdd" || bolgeAdlari.has(ah)) continue;
+                    if (k.includes(ah) && ah.length > enIyi.length) {
+                        enIyi = ah;
+                        secilen = this.floraVeritabani[ah];
+                    }
+                }
+
+                if (!enIyi) {
+                    for (const b in this.bolgeHaritasi) {
+                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
+                            secilen = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || secilen;
+                            break;
+                        }
+                    }
+                }
+                return secilen;
+            },
+
+            async gddOraniniGetir(lat, lon, baseTemp = 10) {
+                const cacheAnahtari = 'polinasyon_gdd_cache_v2';
                 const bugunStr = new Date().toISOString().split('T')[0];
 
                 try {
-                    const cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-                    if (cached && cached.tarih === bugunStr &&
-                        Math.abs(cached.lat - lat) < 0.15 && Math.abs(cached.lon - lon) < 0.15) {
-                        return cached;
+                    const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
+                    if (onbellek && onbellek.tarih === bugunStr &&
+                        Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
+                        return onbellek;
                     }
                 } catch (e) {}
 
                 try {
                     const bugun = new Date();
                     const yilBaslangici = new Date(Date.UTC(bugun.getFullYear(), 0, 1));
-                    let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 3; // 3 gün güvenlik payı
+                    let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 2;
                     if (gunSayisi < 1) gunSayisi = 1;
 
                     const buYilBitis = new Date(yilBaslangici.getTime() + gunSayisi * 86400000);
@@ -321,24 +352,25 @@
                     const buYilData = await buYilRes.json();
                     const gecenYilData = await gecenYilRes.json();
 
-                    const gddTopla = (d) => {
+                    const gddTopla = (d, base) => {
                         if (!d?.daily?.temperature_2m_max) return null;
                         const mx = d.daily.temperature_2m_max;
                         const mn = d.daily.temperature_2m_min;
                         let toplam = 0;
                         for (let i = 0; i < mx.length; i++) {
                             if (typeof mx[i] === 'number' && typeof mn[i] === 'number') {
-                                toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
+                                const ort = (mx[i] + mn[i]) / 2;
+                                toplam += Math.max(0, ort - base);
                             }
                         }
-                        return toplam;
+                        return Math.round(toplam);
                     };
 
-                    const buYilGDD = gddTopla(buYilData);
-                    const gecenYilGDD = gddTopla(gecenYilData);
+                    const buYilGDD = gddTopla(buYilData, baseTemp);
+                    const gecenYilGDD = gddTopla(gecenYilData, baseTemp);
 
                     let oran = 1;
-                    let veriVar = (buYilGDD !== null && gecenYilGDD !== null && gecenYilGDD > 5);
+                    let veriVar = (buYilGDD !== null && gecenYilGDD !== null && gecenYilGDD > 20);
 
                     if (veriVar) {
                         oran = Math.max(0.55, Math.min(1.55, buYilGDD / gecenYilGDD));
@@ -346,22 +378,56 @@
                         veriVar = false;
                     }
 
-                    const sonuc = { tarih: bugunStr, lat, lon, oran, buYilGDD, gecenYilGDD, veriVar };
-                    localStorage.setItem(cacheKey, JSON.stringify(sonuc));
+                    const sonuc = {
+                        tarih: bugunStr, lat, lon,
+                        oran, buYilGDD: buYilGDD || 0, gecenYilGDD: gecenYilGDD || 0,
+                        veriVar, baseTemp
+                    };
+                    localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc));
                     return sonuc;
                 } catch (e) {
-                    console.warn('GDD verisi alınamadı:', e);
-                    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: null, gecenYilGDD: null, veriVar: false };
+                    console.warn('GDD hatası:', e);
+                    return {
+                        tarih: bugunStr, lat, lon,
+                        oran: 1, buYilGDD: 0, gecenYilGDD: 0,
+                        veriVar: false, baseTemp
+                    };
                 }
             },
 
             fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
                 if (!veriVar || typeof gddOran !== 'number') return hamFenoloji;
-                // Oranın etkisi yumuşatılmış (0.5 faktör) → aşırı sapma engellenir
                 const carpan = 1 + (gddOran - 1) * 0.55;
                 return Math.max(5, Math.min(100, Math.round(hamFenoloji * carpan)));
             },
-            // ---------- /GDD MODÜLÜ ----------
+
+            aktifFenolojiyiBulGDD() {
+                const secilen = this.seciliFloraKaydi();
+                const birikmis = this.data.birikmisGDD || 0;
+
+                // 1. Timeline gddMin / gddMax aralığı
+                const eslesen = (secilen.timeline || []).find(t => {
+                    const min = t.gddMin ?? 0;
+                    const max = t.gddMax ?? 99999;
+                    return birikmis >= min && birikmis <= max;
+                });
+
+                if (eslesen) {
+                    const min = eslesen.gddMin ?? 0;
+                    const max = eslesen.gddMax ?? (min + 250);
+                    const progress = Math.max(0, Math.min(1, (birikmis - min) / (max - min || 1)));
+                    const faktor = 0.65 + 0.35 * Math.sin(progress * Math.PI);
+                    return Math.round(eslesen.verim * faktor);
+                }
+
+                // 2. Bölge genel GDD eşikleri
+                const g = secilen.gdd || {};
+                if (birikmis < (g.ciceklenmeBaslangic || 300)) return 18;
+                if (birikmis < (g.nektarZirve || 550)) return 55;
+                if (birikmis < (g.nektarBitis || 850)) return 82;
+                return 28;
+            },
+            // ===================== /GDD MODÜLÜ =====================
 
             aktifBolgesiBul() {
                 const k = this.data.konum.toLocaleLowerCase('tr-TR');
@@ -419,38 +485,6 @@
                 }, { enableHighAccuracy: true });
             },
 
-            aktifFenolojiyiBul() {
-                const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-                const suAnkiAy = aylar[new Date().getMonth()];
-                const k = this.data.konum.toLocaleLowerCase('tr-TR');
-                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
-
-                let secilenVeri = this.floraVeritabani["varsayılan"] || { timeline: [] };
-                let enIyi = "";
-
-                for (const ah of Object.keys(this.floraVeritabani || {})) {
-                    if (ah === "varsayılan" || bolgeAdlari.has(ah)) continue;
-                    if (k.includes(ah) && ah.length > enIyi.length) {
-                        enIyi = ah;
-                        secilenVeri = this.floraVeritabani[ah];
-                    }
-                }
-
-                if (!enIyi) {
-                    for (const b in this.bolgeHaritasi) {
-                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
-                            secilenVeri = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || { timeline: [] };
-                            break;
-                        }
-                    }
-                }
-
-                const ayV = (secilenVeri.timeline || []).find(t => t.ay === suAnkiAy);
-                if (ayV) return ayV.verim;
-                const ayIdx = new Date().getMonth();
-                return (ayIdx >= 4 && ayIdx <= 8) ? 50 : 15;
-            },
-
             uçuşEgrisi(sicaklik) {
                 if (sicaklik < 10) return 0;
                 if (sicaklik < 20) return (sicaklik - 10) / 10;
@@ -485,45 +519,57 @@
                 return Math.round(Math.max(0, Math.min(100, t + w + h + d + p + rain + sun + ph)));
             },
 
+            // ========== TAM ÇALIŞAN NEKTAR + TIMELINE ==========
             nektarAkimiHesaplaVeGuncelle() {
-                const hamFenoloji = this.aktifFenolojiyiBul();
-                const pheno = (this.data.duzeltilmisFenoloji != null) ? this.data.duzeltilmisFenoloji : hamFenoloji;
+                const hamFenoloji = this.aktifFenolojiyiBulGDD();
+                const pheno = (this.data.duzeltilmisFenoloji != null) 
+                    ? this.data.duzeltilmisFenoloji 
+                    : hamFenoloji;
 
                 const skor = this.nektar_flow_score(
-                    this.data.temp, this.data.humidity, this.data.windSpeed,
-                    this.data.dewPoint, this.data.pastAvgTemp || 22, pheno,
-                    this.data.precipitation || 0, this.data.cloudCover ?? 40
+                    this.data.temp,
+                    this.data.humidity,
+                    this.data.windSpeed,
+                    this.data.dewPoint,
+                    this.data.pastAvgTemp || 22,
+                    pheno,
+                    this.data.precipitation || 0,
+                    this.data.cloudCover ?? 40
                 );
 
                 document.getElementById('nektarSkor').textContent = `%${skor}`;
                 document.getElementById('nektarBar').style.width = `${skor}%`;
                 document.getElementById('uiGecmis').textContent = `${this.data.pastAvgTemp || 22}°C Ortalama`;
 
-                // GDD etkisini gösteren metin
+                // Fenoloji + GDD bilgisi
                 let fenolojiMetin = `%${pheno} Kapasite`;
-                if (this.data.gddVeriVar && this.data.gddOran !== 1) {
-                    const farkYuzde = Math.round((this.data.gddOran - 1) * 100);
-                    const isaret = farkYuzde > 0 ? '+' : '';
-                    fenolojiMetin += ` (GDD ${isaret}${farkYuzde}%)`;
+                if (this.data.birikmisGDD > 0) {
+                    fenolojiMetin += ` • GDD ${this.data.birikmisGDD}`;
+                }
+                if (this.data.gddVeriVar && Math.abs(this.data.gddOran - 1) > 0.03) {
+                    const fark = Math.round((this.data.gddOran - 1) * 100);
+                    const isaret = fark > 0 ? '+' : '';
+                    fenolojiMetin += ` (${isaret}${fark}%)`;
                 }
                 document.getElementById('uiFenoloji').textContent = fenolojiMetin;
 
                 const etiket = document.getElementById('nektarDurumEtiketi');
                 const aciklama = document.getElementById('nektarAciklama');
                 const dinamikNot = document.getElementById('dinamikDuzeltmeNotu');
+
                 dinamikNot.classList.remove('hidden');
                 dinamikNot.style.display = 'flex';
 
                 if (skor >= 70) {
                     etiket.textContent = "GÜÇLÜ";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800";
-                    aciklama.textContent = `Aktif bitki fenolojisi (GDD düzeltmeli) ile birleşen uygun hava değerleri nektar salgısını maksimize ediyor.`;
+                    aciklama.textContent = `Aktif bitki fenolojisi (GDD destekli) ile birleşen uygun hava değerleri nektar salgısını maksimize ediyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-emerald-700 bg-emerald-50 p-2 rounded-xl border border-emerald-200/60 flex flex-wrap items-center gap-1.5";
                     dinamikNot.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 shrink-0"></i> <span>Optimum Turgor Bonusu: +${Math.round(skor / 3)}%</span>`;
                 } else if (skor >= 40) {
                     etiket.textContent = "ORTA";
                     etiket.className = "text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800";
-                    aciklama.textContent = `Nektar akımı için makul şartlar mevcut. Fenolojik kapasite ve iklim trendi dengeli.`;
+                    aciklama.textContent = `Nektar akımı için makul şartlar mevcut. Fenolojik kapasite ve iklim trendi dengeli seyrediyor.`;
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-amber-700 bg-amber-50 p-2 rounded-xl border border-amber-200/60 flex flex-wrap items-center gap-1.5";
                     dinamikNot.innerHTML = `<i data-lucide="info" class="w-3.5 h-3.5 shrink-0"></i> <span>Hava Etkisi: Dengeli (Nötr)</span>`;
                 } else {
@@ -533,6 +579,7 @@
                     dinamikNot.className = "mt-2 text-[11px] font-bold text-rose-700 bg-rose-50 p-2 rounded-xl border border-rose-200/60 flex flex-wrap items-center gap-1.5";
                     dinamikNot.innerHTML = `<i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0"></i> <span>İklim Kısıtlaması: -${Math.round((100 - skor) / 2)}%</span>`;
                 }
+
                 if (window.lucide) window.lucide.createIcons();
             },
 
@@ -540,54 +587,47 @@
                 const container = document.getElementById('floraTimelineContainer');
                 if (!container) return;
 
-                const k = this.data.konum.toLocaleLowerCase('tr-TR');
-                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
-
-                let sec = this.floraVeritabani["varsayılan"] || { flora: "Yükleniyor...", timeline: [] };
-                let enIyi = "";
-
-                for (const a of Object.keys(this.floraVeritabani || {})) {
-                    if (a === "varsayılan" || bolgeAdlari.has(a)) continue;
-                    if (k.includes(a) && a.length > enIyi.length) {
-                        enIyi = a;
-                        sec = this.floraVeritabani[a];
-                    }
-                }
-                if (!enIyi) {
-                    for (const b in this.bolgeHaritasi) {
-                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
-                            sec = this.floraVeritabani[b] || this.floraVeritabani["varsayılan"] || sec;
-                            break;
-                        }
-                    }
-                }
+                const sec = this.seciliFloraKaydi();
+                const birikmis = this.data.birikmisGDD || 0;
 
                 const floraEtiket = document.getElementById('bolgeFloraHaritasi');
                 if (floraEtiket) {
-                    const varsayilanMi = !enIyi && ((sec.flora || "").includes("Çeşitli") || (sec.flora || "").includes("Yükleniyor"));
+                    const varsayilanMi = (sec.flora || "").includes("Varsayılan") || (sec.flora || "").includes("Çeşitli") || (sec.flora || "").includes("Yükleniyor");
                     floraEtiket.textContent = `Flora: ${varsayilanMi ? (this.data.konum + " ve Çevresi") : sec.flora}`;
                 }
 
-                const aylarIsim = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-                const mevcutAy = aylarIsim[new Date().getMonth()];
-
                 let html = '';
                 (sec.timeline || []).forEach(t => {
-                    const rS = t.tur === "polen" ? "bg-amber-50 border-amber-300 text-amber-900" :
-                               (t.tur === "kıtlık" ? "bg-slate-100 border-slate-300 text-slate-700" : "bg-emerald-50 border-emerald-300 text-emerald-900");
-                    const bS = t.tur === "polen" ? "bg-amber-500" : (t.tur === "kıtlık" ? "bg-slate-400" : "bg-emerald-500");
-                    const vurgu = (t.ay && t.ay.toLowerCase().includes(mevcutAy.toLowerCase())) ? "ring-2 ring-amber-500 shadow-md" : "";
-                    html += `<div class="p-3 rounded-xl border ${rS} ${vurgu} flex flex-col gap-1.5 shadow-2xs">
-                        <div class="flex justify-between items-center text-xs font-bold">
-                            <span>${t.ay} — ${t.bitki}</span><span>%${t.verim}</span>
-                        </div>
-                        <div class="w-full bg-white/70 h-2 rounded-full overflow-hidden">
-                            <div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div>
-                        </div>
-                    </div>`;
+                    const rS = t.tur === "polen"
+                        ? "bg-amber-50 border-amber-300 text-amber-900"
+                        : (t.tur === "kıtlık"
+                            ? "bg-slate-100 border-slate-300 text-slate-700"
+                            : "bg-emerald-50 border-emerald-300 text-emerald-900");
+
+                    const bS = t.tur === "polen" ? "bg-amber-500" 
+                             : (t.tur === "kıtlık" ? "bg-slate-400" : "bg-emerald-500");
+
+                    const min = t.gddMin ?? 0;
+                    const max = t.gddMax ?? 99999;
+                    const aktif = birikmis >= min && birikmis <= max;
+                    const vurgu = aktif ? "ring-2 ring-amber-500 shadow-md scale-[1.02]" : "";
+
+                    html += `
+                        <div class="p-3 rounded-xl border ${rS} ${vurgu} flex flex-col gap-1.5 shadow-2xs transition-all">
+                            <div class="flex justify-between items-center text-xs font-bold">
+                                <span>${t.ay} — ${t.bitki}</span>
+                                <span>%${t.verim}${aktif ? ' ← şimdi' : ''}</span>
+                            </div>
+                            <div class="w-full bg-white/70 h-2 rounded-full overflow-hidden">
+                                <div class="${bS} h-full rounded-full" style="width: ${t.verim}%"></div>
+                            </div>
+                            ${t.gddMin ? `<div class="text-[10px] text-slate-500">GDD ${t.gddMin} – ${t.gddMax || '∞'}</div>` : ''}
+                        </div>`;
                 });
+
                 container.innerHTML = html || `<p class="text-xs text-slate-400">Bu konum için takvim kaydı yok.</p>`;
             },
+            // ========================================================
 
             async havaDurumunuYukle(lat, lon, sehirAd) {
                 document.getElementById('havaLokasyon').textContent = sehirAd;
@@ -629,7 +669,6 @@
                         precipitation: this.data.precipitation, cloudCover: this.data.cloudCover
                     }));
                 } catch (e) {
-                    // Offline / hata → son kaydı kullan
                     const sH = localStorage.getItem('polinasyon_last_weather');
                     if (sH) {
                         try {
@@ -649,17 +688,24 @@
                     }
                 }
 
-                // 2. GDD hesapla ve fenolojiyi düzelt
+                // 2. GDD + Fenoloji
                 try {
-                    const gdd = await this.gddOraniniGetir(lat, lon);
+                    const flora = this.seciliFloraKaydi();
+                    const base = flora.baseTemp || this.GDD_BASE_TEMP;
+
+                    const gdd = await this.gddOraniniGetir(lat, lon, base);
                     this.data.gddOran = gdd.oran;
                     this.data.gddVeriVar = gdd.veriVar;
-                    const ham = this.aktifFenolojiyiBul();
+                    this.data.birikmisGDD = gdd.buYilGDD || 0;
+
+                    const ham = this.aktifFenolojiyiBulGDD();
                     this.data.duzeltilmisFenoloji = this.fenolojiyiGddIleDuzelt(ham, gdd.oran, gdd.veriVar);
                 } catch (err) {
+                    console.warn(err);
                     this.data.gddOran = 1;
                     this.data.gddVeriVar = false;
-                    this.data.duzeltilmisFenoloji = this.aktifFenolojiyiBul();
+                    this.data.birikmisGDD = 0;
+                    this.data.duzeltilmisFenoloji = this.aktifFenolojiyiBulGDD();
                 }
 
                 this.veriKaydet();
@@ -667,9 +713,7 @@
                 this.timelineCiz();
             },
 
-            // ... (diğer fonksiyonlar: arayuzuGuncelle, kategori*, kovan*, konum*, rssYukle, yedekleme vb. orijinal kodunuzdan aynen alınabilir)
-            // Aşağıya sadece kritik olanları kısaca ekliyorum, geri kalanını kendi kodunuzdan kopyalayın.
-
+            // Diğer fonksiyonlar (kategori, kovan, yedekleme vb.) kendi orijinal kodundan ekle
             arayuzuGuncelle() {
                 const c = document.getElementById('kategoriListesiContainer');
                 if (!c) return;
@@ -699,9 +743,6 @@
                 c.innerHTML = html || `<p class="text-center py-8 text-slate-400 text-xs">Henüz kategori bulunmuyor.</p>`;
                 if (window.lucide) window.lucide.createIcons();
             },
-
-            // Diğer tüm kovan / kategori / modal / yedekleme fonksiyonlarınızı buraya ekleyin
-            // (orijinal kodunuzdaki haliyle).
 
             verileriYedekle() {
                 try {
