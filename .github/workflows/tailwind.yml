@@ -19,8 +19,8 @@ jobs:
       - name: Tailwind Kurulumu ve Derleme
         run: |
           npm install -D tailwindcss
-          npx tailwindcss -i ./src/input.css -o ./style.css --minify
-
+          npx tailwindcss -i ./input.css -o ./style.css --minify
+          
       - name: Derlenen CSS'i Kaydet ve Gönder
         run: |
           git config --global user.name "GitHub Actions"
