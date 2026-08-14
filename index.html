@@ -735,47 +735,50 @@
                 return 0;
             },
 
-           nektar_flow_score(temp, humidity, wind, dew, past, pheno, precipitation = 0, cloudCover = 40) {
-            // Bölge ağırlıkları tanımlı değilse varsayılan katsayıları kullan
-            const aglar = {
-                "iç anadolu": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
-                "ege": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
-                "akdeniz": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
-                "karadeniz": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
-                "doğu anadolu": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
-                "marmara": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
-                "güneydoğu": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
-                "varsayılan": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 }
-            };
-            
-            const bolgeAdi = this.aktifBolgesiBul ? this.aktifBolgesiBul() : "varsayılan";
-            const ag = aglar[bolgeAdi] || aglar["varsayılan"];
+          // 1. FONKSİYON: Skor hesaplama
+nektar_flow_score(temp, humidity, wind, dew, past, pheno, precipitation = 0, cloudCover = 40) {
+    const aglar = {
+        "iç anadolu": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
+        "ege": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 },
+        // ... diğer bölgeler ...
+        "varsayılan": { t: 1, w: 1, h: 1, d: 1, p: 1, rain: 1, sun: 1, ph: 1 }
+    };
 
-            nektarAkimiHesaplaVeGuncelle() {
-                const hamFenoloji = this.aktifFenolojiyiBul();
-                const pheno = (this.data.duzeltilmisFenoloji != null) ? this.data.duzeltilmisFenoloji : hamFenoloji;
-                const skor = this.nektar_flow_score(
-                    this.data.temp,
-                    this.data.humidity,
-                    this.data.windSpeed,
-                    this.data.dewPoint,
-                    this.data.pastAvgTemp || 22,
-                    pheno,
-                    this.data.precipitation || 0,
-                    this.data.cloudCover ?? 40
-                );
+    const bolgeAdi = this.aktifBolgesiBul ? this.aktifBolgesiBul() : "varsayılan";
+    const ag = aglar[bolgeAdi] || aglar["varsayılan"];
 
-                document.getElementById('nektarSkor').textContent = `%${skor}`;
-                document.getElementById('nektarBar').style.width = `${skor}%`;
-                document.getElementById('uiGecmis').textContent = `${this.data.pastAvgTemp || 22}°C Ortalama`;
+    // Buraya geri kalan hesaplama kodlarınızı ekleyin (t, w, h, d, p, rain, sun, ph tanımları)
+    // ...
+    return Math.round(Math.max(0, Math.min(100, t + w + h + d + p + rain + sun + ph)));
+} // <--- BU PARANTEZ ÖNEMLİ
 
-                let fenolojiMetin = `%${pheno} Kapasite`;
-                if (this.data.gddVeriVar && this.data.gddOran !== 1) {
-                    const farkYuzde = Math.round((this.data.gddOran - 1) * 100);
-                    const isaret = farkYuzde > 0 ? '+' : '';
-                    fenolojiMetin += ` (GDD ${isaret}${farkYuzde}%)`;
-                }
-                document.getElementById('uiFenoloji').textContent = fenolojiMetin;
+// 2. FONKSİYON: Güncelleme
+nektarAkimiHesaplaVeGuncelle() {
+    const hamFenoloji = this.aktifFenolojiyiBul();
+    const pheno = (this.data.duzeltilmisFenoloji != null) ? this.data.duzeltilmisFenoloji : hamFenoloji;
+    
+    const skor = this.nektar_flow_score(
+        this.data.temp,
+        this.data.humidity,
+        this.data.windSpeed,
+        this.data.dewPoint,
+        this.data.pastAvgTemp || 22,
+        pheno,
+        this.data.precipitation || 0,
+        this.data.cloudCover ?? 40
+    );
+
+    document.getElementById('nektarSkor').textContent = `%${skor}`;
+    document.getElementById('nektarBar').style.width = `${skor}%`;
+    document.getElementById('uiGecmis').textContent = `${this.data.pastAvgTemp || 22}°C Ortalama`;
+
+    let fenolojiMetin = `%${pheno} Kapasite`;
+    if (this.data.gddVeriVar && this.data.gddOran !== 1) {
+        const farkYuzde = Math.round((this.data.gddOran - 1) * 100);
+        const isaret = farkYuzde > 0 ? '+' : '';
+        fenolojiMetin += ` (GDD ${isaret}${farkYuzde}%)`;
+    }
+}
 
                 const etiket = document.getElementById('nektarDurumEtiketi');
                 const aciklama = document.getElementById('nektarAciklama');
