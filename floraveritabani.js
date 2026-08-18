@@ -257,22 +257,26 @@ window.FLORA_VERITABANI = {
       { ay: "Ekim",    bitki: "Kışa Hazırlık",       verim: 10, tur: "kıtlık", gddMin: 1210, gddMax: 1300 }
     ]
   },
-  "simav": { 
-    flora: "İç Ege Geçiş Bölgesi - Ayçiçeği & Orman Altı", 
-    baseTemp: 8, gdd: { 
-        ciceklenmeBaslangic: 260, nektarZirve: 520, nektarBitis: 820 },
-    timeline: [
-        { ay: "Mart", bitki: "Erken Bahar Badem/Erik", verim: 60, tur: "polen" },
-        { ay: "Nisan", bitki: "Meyve Bahçeleri", verim: 75, tur: "nektar" },
-        { ay: "Mayıs", bitki: "Çayır / Çiçekli Bitkiler", verim: 70, tur: "polen" }, 
-        { ay: "Haziran", bitki: "Kestane & Ihlamur", verim: 90, tur: "nektar" }, 
-        { ay: "Temmuz", bitki: "Orman Altı / Kekik", verim: 85, tur: "nektar" }, 
-        { ay: "Ağustos", bitki: "Ayçiçeği & Orman Altı", verim: 75, tur: "nektar" },
-        { ay: "Eylül", bitki: "Kır Çiçekleri / Sonbahar", verim: 50, tur: "polen" },
-        { ay: "Ekim", bitki: "Kışlatma Hazırlığı", verim: 30, tur: "kıtlık" }
-    ] 
+  "simav": {
+  flora: "İç Ege Geçiş – Kestane (Castanea sativa), Kekik (Thymus), Orman Altı, Geven, Ayçiçeği",
+  baseTemp: 8,
+  gdd: { 
+    ciceklenmeBaslangic: 280,   // Erken bahar uyanışı
+    nektarZirve: 580,           // Kestane ana nektar dönemi
+    nektarBitis: 880            // Yaz sonu / erken sonbahar
+  },
+  timeline: [
+    { ay: "Mart",    bitki: "Söğüt / Badem / Erken Polen",           verim: 45, tur: "polen",  gddMin: 110, gddMax: 200 },
+    { ay: "Nisan",   bitki: "Meyve Ağaçları / Yabani Hardal",        verim: 70, tur: "polen",  gddMin: 210, gddMax: 370 },
+    { ay: "Mayıs",   bitki: "Akasya / Çayır / Erken Kekik",          verim: 75, tur: "nektar", gddMin: 380, gddMax: 540 },
+    { ay: "Haziran", bitki: "Kestane (Castanea) + Ihlamur",          verim: 95, tur: "nektar", gddMin: 550, gddMax: 720 },
+    { ay: "Temmuz",  bitki: "Orman Altı + Kekik + Geven",            verim: 88, tur: "nektar", gddMin: 730, gddMax: 900 },
+    { ay: "Ağustos", bitki: "Ayçiçeği + Geç Orman Altı / Kekik",     verim: 70, tur: "nektar", gddMin: 910, gddMax: 1080 },
+    { ay: "Eylül",   bitki: "Sonbahar Otsuları / Püren (sınırlı)",    verim: 40, tur: "polen",  gddMin: 1090, gddMax: 1230 },
+    { ay: "Ekim",    bitki: "Kışlatma Dönemi",                       verim: 12, tur: "kıtlık", gddMin: 1240, gddMax: 1340 }
+  ]
 },
-  "afyonkarahisar": {
+"afyonkarahisar": {
     flora: "İç Ege Yüksek Geçiş – Haşhaş, Geven, Kekik, Yayla",
     baseTemp: 8, gdd: { ciceklenmeBaslangic: 260, nektarZirve: 520, nektarBitis: 820 },
     timeline: [
