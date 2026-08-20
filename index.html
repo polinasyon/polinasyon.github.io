@@ -1042,18 +1042,29 @@
                     }
                 }
 
-                try {
+                                try {
                     const gdd = await this.gddOraniniGetir(lat, lon);
                     this.data.gddOran = gdd.oran;
                     this.data.gddVeriVar = gdd.veriVar;
+                    this.data.buYilGDD = gdd.buYilGDD;
+                    this.data.gecenYilGDD = gdd.gecenYilGDD;
+                    this.data.gddBaseTemp = gdd.baseTemp;
                     const ham = this.aktifFenolojiyiBul();
                     this.data.duzeltilmisFenoloji = this.fenolojiyiGddIleDuzelt(ham, gdd.oran, gdd.veriVar);
+
+                    const gddEl = document.getElementById('havaGdd');
+                    if (gddEl) {
+                        gddEl.textContent = (gdd.buYilGDD != null) ? String(gdd.buYilGDD) : '--';
+                    }
                 } catch (err) {
                     this.data.gddOran = 1;
                     this.data.gddVeriVar = false;
+                    this.data.buYilGDD = null;
+                    this.data.gecenYilGDD = null;
                     this.data.duzeltilmisFenoloji = this.aktifFenolojiyiBul();
+                    const gddEl = document.getElementById('havaGdd');
+                    if (gddEl) gddEl.textContent = '--';
                 }
-
                 this.veriKaydet();
                 this.nektarAkimiHesaplaVeGuncelle();
                 this.timelineCiz();
