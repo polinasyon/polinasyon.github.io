@@ -1406,7 +1406,7 @@
                     if (!file) return;
                     const reader = new FileReader();
                     reader.onload = (ev) => {
-                        try {
+                                                try {
                             const parsed = JSON.parse(ev.target.result);
                             if (!parsed || typeof parsed !== 'object') throw new Error('Geçersiz');
                             if (!confirm('Mevcut verilerin üzerine yazılacak. Devam edilsin mi?')) return;
@@ -1423,9 +1423,20 @@
                                 cloudCover: parsed.cloudCover ?? 40,
                                 gddOran: parsed.gddOran ?? 1,
                                 gddVeriVar: parsed.gddVeriVar ?? false,
+                                buYilGDD: parsed.buYilGDD ?? null,
+                                gecenYilGDD: parsed.gecenYilGDD ?? null,
+                                gddBaseTemp: parsed.gddBaseTemp ?? 10,
                                 duzeltilmisFenoloji: parsed.duzeltilmisFenoloji ?? null,
                                 kategoriler: Array.isArray(parsed.kategoriler) ? parsed.kategoriler : this.data.kategoriler
                             };
+                            this.veriKaydet();
+                            this.arayuzuGuncelle();
+                            this.kategoriGorunumuneDon();
+                            this.havaDurumunuYukle(this.data.lat, this.data.lon, this.data.konum);
+                            alert('Yedek başarıyla yüklendi.');
+                        } catch (err) {
+                            alert('Dosya okunamadı. Geçerli bir Polinasyon JSON yedeği seçin.');
+                        }
                             this.veriKaydet();
                             this.arayuzuGuncelle();
                             this.kategoriGorunumuneDon();
