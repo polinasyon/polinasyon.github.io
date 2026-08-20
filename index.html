@@ -666,12 +666,20 @@
                 return "varsayılan";
             },
 
-            async gddOraniniGetir(lat, lon) {
-                const cacheAnahtari = 'polinasyon_gdd_cache_v1';
+                        async gddOraniniGetir(lat, lon) {
+                const cacheAnahtari = 'polinasyon_gdd_cache_v2';
                 const bugunStr = new Date().toISOString().split('T')[0];
+                const baseTemp = this.aktifBaseTempBul();
+
                 try {
                     const onbellek = JSON.parse(localStorage.getItem(cacheAnahtari) || 'null');
-                    if (onbellek && onbellek.tarih === bugunStr && Math.abs(onbellek.lat - lat) < 0.15 && Math.abs(onbellek.lon - lon) < 0.15) {
+                    if (
+                        onbellek &&
+                        onbellek.tarih === bugunStr &&
+                        Math.abs(onbellek.lat - lat) < 0.15 &&
+                        Math.abs(onbellek.lon - lon) < 0.15 &&
+                        onbellek.baseTemp === baseTemp
+                    ) {
                         return onbellek;
                     }
                 } catch (e) {}
@@ -679,8 +687,9 @@
                 try {
                     const bugun = new Date();
                     const yilBaslangici = new Date(Date.UTC(bugun.getFullYear(), 0, 1));
-                    let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 5;
+                    let gunSayisi = Math.floor((bugun - yilBaslangici) / 86400000) - 2;
                     if (gunSayisi < this.GDD_MIN_GUN) gunSayisi = this.GDD_MIN_GUN;
+
                     const buYilBitis = new Date(yilBaslangici.getTime() + gunSayisi * 86400000);
                     const buYilBaslangicStr = yilBaslangici.toISOString().split('T')[0];
                     const buYilBitisStr = buYilBitis.toISOString().split('T')[0];
@@ -702,19 +711,20 @@
                     const buYilData = await buYilRes.json();
                     const gecenYilData = await gecenYilRes.json();
 
-                    const gddTopla = (d) => {
+                    const gddTopla = (d, base) => {
                         if (!d || !d.daily || !d.daily.temperature_2m_max) return null;
-                        const mx = d.daily.temperature_2m_max, mn = d.daily.temperature_2m_min;
+                        const mx = d.daily.temperature_2m_max;
+                        const mn = d.daily.temperature_2m_min;
                         let toplam = 0;
                         for (let i = 0; i < mx.length; i++) {
                             if (typeof mx[i] !== 'number' || typeof mn[i] !== 'number') continue;
-                            toplam += Math.max(0, (mx[i] + mn[i]) / 2 - this.GDD_BASE_TEMP);
+                            toplam += Math.max(0, (mx[i] + mn[i]) / 2 - base);
                         }
-                        return toplam;
+                        return Math.round(toplam);
                     };
 
-                    const buYilGDD = gddTopla(buYilData);
-                    const gecenYilGDD = gddTopla(gecenYilData);
+                    const buYilGDD = gddTopla(buYilData, baseTemp);
+                    const gecenYilGDD = gddTopla(gecenYilData, baseTemp);
 
                     let oran = 1;
                     let veriVar = buYilGDD !== null && gecenYilGDD !== null;
@@ -724,15 +734,32 @@
                         veriVar = false;
                     }
 
-                    const sonuc = { tarih: bugunStr, lat, lon, oran, buYilGDD, gecenYilGDD, veriVar };
+                    const sonuc = {
+                        tarih: bugunStr,
+                        lat,
+                        lon,
+                        baseTemp,
+                        oran,
+                        buYilGDD,
+                        gecenYilGDD,
+                        veriVar
+                    };
                     try { localStorage.setItem(cacheAnahtari, JSON.stringify(sonuc)); } catch (e) {}
                     return sonuc;
                 } catch (e) {
                     console.warn('GDD hesaplanamadı:', e);
-                    return { tarih: bugunStr, lat, lon, oran: 1, buYilGDD: null, gecenYilGDD: null, veriVar: false };
+                    return {
+                        tarih: bugunStr,
+                        lat,
+                        lon,
+                        baseTemp,
+                        oran: 1,
+                        buYilGDD: null,
+                        gecenYilGDD: null,
+                        veriVar: false
+                    };
                 }
             },
-
             fenolojiyiGddIleDuzelt(hamFenoloji, gddOran, veriVar) {
                 if (!veriVar || typeof gddOran !== 'number') return hamFenoloji;
                 const carpan = 1 + (gddOran - 1) * 0.5;
