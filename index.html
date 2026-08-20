@@ -617,7 +617,31 @@
 
             GDD_BASE_TEMP: 10,
             GDD_MIN_GUN: 12,
+            GDD_BASE_TEMP: 10,
+            GDD_MIN_GUN: 12,
 
+            aktifBaseTempBul() {
+                const k = (this.data.konum || "").toLocaleLowerCase('tr-TR');
+                const bolgeAdlari = new Set(Object.keys(this.bolgeHaritasi || {}));
+                let enIyi = "", sec = null;
+
+                for (const a of Object.keys(this.floraVeritabani || {})) {
+                    if (a === "varsayılan" || bolgeAdlari.has(a)) continue;
+                    if (k.includes(a) && a.length > enIyi.length) {
+                        enIyi = a;
+                        sec = this.floraVeritabani[a];
+                    }
+                }
+                if (!enIyi) {
+                    for (const b in this.bolgeHaritasi) {
+                        if ((this.bolgeHaritasi[b] || []).some(s => k.includes(s))) {
+                            sec = this.floraVeritabani[b];
+                            break;
+                        }
+                    }
+                }
+                return (sec && typeof sec.baseTemp === 'number') ? sec.baseTemp : this.GDD_BASE_TEMP;
+            },
             aktifBolgesiBul() {
                 const k = this.data.konum.toLocaleLowerCase('tr-TR');
                 let enIyi = "", bolge = "varsayılan";
