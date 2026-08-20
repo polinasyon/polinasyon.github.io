@@ -893,12 +893,15 @@
                 document.getElementById('nektarBar').style.width = `${skor}%`;
                 document.getElementById('uiGecmis').textContent = `${this.data.pastAvgTemp || 22}°C Ortalama`;
 
-                let fenolojiMetin = `%${pheno} Kapasite`;
-                if (this.data.gddVeriVar && this.data.gddOran !== 1) {
+                              let fenolojiMetin = `%${pheno} Kapasite`;
+                if (this.data.gddVeriVar) {
                     const farkYuzde = Math.round((this.data.gddOran - 1) * 100);
                     const isaret = farkYuzde > 0 ? '+' : '';
-                    fenolojiMetin += ` (GDD ${isaret}${farkYuzde}%)`;
+                    const mutlak = (this.data.buYilGDD != null) ? ` · GDD ${this.data.buYilGDD}` : '';
+                    const baseNot = (this.data.gddBaseTemp != null) ? ` base ${this.data.gddBaseTemp}°C` : '';
+                    fenolojiMetin += ` (oran ${isaret}${farkYuzde}%${mutlak}${baseNot})`;
                 }
+                document.getElementById('uiFenoloji').textContent = fenolojiMetin;
                 document.getElementById('uiFenoloji').textContent = fenolojiMetin;
 
                 const etiket = document.getElementById('nektarDurumEtiketi');
